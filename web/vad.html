@@ -1,0 +1,115 @@
+<!--**************************************************************************************
+*   Maria Martin 100291452       	                                                                           
+****************************************************************************************-->
+<html>
+<head>
+<title>Post Vehicle Ad</title>
+
+<link href="style/vad.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/vad.js"></script>
+
+</head>
+<body>
+	<table class="exterior">
+		<tr>
+			<td class="exterior">
+				<table class="interior">
+					<tr>
+						<th colspan="2">
+							Vehicle ad
+						</th>
+					</tr>
+					<form name="formulario" action="">
+						<tr>
+							<td class="tittle" id="phone">
+								Contact phone*
+							</td>
+							<td class="content">
+								<input type="text" id="phone" name="phone">
+							</td>
+						</tr>
+						<tr>
+							<td class="tittle" id="email">
+								Contact email*
+							</td>
+							<td class="content">
+								<input type="text" id="email" name="email">
+							</td>
+						</tr>
+						<tr>
+							<td class="tittle" id="name">
+								Contact name*
+							</td>
+							<td class="content">
+								<input type="text" id="name" name="name">
+							</td>
+						</tr>
+						<tr>
+							<td class="tittle" id="type">
+								Vehicle*
+							</td>
+							<td class="content">
+								<select size="1" id="type" name="type" > 
+									<option value=""></option> 
+									<option value="Car">Car</option> 
+									<option value="Motorbike">Motorbike</option> 
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="tittle" id="fee">
+								Ad free*
+							</td>
+							<td class="content">
+								<select size="1" id="fee" name="fee" > 
+									<option value=""></option> 
+									<option value="Extra">Extra</option> 
+									<option value="Medium">Medium</option>
+									<option value="Normal">Normal</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="tittle" id="year">
+								Year*
+							</td>
+							<td class="content">
+								<input type="text" id="year" name="year">
+							</td>
+						</tr>
+						<tr>
+							<td class="tittle" id="kilometers">
+								Kilometers
+							</td>
+							<td class="content">
+								<input type="text" id="kilometers" name="kilometers">
+							</td>
+						</tr>
+						<tr>
+							<td class="tittle" id="price">
+								Price
+							</td>
+							<td class="content">
+								<input type="text" id="price" name="price">
+							</td>
+						</tr>
+						<tr>
+							<td class="tittle" id="image">
+								Image
+							</td>
+							<td colspan="2" align="center">
+								<input type="button" value="Browse" onclick="Image()">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center">
+								<input type="button" value="Post" onclick="Validate()">
+							</td>
+						</tr>
+					</form>
+				</table>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
