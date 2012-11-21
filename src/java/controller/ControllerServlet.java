@@ -89,16 +89,16 @@ public class ControllerServlet extends HttpServlet {
         // if toVehicleQuery action is called
         else if(userPath.equals("/Cars")) {
             // TODO: Implement toVehicleQuery action
-            userPath = "/query.jsp";
+            userPath = "/QueryController?opt=cars";
         }else if (userPath.equals("/Motorbikes")) {
             // TODO: Implement motorbike page request
             
-             userPath = "/query.jsp";
+             userPath = "/QueryController?opt=motos";
         // if checkout page is requested
         } else if (userPath.equals("/General")) {
             // TODO: Implement general page request
             
-             userPath = "/query.jsp";
+             userPath = "/QueryController?opt=gen";
         // if checkout page is requested
         } else if (userPath.equals("/UserProfile")) {
             // TODO: Implement motorbike page request
@@ -134,10 +134,10 @@ public class ControllerServlet extends HttpServlet {
             // TODO: Implement motorbike page request
             userPath = "/postAd.jsp";
 		
-		}else if (userPath.equals("/EditProfile")) {
+        }else if (userPath.equals("/EditProfile")) {
             // TODO: Implement motorbike page request
-            userPath = "/registrationEdit.jsp";
-		}
+            userPath = "/notFound.jsp";
+        }
 
         // use RequestDispatcher to forward request internally
         String url = userPath;
