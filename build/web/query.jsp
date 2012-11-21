@@ -24,7 +24,7 @@
                 title: "Anuncio"
             });
 
-            $('#row1').click(function(){
+            $('#visitAd1').click(function(){
                  $('#dialog').dialog('open');
                  return false;
             });
@@ -35,6 +35,9 @@
             });
         });
         
+        $("#tabs").ready(function() {
+                $( "#tabs" ).tabs();
+        });
            
         
     </script>
@@ -48,7 +51,7 @@
                 <div id="contactInfo" style="width: 100%; height: auto; margin-top: 10px;">
                     Contact <br>
                     Name: Perico <br>
-                    E-mail: cuchuflete@oletuscohones.com <br>
+                    E-mail: cuchuflete@oleole.com <br>
                     Phone: 123456789
                 </div>
             </div>
@@ -83,7 +86,7 @@
             </div>
         </div>
 
-    <div id="bodycontent" style="margin-top: 10px;">
+    <div id="bodycontent">
         <div id="tabs" style="width: 90%; height: 500px; margin: auto; font-size: 12px; border: 2px solid grey; padding: 3px;
     -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px;" >
             <ul>
@@ -97,27 +100,15 @@
                         <tr><th style="width:200px;">Date</th><th style="width:60px;">Photo</th><th style="width:200px;">Brand and Model</th><th style="width:200px;">State</th><th style="width:50px;">Year</th><th style="width:100px;">Price</th><th style="width:80px;">Visit AD</th></tr>
                     </thead>
                     <tbody style="overflow: auto; display: block; height: 390px;">
-                        <tr id="row1"><td style="width:199px;">Date</td><td style="width:62px;">Photo</td><td style="width:200px;">Brand and Model</td><td style="width:201px;">State</td><td style="width:52px;">Year</td><td style="width:102px;">Price</td><td style="width:66px;">Visit AD</td></tr>
-                        <tr id="row2"><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:50px; margin-left: auto; margin-right: auto;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td ><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
-                        <tr><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:40px;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><div class="arrow"></div></td></tr>
+                        <tr id="row1"><td style="width:199px;">16/10/2012 at 16:00</td><td style="width:62px;"><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:50px; margin-left: auto; margin-right: auto;"></td><td style="width:200px;">BMW 320</td><td style="width:201px;">Barcelona</td><td style="width:52px;">2008</td><td style="width:102px;">4000</td><td style="width:66px;"><input type="button" id="visitAd1" value="Visit AD"></td></tr>
+                        <tr id="row2"><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:50px; margin-left: auto; margin-right: auto;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><input type="button" id="visitAd2" value="Visit AD"></td></tr>
+                        <tr id="row3"><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:50px; margin-left: auto; margin-right: auto;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><input type="button" id="visitAd2" value="Visit AD"></td></tr>
+                        <tr id="row4"><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:50px; margin-left: auto; margin-right: auto;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><input type="button" id="visitAd2" value="Visit AD"></td></tr>
+                        <tr id="row5"><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:50px; margin-left: auto; margin-right: auto;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><input type="button" id="visitAd2" value="Visit AD"></td></tr>
+                        <tr id="row6"><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:50px; margin-left: auto; margin-right: auto;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><input type="button" id="visitAd2" value="Visit AD"></td></tr>
+                        <tr id="row7"><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:50px; margin-left: auto; margin-right: auto;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><input type="button" id="visitAd2" value="Visit AD"></td></tr>
+                        <tr id="row8"><td>16/10/2012 at 16:00</td><td><img src="images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg" alt="Photo" style="height:50px; margin-left: auto; margin-right: auto;"></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><input type="button" id="visitAd2" value="Visit AD"></td></tr>
+
                         
                     </tbody>
                 </table>

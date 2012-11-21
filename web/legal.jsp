@@ -8,53 +8,145 @@
     <div id="legalContainer" style="width: 90%; height: 500px;  margin: auto; border: 2px solid grey; padding: 3px; margin-top: 5px;
     -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; font-size: 12px;">
             <ul>
-                <li><a href="#tabs-1">Legal Notice</a></li>
+                <li><a href="#tabs-1">Terms and Conditions</a></li>
             </ul>
             <div id="tabs-1" style="-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 20px; height:420px; margin-bottom: 20px;">
             <div id="legalContainer" style="overflow: auto; height: 100%;" class="tableWrapper">
 
-                IMPORTANT : The terms and conditions below will govern your agreement with us for the Service. You should ensure that you have read and understood them before you accept our offer to provide the Service to you.
+<h2>
+	Web Site Terms and Conditions of Use
+</h2>
 
-Definitions
-?we?, ?us? or ?our? means FlipMotor, 4 The Crescent, Selby, North Yorkshire, YO8 4PU (e-mail: contact@auto-web.co.uk, tel: 0800 0125 626);
-?you? or ?your? means you, the person accessing, viewing or using the Site.
-?Conditions? means these terms and conditions;
-?Partners? means those third party businesses who, with our permission, maintain links with our Site for the purposes of their business;
-?Personal Information? means the information provided to us in the User Registration Form, and held by us in accordance with the Data Protection Act 1998;
-?Privacy Policy? means the FlipMotor Privacy Policy as amended from time to time and linked to the Site;
-?Services? means the services provided to you through the Site;
-?Site? means the website at url www.autoweb.co.uk or such other URLs or domain names as are from time to time, owned and made available by FlipMotor.
-Services
-Upon receipt of your User Registration Form we will e-mail to you a Vehicle Upload Form on which to provide details of any vehicle you wish to advertise for sale. Once completed and returned to us we will enter the details of the vehicle into our on-line database.
-Our on-line database is accessible to all visitors to the Site and contains details of vehicles listed for sale together with a contact telephone number of the seller.
-Your Obligations
-You must ensure that the information provided to us, is true and accurate. You are responsible for promptly notifying us of any change in your address, contact details, vehicle details or of a sale of the vehicle.
-It is your responsibility to verify any information that you may obtain from the Site with independent sources before acting on it. It is also your responsibility to use suitable anti-virus software in any material that you may download from the Site, or any site linked to it, and to ensure the compatibility of such software with your equipment.
-Intellectual Property
-All rights in copyright, trademarks or other intellectual property attaching to the Site, [(including the database)] whether registered or unregistered are owned by us, or licensed to us. To the best of our knowledge, the material used by Partners is owned by them, and they have granted a licence to us in respect of such material.
-The words FlipMotor and FlipMotor design, and the following logos are used by us as trademarks.
+<h3>
+	1. Terms
+</h3>
 
-You may view the Site and are welcome to print hard copies of any material on it for your personal, non-commercial use. You must not use the contact details given by private advertisers of vehicles other than in connection with a genuine enquiry relating to the purchase by you of the vehicle in question. All other copying whether electronic, hard copy or other format is prohibited. We reserve the right to take action against anyone in breach of these copyright restrictions.
-Warranties
-This Site is provided ?as is? and whilst every care has been taken to ensure that the information given in the Site is correct, we give NO WARRANTIES in respect thereof. Specifically, but without limitation, we do not warrant that:
-The Site is free from technical inaccuracies, and typographical errors of any kind; or
-You will be able to use the Site or that it will continue to be made available in its current or any other form; or that the Site or any software of whatsoever nature available or downloaded from it will be free from viruses or defects, compatible with your equipment or fit for any purpose; or
-Any material or information contained on this site will be true, accurate or complete.
-Except to the extent otherwise set out in these Conditions or any other terms and conditions on this Site, any warranties which would otherwise be implied by law (Including without limitation, warranties as to satisfactory quality, fitness for purpose or skill and care) are, to the fullest extent that the law permits, excluded.
-Limitation of Liability
-Except in the case of personal injury or death directly caused by our negligence, our liability to you whether in contract, negligence, or otherwise, ad whether arising in relation to the Services or otherwise howsoever, shall in all circumstances be limited to [£10]. We shall not be liable for any matter which is beyond our reasonable control. We shall under no circumstances be liable for any indirect, consequential, or purely economic loss or damage howsoever suffered.
-Sites to which you link through the Site (including without limitation any site provided by a Partner or other third party but branded as an FlipMotor Site) are independent of the Site and we have no control over them and accept no liability in respect of your use or inability to use them or any of the content of such sites.
-We accept no liability with respect to any of the products, information, material or services offered or provided by our Partners or other organisations listed on, or linked to, the Site, nor do we endorse any of those organisations or any of their offerings. [Should you decide to appoint any of these organisations to work for you, the contract will be directly between you and the relevant organisation. We will have no other contractual involvement, and will not be liable in contract or otherwise for any products, information (including quotations or estimates), materials or services provided to you by any of these organisations.]
-Cancellation
-Subject always to clause 7.2, we will [display] details relating to your vehicle and a contact telephone number on the Site until such time as you inform us of a sale. If at any time, you wish to remove the details, and cancel your agreement with us, you may do so, by notifying us in writing to the address provided.
-We reserve the right to remove details relating to your vehicle and your contact details at any time should we consider it necessary or reasonable to do so.
-Privacy Policy
-The Privacy Policy set out on the Site forms part of these Conditions. We are committed to protecting your privacy and the Privacy Policy summarises what personal details we may collect from you during your use of the Site and what we will do with them. Any changes to the Privacy Policy will be posted on the Privacy Policy page.
-Miscellaneous
-There may be other terms and conditions on areas of the Site which relate to your use of such areas, all of which together with these Conditions will govern your use of the Site.
-Any notice required to be given under these Conditions must be in writing, addressed to the contact details shown on the Site. Such notice may be by way of e-mail.
-Any failure by us to exercise any right or provision of the Conditions shall not constitute a waiver of that right or provision.
-These Conditions and any matter relating to the Site are governed by English law and the English courts shall have non-exclusive jurisdiction in respect of them.
+<p>
+	By accessing this web site, you are agreeing to be bound by these
+	web site Terms and Conditions of Use, all applicable laws and regulations,
+	and agree that you are responsible for compliance with any applicable local
+	laws. If you do not agree with any of these terms, you are prohibited from
+	using or accessing this site. The materials contained in this web site are
+	protected by applicable copyright and trade mark law.
+</p>
+
+<h3>
+	2. Use License
+</h3>
+
+<ol type="a">
+	<li>
+		Permission is granted to temporarily download one copy of the materials
+		(information or software) on FlipMotor's web site for personal,
+		non-commercial transitory viewing only. This is the grant of a license,
+		not a transfer of title, and under this license you may not:
+
+		<ol type="i">
+			<li>modify or copy the materials;</li>
+			<li>use the materials for any commercial purpose, or for any public display (commercial or non-commercial);</li>
+			<li>attempt to decompile or reverse engineer any software contained on FlipMotor's web site;</li>
+			<li>remove any copyright or other proprietary notations from the materials; or</li>
+			<li>transfer the materials to another person or "mirror" the materials on any other server.</li>
+		</ol>
+	</li>
+	<li>
+		This license shall automatically terminate if you violate any of these restrictions and may be terminated by FlipMotor at any time. Upon terminating your viewing of these materials or upon the termination of this license, you must destroy any downloaded materials in your possession whether in electronic or printed format.
+	</li>
+</ol>
+
+<h3>
+	3. Disclaimer
+</h3>
+
+<ol type="a">
+	<li>
+		The materials on FlipMotor's web site are provided "as is". FlipMotor makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties, including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights. Further, FlipMotor does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its Internet web site or otherwise relating to such materials or on any sites linked to this site.
+	</li>
+</ol>
+
+<h3>
+	4. Limitations
+</h3>
+
+<p>
+	In no event shall FlipMotor or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption,) arising out of the use or inability to use the materials on FlipMotor's Internet site, even if FlipMotor or a FlipMotor authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.
+</p>
+
+<h3>
+	5. Revisions and Errata
+</h3>
+
+<p>
+	The materials appearing on FlipMotor's web site could include technical, typographical, or photographic errors. FlipMotor does not warrant that any of the materials on its web site are accurate, complete, or current. FlipMotor may make changes to the materials contained on its web site at any time without notice. FlipMotor does not, however, make any commitment to update the materials.
+</p>
+
+<h3>
+	6. Links
+</h3>
+
+<p>
+	FlipMotor has not reviewed all of the sites linked to its Internet web site and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by FlipMotor of the site. Use of any such linked web site is at the user's own risk.
+</p>
+
+<h3>
+	7. Site Terms of Use Modifications
+</h3>
+
+<p>
+	FlipMotor may revise these terms of use for its web site at any time without notice. By using this web site you are agreeing to be bound by the then current version of these Terms and Conditions of Use.
+</p>
+
+<h3>
+	8. Governing Law
+</h3>
+
+<p>
+	Any claim relating to FlipMotor's web site shall be governed by the laws of the State of Madrid without regard to its conflict of law provisions.
+</p>
+
+<p>
+	General Terms and Conditions applicable to Use of a Web Site.
+</p>
+
+
+
+<h2>
+	Privacy Policy
+</h2>
+
+<p>
+	Your privacy is very important to us. Accordingly, we have developed this Policy in order for you to understand how we collect, use, communicate and disclose and make use of personal information. The following outlines our privacy policy.
+</p>
+
+<ul>
+	<li>
+		Before or at the time of collecting personal information, we will identify the purposes for which information is being collected.
+	</li>
+	<li>
+		We will collect and use of personal information solely with the objective of fulfilling those purposes specified by us and for other compatible purposes, unless we obtain the consent of the individual concerned or as required by law.
+	</li>
+	<li>
+		We will only retain personal information as long as necessary for the fulfillment of those purposes.
+	</li>
+	<li>
+		We will collect personal information by lawful and fair means and, where appropriate, with the knowledge or consent of the individual concerned.
+	</li>
+	<li>
+		Personal data should be relevant to the purposes for which it is to be used, and, to the extent necessary for those purposes, should be accurate, complete, and up-to-date.
+	</li>
+	<li>
+		We will protect personal information by reasonable security safeguards against loss or theft, as well as unauthorized access, disclosure, copying, use or modification.
+	</li>
+	<li>
+		We will make readily available to customers information about our policies and practices relating to the management of personal information.
+	</li>
+</ul>
+
+<p>
+	We are committed to conducting our business in accordance with these principles in order to ensure that the confidentiality of personal information is protected and maintained.
+</p>
+
+			
             </div>
             </div>
         </div>

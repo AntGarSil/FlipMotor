@@ -7,8 +7,3 @@
 $('#tabs').ready(function(){
        $('#tabs').tabs();
 });
-
-            $('#row1').click(function(){
-                 $('#dialog').dialog('open');
-                 return false;
-            });

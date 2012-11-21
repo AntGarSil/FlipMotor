@@ -6,8 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,16 +18,21 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Controller",
             loadOnStartup = 1,
-            urlPatterns = {"/IndexHelper",
+            urlPatterns = {"/Home",
                            "/Cars",
                            "/General",
                            "/Motorbikes",
                            "/UserProfile",
-                           "/Register"
+                           "/Register",
+                           "/TermsAndConditions",
+                           "/About",
+                           "/AdminPage",
+                           "/PostAd",
+                           "/EditProfile",
+                           "/UserProfile"
                            })
 public class ControllerServlet extends HttpServlet {
 
-    
     /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
@@ -42,7 +45,7 @@ public class ControllerServlet extends HttpServlet {
     throws ServletException, IOException {
 
         String userPath = request.getServletPath();
-        
+
         /**
          * SAMPLE CODE
          */
@@ -56,15 +59,13 @@ public class ControllerServlet extends HttpServlet {
             
 
         // if checkout page is requested
-        } else {
-            userPath = "/footer.jsp";
         } 
 
         // use RequestDispatcher to forward request internally
-        String url = userPath;
+        String url = userPath + ".jsp";
 
         try {
-            request.getRequestDispatcher(url).forward(request, response);            
+            request.getRequestDispatcher(url).forward(request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -82,9 +83,11 @@ public class ControllerServlet extends HttpServlet {
     throws ServletException, IOException {
 
         String userPath = request.getServletPath();
-
+        if(userPath.equals("/Home")){
+            userPath = "/index.jsp";
+        }
         // if toVehicleQuery action is called
-        if (userPath.equals("/Cars")) {
+        else if(userPath.equals("/Cars")) {
             // TODO: Implement toVehicleQuery action
             userPath = "/query.jsp";
         }else if (userPath.equals("/Motorbikes")) {
@@ -93,13 +96,13 @@ public class ControllerServlet extends HttpServlet {
              userPath = "/query.jsp";
         // if checkout page is requested
         } else if (userPath.equals("/General")) {
-            // TODO: Implement motorbike page request
+            // TODO: Implement general page request
             
              userPath = "/query.jsp";
         // if checkout page is requested
         } else if (userPath.equals("/UserProfile")) {
             // TODO: Implement motorbike page request
-            userPath = "/UserProfileController";
+            userPath = "/userProfile.jsp";
 
              //userPath = "/query";
         // if checkout page is requested
@@ -109,7 +112,32 @@ public class ControllerServlet extends HttpServlet {
 
              //userPath = "/query";
         // if checkout page is requested
-        } 
+        } else if (userPath.equals("/About")) {
+            // TODO: Implement motorbike page request
+            userPath = "/aboutus.jsp";
+
+             //userPath = "/query";
+        // if checkout page is requested
+        }else if (userPath.equals("/AdminPage")) {
+            // TODO: Implement motorbike page request
+            userPath = "/admin.jsp";
+
+             //userPath = "/query";
+        // if checkout page is requested
+        }else if (userPath.equals("/TermsAndConditions")) {
+            // TODO: Implement motorbike page request
+            userPath = "/termsandconditions.jsp";
+
+             //userPath = "/query";
+        // if checkout page is requested
+        }else if (userPath.equals("/PostAd")) {
+            // TODO: Implement motorbike page request
+            userPath = "/postAd.jsp";
+		
+		}else if (userPath.equals("/EditProfile")) {
+            // TODO: Implement motorbike page request
+            userPath = "/registrationEdit.jsp";
+		}
 
         // use RequestDispatcher to forward request internally
         String url = userPath;

@@ -45,9 +45,14 @@ height: 20%;
    font-family:"FerroRosso";
    font-size: 80pt;
    color:#cc0000;
-   width:70%;
    vertical-align: middle;
+   border: none;
+   background-color: transparent;
+   padding: 0;
+   text-decoration: none;
 }
+
+
 
 .loginHeaderText{
    font-family:"FerroRosso";
@@ -114,12 +119,7 @@ height: 20%;
 	-khtml-border-radius: 5px;
 	border-radius: 5px;
         vertical-align: bottom;
-        margin-bottom: 15px;
         width: 90px;
-}
-
-.userProfileText {
-    font-weight: bold;
 }
 
 .modallogin{
@@ -171,47 +171,58 @@ body{
     position: relative;
 }
 
+.destroyLinkStyles {
+    float:right;
+    font-family:'Arial'; 
+    color: black;
+    text-decoration: none; 
+   font-weight:      bold;
+   background-color: #ddd;
+   vertical-align: middle;
+   border: none;
+   background-color: transparent;
+   padding: 0;
+   margin-right: 20px;
+}
+/*
 .destroyLinkStyles a:link    {
-  /* Applies to unvisited links in class mainNav */
+  /* Applies to unvisited links in class mainNav 
   text-decoration:  none;
   font-weight:      bold;
   background-color: #ddd;
   color:            blue;
   } 
 .destroyLinkStyles a:visited {
-  /* Applies to visited links in class mainNav */
+  /* Applies to visited links in class mainNav 
   text-decoration:  none;
   font-weight:      bold;
   background-color: #ddd;
   color:            #f0f;
   } 
 .destroyLinkStyles a:hover   {
-  /* Applies to links under the pointer in class mainNav */
+  /* Applies to links under the pointer in class mainNav 
   text-decoration:  none;
   font-weight:      bold;
   background-color: blue;
   color:            #fff;
   } 
 .destroyLinkStyles a:active  {
-  /* Applies to activated links in class mainNav */
+  /* Applies to activated links in class mainNav 
   text-decoration:  none;
   font-weight:      bold;
   background-color: black;
   color: white;
-  }
+  }*/
 
  .tabs {
-      /*margin-top: 10px;*/
+      margin-top: 10px;
       width: 90%;
       height: 500px;
       margin: auto;
       font-size: 12px;
       border: 2px solid grey;
       padding: 3px;
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px;
-      -khtml-border-radius: 5px;
-      
+      -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px;
   }
   
   .tabs-1 {
@@ -222,4 +233,33 @@ body{
       height:100%;
       margin-bottom: 20px;
   }
-  
+
+  #w2b-searchbox{
+      background:url(http://lh4.googleusercontent.com/-Pd1zyUMhsVo/TeixHnaB1hI/AAAAAAAAA6M/p-Iz_WGMQ3M/way2blogging_searchbox4.png) no-repeat scroll center center transparent;
+      width:307px;
+      height:50px;
+      display:block;
+  }
+form#w2b-searchform{
+      display: block;
+      padding: 12px;
+      margin:0;
+  }
+form#w2b-searchform #s{
+    padding: 6px 6px 6px 26px;
+    margin:0;
+    width: 215px;
+    font-size:14px;
+    vertical-align: top;
+    border:none;
+    background:transparent;
+}
+form#w2b-searchform #sbutton{
+    margin:0;
+    padding:0;
+    height:30px;
+    width:30px;
+    vertical-align: top;
+    border:none;
+    background:transparent;
+}
