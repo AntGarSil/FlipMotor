@@ -102,7 +102,7 @@ public class ControllerServlet extends HttpServlet {
         // if checkout page is requested
         } else if (userPath.equals("/UserProfile")) {
             // TODO: Implement motorbike page request
-            userPath = "/userProfile.jsp";
+            userPath = "/UserProfileController";
 
              //userPath = "/query";
         // if checkout page is requested
