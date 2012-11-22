@@ -78,6 +78,7 @@ public class UserProfileController extends HttpServlet {
                 throw new Exception ("Something funky going on with your session");
             }
              * */
+             
             
             response.setContentType("text/html");
             request.getRequestDispatcher("/header.jsp").include(request, response); 
