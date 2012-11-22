@@ -1,0 +1,180 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package controller;
+
+import Datastore.Entities.Administrato;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.UserTransaction;
+import model.AdministratoJpaController;
+import model.exceptions.PreexistingEntityException;
+import model.exceptions.RollbackFailureException;
+
+/**
+ *
+ * @author Antón García Dosil
+ */
+@WebServlet(name = "Controller",
+            loadOnStartup = 1,
+            urlPatterns = {"/Home",
+                           "/Cars",
+                           "/General",
+                           "/Motorbikes",
+                           "/UserProfile",
+                           "/Register",
+                           "/TermsAndConditions",
+                           "/About",
+                           "/AdminPage",
+                           "/PostAd",
+                           "/EditProfile",
+                           "/UserProfile"
+                           })
+public class ControllerServlet extends HttpServlet {
+
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+
+        String userPath = request.getServletPath();
+
+        /**
+         * SAMPLE CODE
+         */
+        // if category page is requested
+        if (userPath.equals("/category")) {
+            // TODO: Implement category request
+
+        // if cart page is requested
+        } else if (userPath.equals("/toMotorQuery")) {
+            // TODO: Implement motorbike page request
+            
+
+        // if checkout page is requested
+        } 
+
+        // use RequestDispatcher to forward request internally
+        String url = userPath + ".jsp";
+
+        try {
+            request.getRequestDispatcher(url).forward(request, response);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+
+        String userPath = request.getServletPath();
+        if(userPath.equals("/Home")){
+            userPath = "/index.jsp";
+        }
+        // if toVehicleQuery action is called
+        else if(userPath.equals("/Cars")) {
+            // TODO: Implement toVehicleQuery action
+            userPath = "/query.jsp";
+        }else if (userPath.equals("/Motorbikes")) {
+            // TODO: Implement motorbike page request
+            
+             userPath = "/query.jsp";
+        // if checkout page is requested
+        } else if (userPath.equals("/General")) {
+
+                // TODO: Implement general page request
+                
+                 //userPath = "/query.jsp";                
+                AdministratoJpaController admJPA = new AdministratoJpaController();
+                Administrato admEntity = new Administrato(new Integer(456745), "Anton", "asdf");
+
+                int count = admJPA.getAdministratoCount();
+            try {
+                admJPA.destroy(456745);
+                admJPA.destroy(45674);
+            } catch (PreexistingEntityException ex) {
+                Logger.getLogger(ControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (RollbackFailureException ex) {
+                Logger.getLogger(ControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(ControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            count = admJPA.getAdministratoCount();
+                
+                userPath = "/query.jsp";
+            // if checkout page is requested
+
+        } else if (userPath.equals("/UserProfile")) {
+            // TODO: Implement motorbike page request
+            userPath = "/userProfile.jsp";
+
+             //userPath = "/query";
+        // if checkout page is requested
+        } else if (userPath.equals("/Register")) {
+            // TODO: Implement motorbike page request
+            userPath = "/registration.jsp";
+
+             //userPath = "/query";
+        // if checkout page is requested
+        } else if (userPath.equals("/About")) {
+            // TODO: Implement motorbike page request
+            userPath = "/aboutus.jsp";
+
+             //userPath = "/query";
+        // if checkout page is requested
+        }else if (userPath.equals("/AdminPage")) {
+            // TODO: Implement motorbike page request
+            userPath = "/admin.jsp";
+
+             //userPath = "/query";
+        // if checkout page is requested
+        }else if (userPath.equals("/TermsAndConditions")) {
+            // TODO: Implement motorbike page request
+            userPath = "/termsandconditions.jsp";
+
+             //userPath = "/query";
+        // if checkout page is requested
+        }else if (userPath.equals("/PostAd")) {
+            // TODO: Implement motorbike page request
+            userPath = "/postAd.jsp";
+		
+		}else if (userPath.equals("/EditProfile")) {
+            // TODO: Implement motorbike page request
+            userPath = "/registrationEdit.jsp";
+		}
+
+        // use RequestDispatcher to forward request internally
+        String url = userPath;
+
+        try {
+            request.getRequestDispatcher(url).forward(request, response);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+}
