@@ -80,6 +80,7 @@ public class UserProfileController extends HttpServlet {
              * */
              
             
+            
             response.setContentType("text/html");
             request.getRequestDispatcher("/header.jsp").include(request, response); 
             
