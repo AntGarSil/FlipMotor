@@ -4,7 +4,7 @@
  */
 package controller;
 
-import Datastore.UserEntity;
+import Datastore.Entities.UserEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -77,9 +77,11 @@ public class LoginController extends HttpServlet {
                 session.setMaxInactiveInterval(20 * 60);
                 //Store user credential
                 session.setAttribute("userid", result.getUserID());
-                
+            }else{
+                // SHOW WRONG LOGIN INPUT MESSAGE
+
             }
-            request.getRequestDispatcher("/index.jsp").forward(request, response);            
+            request.getRequestDispatcher("/Home").forward(request, response);
         } finally {            
             out.close();
         }

@@ -5,12 +5,21 @@
 
 package controller;
 
+import Datastore.Entities.Administrato;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.UserTransaction;
+import model.AdministratoJpaController;
+import model.exceptions.PreexistingEntityException;
+import model.exceptions.RollbackFailureException;
 
 /**
  *
@@ -89,20 +98,39 @@ public class ControllerServlet extends HttpServlet {
         // if toVehicleQuery action is called
         else if(userPath.equals("/Cars")) {
             // TODO: Implement toVehicleQuery action
-            userPath = "/QueryController?opt=cars";
+            userPath = "/query.jsp";
         }else if (userPath.equals("/Motorbikes")) {
             // TODO: Implement motorbike page request
             
-             userPath = "/QueryController?opt=motos";
+             userPath = "/query.jsp";
         // if checkout page is requested
         } else if (userPath.equals("/General")) {
-            // TODO: Implement general page request
-            
-             userPath = "/QueryController?opt=gen";
-        // if checkout page is requested
+
+                // TODO: Implement general page request
+                
+                 //userPath = "/query.jsp";                
+                AdministratoJpaController admJPA = new AdministratoJpaController();
+                Administrato admEntity = new Administrato(new Integer(456745), "Anton", "asdf");
+
+                int count = admJPA.getAdministratoCount();
+            try {
+                admJPA.destroy(456745);
+                admJPA.destroy(45674);
+            } catch (PreexistingEntityException ex) {
+                Logger.getLogger(ControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (RollbackFailureException ex) {
+                Logger.getLogger(ControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(ControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            count = admJPA.getAdministratoCount();
+                
+                userPath = "/query.jsp";
+            // if checkout page is requested
+
         } else if (userPath.equals("/UserProfile")) {
             // TODO: Implement motorbike page request
-            userPath = "/UserProfileController";
+            userPath = "/userProfile.jsp";
 
              //userPath = "/query";
         // if checkout page is requested
@@ -134,10 +162,10 @@ public class ControllerServlet extends HttpServlet {
             // TODO: Implement motorbike page request
             userPath = "/postAd.jsp";
 		
-        }else if (userPath.equals("/EditProfile")) {
+		}else if (userPath.equals("/EditProfile")) {
             // TODO: Implement motorbike page request
-            userPath = "/notFound.jsp";
-        }
+            userPath = "/registrationEdit.jsp";
+		}
 
         // use RequestDispatcher to forward request internally
         String url = userPath;
