@@ -221,8 +221,8 @@ public class UserProfileController extends HttpServlet {
             out.println("                                <input id='phone' name='phone' class='required' minlength='9' maxlength='13' type='number' /></div>");
 
 
-            out.println("                                <div>Email address ");
-            out.println("                                <input id='email' name='email' class='required email' type='text'  style='width:200px'/></div>");
+//            out.println("                                <div>Email address ");
+//            out.println("                                <input id='email' name='email' class='required email' type='text'  style='width:200px'/></div>");
 
 
             out.println("                                <div> Credit card ");

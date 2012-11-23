@@ -94,10 +94,6 @@ public class EditProfileController extends HttpServlet {
                 oldClient.setCreditCard(newClient.getCreditCard());
             }
             
-            if(newClient.getEmail().length() != 0)
-            {
-                oldClient.setEmail(newClient.getEmail());
-            }
             
             if(newClient.getFlat() != 0)
             {
