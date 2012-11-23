@@ -33,6 +33,7 @@ import model.exceptions.RollbackFailureException;
                            "/Motorbikes",
                            "/UserProfile",
                            "/Register",
+                           "/RegisterAction",
                            "/TermsAndConditions",
                            "/About",
                            "/AdminPage",
@@ -106,24 +107,7 @@ public class ControllerServlet extends HttpServlet {
         // if checkout page is requested
         } else if (userPath.equals("/General")) {
 
-                // TODO: Implement general page request
-                
-                 //userPath = "/query.jsp";                
-                AdministratoJpaController admJPA = new AdministratoJpaController();
-                Administrato admEntity = new Administrato(new Integer(456745), "Anton", "asdf");
-
-                int count = admJPA.getAdministratoCount();
-            try {
-                admJPA.destroy(456745);
-                admJPA.destroy(45674);
-            } catch (PreexistingEntityException ex) {
-                Logger.getLogger(ControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (RollbackFailureException ex) {
-                Logger.getLogger(ControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(ControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            count = admJPA.getAdministratoCount();
+                // TODO: Implement general page request                
                 
                 userPath = "/query.jsp";
             // if checkout page is requested
@@ -162,10 +146,14 @@ public class ControllerServlet extends HttpServlet {
             // TODO: Implement motorbike page request
             userPath = "/postAd.jsp";
 		
-		}else if (userPath.equals("/EditProfile")) {
+	}else if (userPath.equals("/EditProfile")) {
             // TODO: Implement motorbike page request
             userPath = "/registrationEdit.jsp";
-		}
+            
+	}else if (userPath.equals("/RegisterAction")) {
+            // TODO: Implement motorbike page request
+            userPath = "/RegistrationController";
+	}
 
         // use RequestDispatcher to forward request internally
         String url = userPath;

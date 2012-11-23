@@ -2,7 +2,7 @@
 <!--<script src="js/register_jq.js" type="text/javascript"></script>-->
 <script src="js/jquery.validate.js" type="text/javascript"></script>
 <script src="js/register.js" type="text/javascript"></script>
-<script src="js/jquery.validate.password.js" type="text/javascript"></script>
+<!--<script src="js/jquery.validate.password.js" type="text/javascript"></script> -->
 <div id="bodyContent">
 
 
@@ -13,7 +13,7 @@
 			<li><a href="#client">Client</a></li>
 		</ul>
 		<div id="client" style="-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 20px; height:480px; margin-bottom: 20px;">
-                    <form id="clientSignUp" method="post" action="/Controller">
+                    <form id="clientSignUp" method="POST" action="RegisterAction">
                         <div id="leftPanel" style="float: left; width: 50%;">
                             <p>
 				<label for="name">Name</label>
@@ -25,7 +25,7 @@
                             </p>
                             <p>
                                     <label for="nif">NIF</label>
-                                    <input id="nif" name="nif" class="required" minlength="8" maxlength="9" type="password" />
+                                    <input id="nif" name="nif" class="required" minlength="8" maxlength="9" type="text" />
                             </p>
 
                             <p>
@@ -43,7 +43,7 @@
                             <p>
 
                                 <label for="password">Password</label>
-                                <input name="password" id="password" type="password" class="required" minlength="4" maxlength="8" />
+                                <input name="password" id="password" type="password" class="required" minlength="4" maxlength="50" />
 
                                 <div class="password-meter">
                                         <div class="password-meter-message"> </div>
@@ -95,7 +95,7 @@
                             </p>
                         </div>
                         <div id="submitPanel" style="float: left; width: 100%; margin-top: 5px;">
-                            <input type="submit" value="Sign Up" style="margin-left: auto; margin-right: auto; display:block;">
+                            <input type="submit" value="Sign Up" style="margin-left: auto; margin-right: auto; display:block;" />
                         </div>
                         
                     </form>

@@ -1,5 +1,12 @@
 <%@include file="header.jsp" %>
-
+    <style>
+    .ui-tabs-vertical { width: 55em; }
+    .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
+    .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+    .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+    .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
+    .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+    </style>
     <script src="js/jquery.validate.js" type="text/javascript"></script>
     <script src="js/register.js" type="text/javascript"></script>
     <script src="js/jquery.validate.password.js" type="text/javascript"></script>
@@ -8,8 +15,9 @@
            $('#tabs').tabs();
         });
 
-        $('#accordionContainer').ready(function(){
-           $('#accordionContainer').accordion();
+        $('#extraManagement').ready(function(){
+           $('#extraManagement').tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+           $("#extraManagement li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
            $('#datepicker').datepicker();
         });
 
@@ -50,50 +58,6 @@
 
     </script>
 
-        <div id="dialog" style="font-size: 14px;">
-            <div style="float:left; width: 240px; height:100%">
-                <div id="adPhoto" style="width: 100%; height: 70%; background-color: red;">
-                    Photo
-                    <img src="" alt="Photo">
-                </div>
-                <div id="contactInfo" style="width: 100%; height: auto; margin-top: 10px;">
-                    Contact <br>
-                    Name: Perico <br>
-                    E-mail: cuchuflete@oleole.com <br>
-                    Phone: 123456789
-                </div>
-            </div>
-
-            <div id="adDescription" style="float:left; width: 500px; height:100%; margin-left: 20px;">
-                <h3>Details</h3>
-                <div style="height: 60px;">
-                    <div style="float:left; width: 50%;">
-                    Type: <br>
-                    Brand:<br>
-                    Model:<br>
-                    Color:<br>
-                </div>
-                <div style="float:left; width: 50%;">
-                    Year:<br>
-                    Km: <br>
-                    Price: <br>
-                    Ad date: <br>
-                </div>
-
-                </div>
-
-                <div style="width:100%; height: 150px; margin-top:25px;">
-                    <h4>Description</h4>
-                    Descripcion y más detalles del vehículo
-                </div>
-                <div id="footBar" style="width:100%; height:auto; background-color: white;">
-                    <button id="closeButton" style="float: right; margin-right: 25px; margin-top: 20px;">Close</button>
-                </div>
-
-
-            </div>
-        </div>
-
     <div id="bodycontent" style="margin-top: 10px;">
         <div id="tabs" style="width: 90%; height: 300px; margin: auto; font-size: 12px; border: 2px solid grey; padding: 3px;
     -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px;" >
@@ -102,7 +66,7 @@
                 <li><a href="#tabs-2">Business ADs Validator</a></li>
             </ul>
             <div id="tabs-1" style="-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 20px; height:240px; margin-bottom: 20px;">
-                <form id="vehiclesForm" action="ControllerServlet" method="post">
+                <form id="vehiclesForm" action="AdminPage" method="post">
                 <div id="tableContainer" style="float: left;" class="tableWrapper">
                 <table id="vehicle" style="float:left;" class="tablesorter">
                     <thead style="display: block;">
@@ -122,7 +86,7 @@
             </div>
             <div id="tabs-2" style="-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 20px; height:230px; margin-bottom: 20px;">
 
-                <form id="businessForm" action="ControllerServlet" method="post">
+                <form id="businessForm" action="AdminPage" method="post">
                 <div id="tableContainer" style="float: left;" class="tableWrapper">
                 <table id="business" style="float: left;" class="tablesorter">
                     <thead style="display: block;">
@@ -146,23 +110,45 @@
             </div>
 
         </div>
-        <div id="accordionContainer" style="font-size:12px; width:90%; height: 200px; background-color: white; margin:auto; border: 2px solid grey; padding: 3px;
+        <div id="extraManagement" style="font-size:12px; width:90%; height: 200px; background-color: white; margin:auto; border: 2px solid grey; padding: 3px;
     -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px;">
-            <h3>New Offer</h3>
-            <div id="newOffer">
-                <form method="post" action="admin.jsp">
+            <ul>
+                <li><a href="#viewOffers">Existing Offers</a></li>
+                <li><a href="#newOffer">Create Offer</a></li>
+                <li><a href="#viewAdmins">Existing Admins</a></li>
+                <li><a href="#newAdmin">Create Admin</a></li>
+            </ul>
+            <div id="viewOffers" style="float: left; width: 75%; height: 70%; margin: 15px; margin-left: 40px; border: 2px solid grey; -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px;">
+                <div id="tableContainer" style="float: left;" >
+                    <table id="offers" style="float: left;" class="tablesorter">
+                        <thead style="display: block;">
+                            <tr><th style="width:199px;">Name</th><th style="width:280px">Type</th><th style="width:115px;">Fee</th><th style="width:50px;">Months</th><th style="width:70px;"># Ads</th><th style="width:80px;">Expires</th><th style="width:80px;">Delete</th></tr>
+                        </thead>
+                        <tbody style=" height: 100px; overflow: auto; display: block;">
+
+                            <tr><td style="width:180px;">20/10/12</td><td style="width:260px">OpenBank</td><td style="width:115px;">10</td><td style="width:60px;"><td style="width:70px;"></td><td style="width:80px;"></td><td style="width:70px"><form id="del_id" action="DeleteOffer" method="post"><input type="submit" value="Delete"></form></td></td> </tr>
+                            <tr><td style="width:180px;">20/10/12</td><td style="width:260px">OpenBank</td><td style="width:115px;">10</td><td style="width:60px;"><td style="width:70px;"></td><td style="width:80px;"></td><td style="width:70px"><input type="checkbox" checked disabled ></td></td> </tr>
+                            <tr><td style="width:180px;">20/10/12</td><td style="width:260px">OpenBank</td><td style="width:115px;">10</td><td style="width:60px;"><td style="width:70px;"></td><td style="width:80px;"></td><td style="width:70px"><input type="checkbox" checked disabled ></td></td> </tr>
+                            <tr><td style="width:180px;">20/10/12</td><td style="width:260px">OpenBank</td><td style="width:115px;">10</td><td style="width:60px;"><td style="width:70px;"></td><td style="width:80px;"></td><td style="width:70px"><input type="checkbox" checked disabled ></td></td> </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="newOffer" style="float: left; width: 75%; height: 70%; margin: 15px; margin-left: 40px; border: 2px solid grey; -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px;">
+                <form method="post" action="AdminPage">
                     <div style="float: left; width: 100%; height: 80px" class="tableWrapper">
                         <div id="offerDetails" style="float:left; width:50%;">
-                            Type:
+                            <label>Type:</label>
                             <input type="radio" name="offerType" value="vehicle" > Vehicle Ad
                             <input type="radio" name="offerType" value="business"> Business Ad <br>
-                            Offer Name: <input type="text" name="name"><br>
-                            End date: <input type="text" id="datepicker">
+                            <label>Offer Name:</label> <input type="text" name="name"><br>
+                            <label>End date:</label> <input type="text" id="datepicker">
                         </div>
                         <div id="offerDetails2" style="float:left; width:50%;">
-                            Fee (&euro;): <input type="text" name="fee"><br>
-                            Months: <input type="text" name="months"><br>
-                            Number of ads: <input type="text" name="numberAds">
+                            <label>Fee (&euro;):</label> <input type="text" name="fee"><br>
+                            <label>Months:</label> <input type="text" name="months"><br>
+                            <label>Number of ads:</label> <input type="text" name="numberAds">
                         </div>
                     </div>
                     <div id="offerSubmit" style="float: left; width: 100%; margin-top: 5px;">
@@ -170,9 +156,21 @@
                     </div>
                 </form>
             </div>
-            <h3>New Admin Account</h3>
-            <div id="newAdmin">
-                    <form id="adminSignUp" action="/Controller" method="POST">
+            <div id="viewAdmins" style="float: left; width: 75%; height: 70%; margin: 15px; margin-left: 40px; border: 2px solid grey; -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px;">
+                <div id="tableContainer" style="float: left; margin-left: 240px;" >
+                    <table id="admins" style="float: left;" class="tablesorter">
+                        <thead style="display: block;">
+                            <tr><th style="width:199px;">Admin</th><th style="width:100px">Delete</th></tr>
+                        </thead>
+                        <tbody style=" height: 100px; overflow: auto; display: block;">
+                            <tr><td style="width:199px;">Admin</td><td style="width:100px"><form id="del_id" action="DeleteAdmin" method="post"><input type="submit" value="Delete"></form></td></tr>
+                            <tr><td>Admin</td><td><form id="del_id" action="DeleteAdmin" method="post"><input type="submit" value="Delete"></form></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="newAdmin" style="float: left; width: 75%; height: 70%; margin: 15px; margin-left: 40px; border: 2px solid grey; -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px;">
+                    <form id="adminSignUp" action="AdminPage" method="POST">
                         <div id="leftPanel" style="float: left; width: 50%; padding: 0px;">
                             <label for="id">ID</label>
                             <input id="id" name="id" class="required" minlength="4" maxlength="10" type="text"><br>
@@ -191,7 +189,7 @@
                                 </div>
                             </div>
                         </div>
-			<div id="submitPanel" style="width:100%; float: left;">
+			<div id="submitPanel" style="width:100%; float: left; margin-top: 25px;">
                             <input type="submit" value="Register New Admin" style="margin-left: auto; margin-right: auto; display:block;">
                         </div>
                     </form>

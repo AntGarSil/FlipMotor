@@ -15,6 +15,7 @@
         <link rel="Stylesheet" href="style/s3slider.css" type="text/css" media=screen >
         <link rel="stylesheet" type="text/css" href="style/register.css"/>
         <link rel="Stylesheet" href="style/home.css" type="text/css" media=screen >
+        <link rel="stylesheet" href="style/questionmark.css" type="text/css" media="screen">
         <link rel="stylesheet" href="style/custom-theme2/jquery-ui-1.9.0.custom.css"  type="text/css">
         <link rel="stylesheet" href="js/jquery.tablesorter/themes/blue/style.css"  type="text/css">
         <link rel="stylesheet" type="text/css" href="style/jquery.validate.password.css"/>
@@ -52,24 +53,34 @@
                     <div id="navigationBar" style="width: 60%; height: 100%; float:left;">
                         
                         <%-- Code to paint buttons according to user log in --%>
-                        <% if(null == session.getAttribute("userid")){ %>                        
+                        <% if(null == session.getAttribute("userid") && null == session.getAttribute("adminid")){ %>                        
                         <div id="buttonBox" style="float: right; margin-top: 20px; margin-right: 50px;">
                             <div style=""><input id='loginButtonId' type="button" class="loginbutton" value="Log in"></div>
                             <div><form action="Register" method="POST"><input type="submit" id='registerButtonId' class="loginbutton" value="Register"/></form></div>
                         </div>
-                        <% }
-                        else {                            
-                        %>
+                        <% } else if(null != session.getAttribute("userid")){ %>
                         
                         <div id="buttonBox" style="float: right; margin-top: 20px; margin-right: 50px;">
                             <div><form action="UserProfile" method="POST"><input id='userProfileButtonId' type="submit" class="loginbutton" value="Profile"></form></div>
-                            <div><form action="LogoutController" method="POST"><input type="submit" id='registerButtonId' class="loginbutton" value="Log out"/></form></div>
+                            <div><form action="LogoutController" method="POST"><input type="submit" id='registerButtonId' class="loginbutton" value="Log Out"/></form></div>
                         </div>
-                        <div id="postBox" style="float: right; margin-top: 40px; margin-right: 10px;">
+                        <div id="postFavBox" style="float: right; margin-top: 20px; margin-right: 10px;">
                             <form action="PostAd" method="POST">
                                 <input type="submit" class="loginbutton" value="New Ad">
                             </form>
+                            <form action="Favorites" method="POST">
+                                <input type="submit" class="loginbutton" value="Favorites">
+                            </form>
                         </div>
+                        <%
+                             } else if(null!= session.getAttribute("adminid")){
+                        %>
+                            
+                            <div id="postBox" style="float: right; margin-top: 40px; margin-right: 50px;">
+                                <form action="AdminLogOut" method="POST">
+                                    <input type="submit" class="loginbutton" value="Log Out">
+                                </form>
+                            </div>
                         <%
                              }
                         %>
@@ -79,6 +90,9 @@
                             <input id="searchBoxId" class="searchBox" style="width:200px; margin: 20px;" type="text" onfocus="if (this.value=='Search...') this.value = ''" value="Search..." />
 
                         </div>--%>
+                        <%
+                             if(null== session.getAttribute("adminid")){
+                        %>
                         <div id="w2b-searchbox" style="margin-top:30px; margin-left:120px;">
                         <form id="w2b-searchform" action="ControllerServlet" method="get">
                             <input type="text" id="s" name="q" value=""/>
@@ -87,6 +101,10 @@
                         </form>
                             <input type="button" id="advSearchButton" value="Advanced Search">
                         </div>
+                        <%
+                             }
+                        %>
+                        
                         
                         
         <div id="advSearchBox" style="width:750px; height: 120px; border: 2px solid grey; padding: 10px; margin-top: 10px; background-image: url('images/seamlesstexture1_1200.jpg');
@@ -138,10 +156,6 @@
                         
                     </div>
 
-                    
-                   
-
-
                     <div id="loginpopup" class="modallogin">
                         <img alt="Close" id="closeLoginPopup" src="images/gtk-close.png" class="closeButton"/>
                         <div class="loginHeaderText">Log In </div>
@@ -156,6 +170,8 @@
                             <input type="submit" value="Log In" class="loginbutton" style="margin-bottom:0px; margin-left: 10px;width:70px;"/>
                         </form>
                     </div>
+                        
+                    
 
                 </div>
             </div>

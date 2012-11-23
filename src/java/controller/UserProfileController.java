@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.RegisteredclientJpaController;
 
 
 /**
@@ -56,6 +57,8 @@ public class UserProfileController extends HttpServlet {
                 throw new Exception ("Something funky going on with your session");
             }
                         
+            RegisteredclientJpaController userJPA = new RegisteredclientJpaController();
+            userJPA.findRegisteredclient(1234);
             
             /**
             for(int i = 0; i < userList.size(); i++){

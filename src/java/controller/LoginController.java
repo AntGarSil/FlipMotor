@@ -76,7 +76,7 @@ public class LoginController extends HttpServlet {
                 //Log in will expire every 20 minutes
                 session.setMaxInactiveInterval(20 * 60);
                 //Store user credential
-                session.setAttribute("userid", result.getUserID());
+                session.setAttribute("userid", 1234);
             }else{
                 // SHOW WRONG LOGIN INPUT MESSAGE
 
