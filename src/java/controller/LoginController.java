@@ -4,7 +4,9 @@
  */
 package controller;
 
+import Datastore.Entities.Registeredclient;
 import Datastore.Entities.UserEntity;
+import controller.Utils.Common;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.RegisteredclientJpaController;
 
 /**
  *
@@ -40,38 +43,22 @@ public class LoginController extends HttpServlet {
             /*
              * Class that checks a list to see if the user is logged in.
              * Creates session attributes with userid
-             */
-            
-            /////////////////// This section shall be replaced with a database query ///////////
-            UserEntity user1 = new UserEntity("12345678","juanito","juanitoh");
-            UserEntity user2 = new UserEntity("111111111","asdf","asdf");            
-            List<UserEntity> userList  = new ArrayList<UserEntity>();
-            
-            userList.add(user1);
-            userList.add(user2);
-            ////////////////////////////////////////////////////////////////////////////////////
+             */            
             
             String req_name = request.getParameter("username");
             String req_pass = request.getParameter("userpass");
             
-            boolean accept = false;
-            UserEntity result = new UserEntity();
+            RegisteredclientJpaController userJPA = new RegisteredclientJpaController();
             
-            for(int i = 0; i < userList.size(); i++)
-            {
-                if(userList.get(i).getUserName().equalsIgnoreCase(req_name) 
-                        && userList.get(i).getUserPassword().equalsIgnoreCase(req_pass)){
-                    
-                    result.setUserID(userList.get(i).getUserID());
-                    result.setUserName(req_name);
-                    result.setUserPassword(req_pass);
-                    
-                    accept = true;
-                    break;
-                }
-            }
+            //Generate ID for the given name-password pair
+            int userid = Common.generateUserID(req_name, req_pass);
+                        
+            //Check if the ID is in the database
+            Registeredclient user = new Registeredclient();            
+            user = userJPA.findRegisteredclient(userid);
             
-            if(accept){
+                       
+            if(null != user){
                 HttpSession session = request.getSession(true);
                 //Log in will expire every 20 minutes
                 session.setMaxInactiveInterval(20 * 60);

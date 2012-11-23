@@ -61,7 +61,7 @@ public class RegistrationController extends HttpServlet {
             String card = request.getParameter("card");
             String province = request.getParameter("province");
             
-            int PK = Common.generatePK(nif);
+            int PK = Common.generateUserID(email,password);
             /*Registeredclient(Integer clientID, String nif, int phone,
                     String email, String nam, String surname, String passwor,
                             long creditCard, String nationality, int pc,

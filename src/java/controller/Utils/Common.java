@@ -15,11 +15,12 @@ import java.util.logging.Logger;
  */
 public class Common {
     
-    public static int generatePK(String id){
+    public static int generateUserID(String email, String password){
         
+        String input = email.concat(password);
         int key = 0;
         try {
-            byte[] idbytes = id.getBytes();            
+            byte[] idbytes = input.getBytes();            
             
             StringBuffer hashString = new StringBuffer();
             MessageDigest md = MessageDigest.getInstance("SHA-256");
