@@ -4,10 +4,15 @@
  */
 package controller.Utils;
 
+import Datastore.Entities.Vehicleadvert;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.VehicleadvertJpaController;
 
 /**
  *
@@ -15,9 +20,9 @@ import java.util.logging.Logger;
  */
 public class Common {
     
-    public static int generateUserID(String email, String password){
+    public static int generateUserID(String email){
         
-        String input = email.concat(password);
+        String input = email;
         int key = 0;
         try {
             byte[] idbytes = input.getBytes();            
@@ -42,4 +47,68 @@ public class Common {
         }
         return key;
     }
+    
+    public static List<Vehicleadvert> getMotorbikes(){
+        
+        List<Vehicleadvert> query;
+        List<Vehicleadvert> motorbikes = new ArrayList<Vehicleadvert>();
+        
+        VehicleadvertJpaController vehicleJPA = new VehicleadvertJpaController();
+        
+        query = vehicleJPA.findVehicleadvertEntities();
+        
+        for(Vehicleadvert i : query){
+            if(i.getVehicle().equalsIgnoreCase("motorbike")){
+                motorbikes.add(i);
+            }
+        }
+        
+        return motorbikes;
+    }
+    
+    
+    public static List<Vehicleadvert> getCars(){
+        
+        List<Vehicleadvert> query;
+        List<Vehicleadvert> cars = new ArrayList<Vehicleadvert>();
+        
+        VehicleadvertJpaController vehicleJPA = new VehicleadvertJpaController();
+        
+        query = vehicleJPA.findVehicleadvertEntities();
+        
+        for(Vehicleadvert i : query){
+            if(i.getVehicle().equalsIgnoreCase("car")){
+                cars.add(i);
+            }
+        }
+        
+        return cars;
+    }
+ 
+    
+     public static List<Vehicleadvert> getAllAdverts(){                        
+        
+        VehicleadvertJpaController vehicleJPA = new VehicleadvertJpaController();
+        
+        List<Vehicleadvert> query = vehicleJPA.findVehicleadvertEntities();      
+        
+        return query;
+    }
+     
+     
+    public static List<Vehicleadvert> getAdvertsByClient(int clientID){                        
+        
+     VehicleadvertJpaController vehicleJPA = new VehicleadvertJpaController();
+     List<Vehicleadvert> ads = vehicleJPA.findVehicleadvertEntities();
+     List<Vehicleadvert> userads = new ArrayList<Vehicleadvert>();
+     
+     for(Vehicleadvert i : ads){
+         if(i.getClientID().getClientID() == clientID){
+             userads.add(i);
+         }
+     }
+        return userads;
+    }
+
+     
 }

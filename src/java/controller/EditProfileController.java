@@ -8,7 +8,6 @@ import Datastore.Entities.Registeredclient;
 import controller.Utils.Common;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,14 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.RegisteredclientJpaController;
-import model.exceptions.PreexistingEntityException;
-import model.exceptions.RollbackFailureException;
 
 /**
  *
  * @author root
  */
-public class RegistrationController extends HttpServlet {
+public class EditProfileController extends HttpServlet {
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,11 +31,11 @@ public class RegistrationController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-
+ 
             RegisteredclientJpaController userJPA = new RegisteredclientJpaController();
             
             
@@ -47,20 +44,20 @@ public class RegistrationController extends HttpServlet {
             
             String name = request.getParameter("name");
             String surname = request.getParameter("surname");
-            String phone = request.getParameter("phone");
+            String phone = "0" + request.getParameter("phone");
             String nif = request.getParameter("nif");
             String street = request.getParameter("street");
-            String flat = request.getParameter("flat");
-            String number = request.getParameter("number");
+            String flat = "0" + request.getParameter("flat");
+            String number = "0" + request.getParameter("number");
             String password = request.getParameter("password");
             String city = request.getParameter("city");
             String email = request.getParameter("email");
-            String pc = request.getParameter("pc");
+            String pc = "0" + request.getParameter("pc");
             String leter = request.getParameter("leter");
-            String card = request.getParameter("card");
+            String card = "0" + request.getParameter("card");
             String province = request.getParameter("province");
+            int PK = -1;
             
-            int PK = Common.generateUserID(email);
             /*Registeredclient(Integer clientID, String nif, int phone,
                     String email, String nam, String surname, String passwor,
                             long creditCard, String nationality, int pc,
@@ -70,36 +67,103 @@ public class RegistrationController extends HttpServlet {
                     email, name, surname, password, Long.valueOf(card), "NA", Integer.valueOf(pc),
                     city, province, street, Integer.valueOf(number),Integer.valueOf(flat),
                     -1, -1);
-            newClient.setLeter(leter.charAt(0));
+            if(leter.length() != 0){
+                newClient.setLeter(leter.charAt(0));
+            }else{
+                newClient.setLeter('0');
+            }
             
+            HttpSession session = request.getSession(true);
+            Integer uid = -1;
+            if(null != session.getAttribute("userid")){
+                uid = (Integer) session.getAttribute("userid");    
+            } else{
+                out.println("Session Expired");
+                throw new Exception ("Something funky going on with your session");
+            }
             
-            try {
-                int count = userJPA.getRegisteredclientCount();
-                userJPA.create(newClient);
-                count = userJPA.getRegisteredclientCount();
-                
-                
-                HttpSession session = request.getSession(true);
-                //Log in will expire every 20 minutes
-                session.setMaxInactiveInterval(20 * 60);
-                //Store user credential
-                session.setAttribute("userid", PK);
-                request.getRequestDispatcher("/UserProfile").forward(request, response);
-                
-            } catch (PreexistingEntityException ex) {
-                Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (RollbackFailureException ex) {
-                Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
+            Registeredclient oldClient = userJPA.findRegisteredclient(uid);
+            
+            if(newClient.getCity().length() != 0)
+            {
+                oldClient.setCity(newClient.getCity());
+            }
+            
+            if(newClient.getCreditCard() != 0)
+            {
+                oldClient.setCreditCard(newClient.getCreditCard());
+            }
+            
+            if(newClient.getEmail().length() != 0)
+            {
+                oldClient.setEmail(newClient.getEmail());
+            }
+            
+            if(newClient.getFlat() != 0)
+            {
+                oldClient.setFlat(newClient.getFlat());
+            }
+            
+            if(newClient.getLeter() != '0')
+            {
+                oldClient.setLeter(newClient.getLeter());
             }            
+            
+            if(newClient.getNam().length() != 0)
+            {
+                oldClient.setNam(newClient.getNam());
+            }
+            
+            if(newClient.getNif().length() != 0)
+            {
+                oldClient.setNif(newClient.getNif());
+            }
+            
+            if(newClient.getNumbe() != 0)
+            {
+                oldClient.setNumbe(newClient.getNumbe());
+            }
+            
+            if(newClient.getPasswor().length() != 0)
+            {
+                oldClient.setPasswor(newClient.getPasswor());                
+            }            
+            
+            if(newClient.getPc() != 0)
+            {
+                oldClient.setPc(newClient.getPc());
+            }            
+            
+            if(newClient.getPhone() != 0)
+            {
+                oldClient.setPhone(newClient.getPhone());
+            }            
+            
+            if(newClient.getProvince().length() != 0)
+            {
+                oldClient.setProvince(newClient.getProvince());
+            }
+            
+            if(newClient.getStreet().length() != 0)
+            {
+                oldClient.setStreet(newClient.getStreet());
+            }            
+            
+            if(newClient.getSurname().length() != 0)
+            {
+                oldClient.setSurname(newClient.getSurname());
+            }            
+            
+
+            
+            userJPA.edit(oldClient);
+            request.getRequestDispatcher("/UserProfileController").include(request, response); 
+            
             
         } finally {            
             out.close();
         }
     }
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -112,7 +176,11 @@ public class RegistrationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /** 
@@ -125,7 +193,11 @@ public class RegistrationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /** 

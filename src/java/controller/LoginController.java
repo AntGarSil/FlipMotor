@@ -5,12 +5,9 @@
 package controller;
 
 import Datastore.Entities.Registeredclient;
-import Datastore.Entities.UserEntity;
 import controller.Utils.Common;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,19 +48,19 @@ public class LoginController extends HttpServlet {
             RegisteredclientJpaController userJPA = new RegisteredclientJpaController();
             
             //Generate ID for the given name-password pair
-            int userid = Common.generateUserID(req_name, req_pass);
+            int userid = Common.generateUserID(req_name);
                         
             //Check if the ID is in the database
             Registeredclient user = new Registeredclient();            
             user = userJPA.findRegisteredclient(userid);
             
                        
-            if(null != user){
+            if(null != user && user.getPasswor().equals(req_pass)){
                 HttpSession session = request.getSession(true);
                 //Log in will expire every 20 minutes
                 session.setMaxInactiveInterval(20 * 60);
                 //Store user credential
-                session.setAttribute("userid", 1234);
+                session.setAttribute("userid", userid);
             }else{
                 // SHOW WRONG LOGIN INPUT MESSAGE
 

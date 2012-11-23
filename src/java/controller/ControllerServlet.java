@@ -5,27 +5,19 @@
 
 package controller;
 
-import Datastore.Entities.Administrato;
+
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.UserTransaction;
-import model.AdministratoJpaController;
-import model.exceptions.PreexistingEntityException;
-import model.exceptions.RollbackFailureException;
 
 /**
  *
  * @author Antón García Dosil
  */
-@WebServlet(name = "Controller",
+@WebServlet(name = "ControllerServlet",
             loadOnStartup = 1,
             urlPatterns = {"/Home",
                            "/Cars",
@@ -99,22 +91,22 @@ public class ControllerServlet extends HttpServlet {
         // if toVehicleQuery action is called
         else if(userPath.equals("/Cars")) {
             // TODO: Implement toVehicleQuery action
-            userPath = "/query.jsp";
+            userPath = "/QueryController?opt=Cars";
         }else if (userPath.equals("/Motorbikes")) {
             // TODO: Implement motorbike page request
             
-             userPath = "/query.jsp";
+             userPath = "/QueryController?opt=Motorbikes";
         // if checkout page is requested
         } else if (userPath.equals("/General")) {
 
                 // TODO: Implement general page request                
                 
-                userPath = "/query.jsp";
+                userPath = "/QueryController?opt=General";
             // if checkout page is requested
 
         } else if (userPath.equals("/UserProfile")) {
             // TODO: Implement motorbike page request
-            userPath = "/userProfile.jsp";
+            userPath = "/UserProfileController";
 
              //userPath = "/query";
         // if checkout page is requested
@@ -148,7 +140,7 @@ public class ControllerServlet extends HttpServlet {
 		
 	}else if (userPath.equals("/EditProfile")) {
             // TODO: Implement motorbike page request
-            userPath = "/registrationEdit.jsp";
+            userPath = "/EditProfileController";
             
 	}else if (userPath.equals("/RegisterAction")) {
             // TODO: Implement motorbike page request
