@@ -62,30 +62,7 @@ public class UserProfileController extends HttpServlet {
                         
             RegisteredclientJpaController userJPA = new RegisteredclientJpaController();
             Registeredclient user = userJPA.findRegisteredclient(Integer.valueOf(uid));
-            
-            /**
-            for(int i = 0; i < userList.size(); i++){
-                if(uid.equalsIgnoreCase(userList.get(i).getUserID()))
-                {
-                    result.setUserName(userList.get(i).getUserName());
-                    result.setPhone(userList.get(i).getPhone());
-                    result.setNIF(userList.get(i).getNIF());
-                    result.setCreditCard(userList.get(i).getCreditCard());
-                    result.setAddressPC(userList.get(i).getAddressPC());
-                    result.setAddressFlat(userList.get(i).getAddressFlat());
-                    result.setAddressLetter(userList.get(i).getAddressLetter());
-                    result.setAddressNo(userList.get(i).getAddressNo());
-                    result.setEmail(userList.get(i).getEmail());
-                    break;
-                }
-            }
-            
-            if(null == result.getNIF()){
-                throw new Exception ("Something funky going on with your session");
-            }
-             * */
-             
-            
+                                     
             
             response.setContentType("text/html");
             request.getRequestDispatcher("/header.jsp").include(request, response); 

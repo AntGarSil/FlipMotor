@@ -6,14 +6,19 @@ package controller;
 
 import Datastore.Entities.Vehicleadvert;
 import controller.Utils.Common;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.VehicleadvertJpaController;
 
 /**
@@ -83,17 +88,27 @@ public class QueryController extends HttpServlet {
     if(opt.equals("Cars")){
         res = Common.getCars();
     }
-    if(opt.equals("Cars")){
-        res = Common.getCars();
+    if(opt.equals("Motorbikes")){
+        res = Common.getMotorbikes();
     }
     
-    for(Vehicleadvert entity : res)
+
+    HttpSession session = request.getSession(true);
+                //Log in will expire every 20 minutes
+    session.setMaxInactiveInterval(20 * 60);
+    //Store user credential
+    session.setAttribute("vehicles", res);
+    
+    
+    
+    for(int i = 0; i < res.size(); i++)
     {
-        out.println("                        <tr><td style='width:199px;'>16/10/2012 at 16:00</td><td style='width:62px;'><img src='images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg' alt='Photo' style='height:50px; margin-left: auto; margin-right: auto;'></td><td style='width:200px;'>BMW 320</td><td style='width:201px;'>Barcelona</td><td style='width:52px;'>2008</td><td style='width:102px;'>4000</td><td style='width:66px;'><form id='ad_id' action='Advert' method='post' ><input type='submit' id='visitAd1' value='Visit AD'></form></td></tr> ");    
+        
+        Vehicleadvert entity = res.get(i);
+
+        out.println("                        <tr><td style='width:199px;'>" + entity.getPublicationDate() + "</td><td style='width:62px;'><iframe width='100' height='100' frameBorder='0' src='ImagePrinterHelper?num=" + i +"'></iframe></td><td style='width:200px;'>" + entity.getBrand() +"</td><td style='width:201px;'>" + entity.getState() +"</td><td style='width:52px;'>" + entity.getYearV() +"</td><td style='width:102px;'>" + entity.getPrice() +" $</td><td style='width:66px;'><form id='ad_id' action='Advert' method='post' ><input type='submit' id='visitAd1' value='Visit AD'></form></td></tr> ");    
     }
-        //out.println("                        <tr><td style='width:199px;'>16/10/2012 at 16:00</td><td style='width:62px;'><img src='images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg' alt='Photo' style='height:50px; margin-left: auto; margin-right: auto;'></td><td style='width:200px;'>BMW 320</td><td style='width:201px;'>Barcelona</td><td style='width:52px;'>2008</td><td style='width:102px;'>4000</td><td style='width:66px;'><form id='ad_id' action='Advert' method='post' ><input type='submit' id='visitAd1' value='Visit AD'></form></td></tr> ");
-        //out.println("                        <tr id='row2'><td>16/10/2012 at 16:00</td><td><img src='images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg' alt='Photo' style='height:50px; margin-left: auto; margin-right: auto;'></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><input type='button' id='visitAd2' value='Visit AD'></td></tr> ");
-        //out.println("                        <tr id='row3'><td>16/10/2012 at 16:00</td><td><img src='images/motos/jet-sport-x-50-motissimo-barcelona-motos-ocasion.jpeg' alt='Photo' style='height:50px; margin-left: auto; margin-right: auto;'></td><td>BMW 320</td><td>Madrid</td><td>2009</td><td>2.000</td><td><input type='button' id='visitAd2' value='Visit AD'></td></tr> ");
+    
     
                         
     out.println("                    </tbody> ");
