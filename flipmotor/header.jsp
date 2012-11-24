@@ -54,24 +54,24 @@
                         
                         <%-- Code to paint buttons according to user log in --%>
                         <% if(null == session.getAttribute("userid") && null == session.getAttribute("adminid")){ %>                        
-                        <div id="buttonBox" style="float: right; margin-top: 20px; margin-right: 50px;">
-                            <div style=""><input id='loginButtonId' type="button" class="loginbutton" value="Log in"></div>
-                            <div><form action="Register" method="POST"><input type="submit" id='registerButtonId' class="loginbutton" value="Register"/></form></div>
-                        </div>
+                                <div id="buttonBox" style="float: right; margin-top: 20px; margin-right: 50px;">
+                                    <div style=""><input id='loginButtonId' type="button" class="loginbutton" value="Log in"></div>
+                                    <div><form action="Register" method="POST"><input type="submit" id='registerButtonId' class="loginbutton" value="Register"/></form></div>
+                                </div>
                         <% } else if(null != session.getAttribute("userid")){ %>
                         
-                        <div id="buttonBox" style="float: right; margin-top: 20px; margin-right: 50px;">
-                            <div><form action="UserProfile" method="POST"><input id='userProfileButtonId' type="submit" class="loginbutton" value="Profile"></form></div>
-                            <div><form action="LogoutController" method="POST"><input type="submit" id='registerButtonId' class="loginbutton" value="Log Out"/></form></div>
-                        </div>
-                        <div id="postFavBox" style="float: right; margin-top: 20px; margin-right: 10px;">
-                            <form action="PostAd" method="POST">
-                                <input type="submit" class="loginbutton" value="New Ad">
-                            </form>
-                            <form action="Favorites" method="POST">
-                                <input type="submit" class="loginbutton" value="Favorites">
-                            </form>
-                        </div>
+                            <div id="buttonBox" style="float: right; margin-top: 20px; margin-right: 0px;">
+                                <div><form action="UserProfile" method="POST"><input id='userProfileButtonId' type="submit" class="loginbutton" value="Profile"></form></div>
+                                <div><form action="LogoutController" method="POST"><input type="submit" id='registerButtonId' class="loginbutton" value="Log Out"/></form></div>
+                            </div>
+                            <div id="postFavBox" style="float: right; margin-top: 20px; margin-right: 10px;">
+                                <form action="PostAd" method="POST">
+                                    <input type="submit" class="loginbutton" value="New Ad">
+                                </form>
+                                <form action="Favorites" method="POST">
+                                    <input type="submit" class="loginbutton" value="Favorites">
+                                </form>
+                            </div>
                         <%
                              } else if(null!= session.getAttribute("adminid")){
                         %>
@@ -93,7 +93,7 @@
                         <%
                              if(null== session.getAttribute("adminid")){
                         %>
-                        <div id="w2b-searchbox" style="margin-top:30px; margin-left:120px;">
+                        <div id="w2b-searchbox" style="margin-top:30px; margin-left:80px;">
                         <form id="w2b-searchform" action="ControllerServlet" method="get">
                             <input type="text" id="s" name="q" value=""/>
                             <input type="image" src="http://img1.blogblog.com/img/blank.gif" id="sbutton" />
