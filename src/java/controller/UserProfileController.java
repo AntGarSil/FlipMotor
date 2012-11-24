@@ -263,7 +263,7 @@ public class UserProfileController extends HttpServlet {
             out.println("                           <tr><th style='width:300px;'>Date</th><th style='width:280px;'>Brand and Model</th><th style='width:200px;'>Vehicle</th><th style='width:80px;'>Delete Ad</th><th style='width:80px;'>Edit Ad</th></tr> ");
             out.println("                    </thead> ");
             out.println("                    <tbody style='overflow: auto; display: block; height: 400px;'> ");
-            out.println("                        <tr><td style='width:305px;'>20/10/12</td><td style='width:200px'>BMW</td><td style='width:200px;'>Motorbike</td><td style='width:80px;'><input type='button' value='Delete Ad'></td><td style='width:70px;'><input type='button' value='Edit Ad'></tr> ");
+            //out.println("                        <tr><td style='width:305px;'>20/10/12</td><td style='width:200px'>BMW</td><td style='width:200px;'>Motorbike</td><td style='width:80px;'><input type='button' value='Delete Ad'></td><td style='width:70px;'><input type='button' value='Edit Ad'></tr> ");
 
             //////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////                      ADD ADVERTISEMENTS                          //////////////
@@ -273,7 +273,7 @@ public class UserProfileController extends HttpServlet {
             
             for(Vehicleadvert ad : userads)
             {
-                out.println("                        <tr><td>20/10/12</td><td style='width:280px'>BMW</td><td>Motorbike</td><td><input type='button' value='Delete Ad'></td><td><input type='button' value='Edit Ad'></tr> ");
+                out.println("                        <tr><td style='width:305px;'>" + ad.getPublicationDate() +"</td><td style='width:200px'>" + ad.getBrand() + " " + ad.getModelV() +"</td><td style='width:200px;'>" + ad.getVehicle() +"</td><td style='width:80px;'><input type='button' value='Delete Ad'></td><td style='width:70px;'><input type='button' value='Edit Ad'></tr> ");
             }
             //////////////////////////////////////////////////////////////////////////////////////////////////
 

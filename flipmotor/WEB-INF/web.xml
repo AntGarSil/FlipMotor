@@ -93,6 +93,10 @@
         <url-pattern>/EditProfile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ControllerServlet</servlet-name>
+        <url-pattern>/RegisterError</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>
         <url-pattern>/UserProfileController</url-pattern>
     </servlet-mapping>

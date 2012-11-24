@@ -61,6 +61,13 @@ public class RegistrationController extends HttpServlet {
             String province = request.getParameter("province");
             
             int PK = Common.generateUserID(email);
+            
+            Registeredclient existClient = userJPA.findRegisteredclient(PK);
+            if(null != existClient)
+            {
+                request.getRequestDispatcher("/RegisterError").forward(request, response);
+                return;
+            }
             /*Registeredclient(Integer clientID, String nif, int phone,
                     String email, String nam, String surname, String passwor,
                             long creditCard, String nationality, int pc,

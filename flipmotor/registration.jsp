@@ -30,7 +30,7 @@
 
                             <p>
                                     <label for="phone">Phone</label>
-                                    <input id="phone" name="phone" class="required" minlength="9" maxlength="13" type="number" />
+                                    <input id="phone" name="phone" class="required" minlength="9" maxlength="9" type="number" />
                             </p>
                             <p>
                                     <label for="email">Email address</label>

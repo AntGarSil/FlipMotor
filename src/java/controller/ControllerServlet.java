@@ -31,7 +31,8 @@ import javax.servlet.http.HttpServletResponse;
                            "/AdminPage",
                            "/PostAd",
                            "/EditProfile",
-                           "/UserProfile"
+                           "/UserProfile",
+                           "/RegisterError"
                            })
 public class ControllerServlet extends HttpServlet {
 
@@ -145,6 +146,10 @@ public class ControllerServlet extends HttpServlet {
 	}else if (userPath.equals("/RegisterAction")) {
             // TODO: Implement motorbike page request
             userPath = "/RegistrationController";
+            
+	}else if (userPath.equals("/RegisterError")) {
+            // TODO: Implement motorbike page request
+            userPath = "/RegisterError.jsp";
 	}
 
         // use RequestDispatcher to forward request internally
