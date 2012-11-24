@@ -203,7 +203,7 @@ public class UserProfileController extends HttpServlet {
 
 
             out.println("                                <div> Credit card ");
-            out.println("                                <input id='card' name='card' class='required' minlength='20' maxlength='20' type='number'  style='width:200px'/></div> ");
+            out.println("                                <input id='card' name='card' class='required' minlength='16' maxlength='16' type='number'  style='width:200px'/></div> ");
 
 
             out.println("				<div><h4>Address</h4> ");

@@ -38,7 +38,7 @@
                             </p>
                             <p>
                                     <label for="card">Credit card</label>
-                                    <input id="card" name="card" class="required" minlength="20" maxlength="20" type="number" />
+                                    <input id="card" name="card" class="required" minlength="16" maxlength="16" type="number" />
                             </p>
                             <p>
 
