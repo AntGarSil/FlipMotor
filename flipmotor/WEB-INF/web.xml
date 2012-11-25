@@ -40,6 +40,10 @@
         <servlet-name>ImagePrinterHelper</servlet-name>
         <servlet-class>controller.ImagePrinterHelper</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewAdController</servlet-name>
+        <servlet-class>controller.ViewAdController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -97,6 +101,10 @@
         <url-pattern>/RegisterError</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ControllerServlet</servlet-name>
+        <url-pattern>/Advert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>
         <url-pattern>/UserProfileController</url-pattern>
     </servlet-mapping>
@@ -123,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>ImagePrinterHelper</servlet-name>
         <url-pattern>/ImagePrinterHelper</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAdController</servlet-name>
+        <url-pattern>/ViewAdController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,7 +5,10 @@
 package controller;
 
 import Datastore.Entities.Vehicleadvert;
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -41,11 +44,17 @@ public class ImagePrinterHelper extends HttpServlet {
         //response.setContentType("text/html;charset=UTF-8");
         //PrintWriter out = response.getWriter();
         try {
-                
-                Enumeration<String> att = request.getAttributeNames();
-                
+                                
                 List<Vehicleadvert> vehicles = new ArrayList<Vehicleadvert>();
+                
+                
+                /*
+                 * Receives vehicle number
+                 * Receives output image width and height
+                 */
                 Integer num = Integer.valueOf(request.getParameter("num"));
+                Integer width = Integer.valueOf(request.getParameter("width"));
+                Integer height = Integer.valueOf(request.getParameter("height"));
                 
                 
                 HttpSession session = request.getSession(true);
@@ -57,13 +66,21 @@ public class ImagePrinterHelper extends HttpServlet {
                     throw new Exception ("Something funky going on with your session");
                 }
             
+                BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(vehicles.get(num).getImag()));
                 
+                BufferedImage scaledImage = new BufferedImage(width,height, BufferedImage.TYPE_INT_RGB);
+                Graphics2D g = scaledImage.createGraphics();
+                g.setComposite(AlphaComposite.Src);
+                g.drawImage(bufferedImage,0,0,width,height, null);
+                g.dispose();
+                                                
                 response.setContentType("image/jpeg");
-                response.setContentLength(vehicles.get(num).getImag().length);                
+                //response.setContentLength(vehicles.get(num).getImag().length);                
                 
-                response.getOutputStream().write(vehicles.get(num).getImag());
-                response.getOutputStream().flush();
-                response.getOutputStream().close();
+                ImageIO.write(scaledImage, "jpeg", response.getOutputStream());
+                //response.getOutputStream().write(vehicles.get(num).getImag());
+                //response.getOutputStream().flush();
+                //response.getOutputStream().close();
                 
                 //ServletOutputStream oStream = response.getOutputStream();
                 //oStream.write(vehicles.get(num).getImag());

@@ -32,7 +32,8 @@ import javax.servlet.http.HttpServletResponse;
                            "/PostAd",
                            "/EditProfile",
                            "/UserProfile",
-                           "/RegisterError"
+                           "/RegisterError",
+                           "/ViewAdController"
                            })
 public class ControllerServlet extends HttpServlet {
 
@@ -53,8 +54,8 @@ public class ControllerServlet extends HttpServlet {
          * SAMPLE CODE
          */
         // if category page is requested
-        if (userPath.equals("/category")) {
-            // TODO: Implement category request
+        if (userPath.equals("/Advert")) {            
+            userPath = "/ViewAdController";
 
         // if cart page is requested
         } else if (userPath.equals("/toMotorQuery")) {
@@ -65,7 +66,7 @@ public class ControllerServlet extends HttpServlet {
         } 
 
         // use RequestDispatcher to forward request internally
-        String url = userPath + ".jsp";
+        String url = userPath;
 
         try {
             request.getRequestDispatcher(url).forward(request, response);

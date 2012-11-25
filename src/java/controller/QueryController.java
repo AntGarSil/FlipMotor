@@ -106,7 +106,7 @@ public class QueryController extends HttpServlet {
         
         Vehicleadvert entity = res.get(i);
 
-        out.println("                        <tr><td style='width:199px;'>" + entity.getPublicationDate() + "</td><td style='width:62px;'><iframe width='100' height='100' frameBorder='0' src='ImagePrinterHelper?num=" + i +"'></iframe></td><td style='width:200px;'>" + entity.getBrand() +"</td><td style='width:201px;'>" + entity.getState() +"</td><td style='width:52px;'>" + entity.getYearV() +"</td><td style='width:102px;'>" + entity.getPrice() +" $</td><td style='width:66px;'><form id='ad_id' action='Advert' method='post' ><input type='submit' id='visitAd1' value='Visit AD'></form></td></tr> ");    
+        out.println("                        <tr><td style='width:199px;'>" + entity.getPublicationDate() + "</td><td style='width:62px;'><iframe width='100' height='100' frameBorder='0' src='ImagePrinterHelper?height=80&width=80&num=" + i +"'></iframe></td><td style='width:200px;'>" + entity.getBrand() +"</td><td style='width:201px;'>" + entity.getState() +"</td><td style='width:52px;'>" + entity.getYearV() +"</td><td style='width:102px;'>" + entity.getPrice() +" $</td><td style='width:66px;'><form id='ad_id' action='Advert' method='GET' ><input type='hidden' name='code' value='" + entity.getCode() + "'/><input type='hidden' name='num' value='" + i + "'/><input type='submit' id='visitAd1' value='Visit AD'></form></td></tr> ");    
     }
     
     

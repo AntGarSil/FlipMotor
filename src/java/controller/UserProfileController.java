@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.RegisteredclientJpaController;
-import model.VehicleadvertJpaController;
+
 
 
 /**
@@ -271,6 +271,10 @@ public class UserProfileController extends HttpServlet {
             //////////////////////////////////////////////////////////////////////////////////////////////////
             List<Vehicleadvert> userads = Common.getAdvertsByClient(user.getClientID());
             
+            
+            //Store user credential
+            session.setAttribute("vehicles", userads);
+    
             for(Vehicleadvert ad : userads)
             {
                 out.println("                        <tr><td style='width:305px;'>" + ad.getPublicationDate() +"</td><td style='width:200px'>" + ad.getBrand() + " " + ad.getModelV() +"</td><td style='width:200px;'>" + ad.getVehicle() +"</td><td style='width:80px;'><input type='button' value='Delete Ad'></td><td style='width:70px;'><input type='button' value='Edit Ad'></tr> ");
