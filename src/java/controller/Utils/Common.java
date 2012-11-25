@@ -4,6 +4,7 @@
  */
 package controller.Utils;
 
+import Datastore.Entities.Fav;
 import Datastore.Entities.Registeredclient;
 import Datastore.Entities.Vehicleadvert;
 import java.security.MessageDigest;
@@ -13,6 +14,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.FavJpaController;
 import model.VehicleadvertJpaController;
 
 /**
@@ -127,17 +129,31 @@ public class Common {
      
     public static List<Vehicleadvert> getAdvertsByClient(int clientID){                        
         
-     VehicleadvertJpaController vehicleJPA = new VehicleadvertJpaController();
-     List<Vehicleadvert> ads = vehicleJPA.findVehicleadvertEntities();
-     List<Vehicleadvert> userads = new ArrayList<Vehicleadvert>();
-     
-     for(Vehicleadvert i : ads){
-         if(i.getClientID().getClientID() == clientID){
-             userads.add(i);
+         VehicleadvertJpaController vehicleJPA = new VehicleadvertJpaController();
+         List<Vehicleadvert> ads = vehicleJPA.findVehicleadvertEntities();
+         List<Vehicleadvert> userads = new ArrayList<Vehicleadvert>();
+
+         for(Vehicleadvert i : ads){
+             if(i.getClientID().getClientID() == clientID){
+                 userads.add(i);
+             }
          }
-     }
-        return userads;
-    }    
+            return userads;
+    }
+    
+    public static List<Fav> getAFavouritesByClient(int clientID){                        
+       
+         FavJpaController favJPA = new FavJpaController();
+         List<Fav> favourites = favJPA.findFavEntities();
+         List<Fav> userfavs = new ArrayList<Fav>();
+
+         for(Fav i : favourites){
+             if(i.getClientID().getClientID() == clientID){
+                 userfavs.add(i);
+             }
+         }
+            return userfavs;
+    }
 
      
 }

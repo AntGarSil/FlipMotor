@@ -43,7 +43,7 @@ public class QueryController extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
 
-            String userReq = request.getParameter("opt");
+
             
             request.getRequestDispatcher("/header.jsp").include(request, response); 
 

@@ -158,6 +158,9 @@ public class ControllerServlet extends HttpServlet {
 	}else if (userPath.equals("/Advert")) {
             // TODO: Implement motorbike page request
             userPath = "/ViewAdController";
+	}else if (userPath.equals("/Favorites")) {
+            // TODO: Implement motorbike page request
+            userPath = "/FavouriteViewController";
 	}
 
         // use RequestDispatcher to forward request internally
