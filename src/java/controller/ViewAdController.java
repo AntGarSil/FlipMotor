@@ -4,7 +4,10 @@
  */
 package controller;
 
+import Datastore.Entities.Fav;
+import Datastore.Entities.Registeredclient;
 import Datastore.Entities.Vehicleadvert;
+import controller.Utils.Common;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import model.FavJpaController;
+import model.RegisteredclientJpaController;
 import model.VehicleadvertJpaController;
 
 /**
@@ -48,6 +53,13 @@ public class ViewAdController extends HttpServlet {
           
           VehicleadvertJpaController vehicleJPA = new VehicleadvertJpaController();
           Vehicleadvert showVehicle = vehicleJPA.findVehicleadvert(adcode);
+          
+          Integer uid = -1;
+          boolean hasSession = false;
+            if(null != session.getAttribute("userid")){
+                uid = (Integer) session.getAttribute("userid");    
+                hasSession = true;
+            }
        
             out.println(" <script> ");
             out.println("         $('#adContainer').ready(function(){");
@@ -68,7 +80,31 @@ public class ViewAdController extends HttpServlet {
             out.println("                     <iframe src='ImagePrinterHelper?width=230&height=230&num=" + imagenum +"' scrollbar='no'  width='250' height='250' frameBorder='0' >Photo</iframe>");
             out.println("                 </div>");
             out.println("                 <div id='favBox' style='width: 100%; height: 30%;'>");
-            out.println("                     <input type='image' src='images/Star-Favorite-Black.png' style='width: 50px;  margin-top: 30px;  margin-left: auto; margin-right: auto; display: block;'>");
+            
+            
+            if(hasSession == true)
+            {
+                FavJpaController favJPA = new FavJpaController();
+                RegisteredclientJpaController clieJPA = new RegisteredclientJpaController();
+                Registeredclient clie = clieJPA.findRegisteredclient(uid);
+                int favID = Common.generateFavID(showVehicle, clie);
+                Fav favourite = favJPA.findFav(favID); 
+                
+                if(null != favourite)
+                {
+                    out.println("                 <form action='MakeFavourite' method='POST'>");           
+                    out.println("                     <input type='image' src='images/Star-Favorite.png' style='width: 50px;  margin-top: 30px;  margin-left: auto; margin-right: auto; display: block;'>");
+                    out.println("                     <input type='hidden' name='code' value='" + showVehicle.getCode() + "'/> ");
+                    out.println("                     <input type='hidden' name='num' value='" + imagenum + "'/> ");
+                    out.println("                 </form>");
+                }else{                                    
+                    out.println("                 <form action='MakeFavourite' method='POST'>");           
+                    out.println("                     <input type='image' src='images/Star-Favorite-Black.png' style='width: 50px;  margin-top: 30px;  margin-left: auto; margin-right: auto; display: block;'>");
+                    out.println("                     <input type='hidden' name='code' value='" + showVehicle.getCode() + "'/> ");
+                    out.println("                     <input type='hidden' name='num' value='" + imagenum + "'/> ");
+                    out.println("                 </form>");
+                }
+            }
             out.println("                 </div>");
             out.println("             </div>");
 

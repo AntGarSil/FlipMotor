@@ -44,6 +44,10 @@
         <servlet-name>ViewAdController</servlet-name>
         <servlet-class>controller.ViewAdController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ToggleFavouriteController</servlet-name>
+        <servlet-class>controller.ToggleFavouriteController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -105,6 +109,10 @@
         <url-pattern>/Advert</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ControllerServlet</servlet-name>
+        <url-pattern>/MakeFavourite</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>
         <url-pattern>/UserProfileController</url-pattern>
     </servlet-mapping>
@@ -135,6 +143,10 @@
     <servlet-mapping>
         <servlet-name>ViewAdController</servlet-name>
         <url-pattern>/ViewAdController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ToggleFavouriteController</servlet-name>
+        <url-pattern>/ToggleFavouriteController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

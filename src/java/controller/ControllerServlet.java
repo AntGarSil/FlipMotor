@@ -33,7 +33,8 @@ import javax.servlet.http.HttpServletResponse;
                            "/EditProfile",
                            "/UserProfile",
                            "/RegisterError",
-                           "/ViewAdController"
+                           "/ViewAdController",
+                           "/MakeFavourite"
                            })
 public class ControllerServlet extends HttpServlet {
 
@@ -151,6 +152,12 @@ public class ControllerServlet extends HttpServlet {
 	}else if (userPath.equals("/RegisterError")) {
             // TODO: Implement motorbike page request
             userPath = "/RegisterError.jsp";
+	}else if (userPath.equals("/MakeFavourite")) {
+            // TODO: Implement motorbike page request
+            userPath = "/ToggleFavouriteController";
+	}else if (userPath.equals("/Advert")) {
+            // TODO: Implement motorbike page request
+            userPath = "/ViewAdController";
 	}
 
         // use RequestDispatcher to forward request internally

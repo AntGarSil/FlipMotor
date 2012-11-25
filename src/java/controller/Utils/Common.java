@@ -4,6 +4,7 @@
  */
 package controller.Utils;
 
+import Datastore.Entities.Registeredclient;
 import Datastore.Entities.Vehicleadvert;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -23,6 +24,34 @@ public class Common {
     public static int generateUserID(String email){
         
         String input = email;
+        int key = 0;
+        try {
+            byte[] idbytes = input.getBytes();            
+            
+            StringBuffer hashString = new StringBuffer();
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            
+            //Hash id to obtain PK
+            md.reset();
+            md.update(idbytes);
+            byte[] hash = md.digest();
+            
+            for(int i = 0; i < hash.length; i++){
+                hashString.append(0xFF & hash[i]);
+            }
+            
+            String stringres = hashString.toString().substring(0, 18);
+            key = (int) Long.parseLong(stringres) % 2147483647;
+            
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Common.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return key;
+    }
+    
+    public static int generateFavID(Vehicleadvert vehicle, Registeredclient client){
+        
+        String input = "" + vehicle.getCode() + "" + client.getClientID();
         int key = 0;
         try {
             byte[] idbytes = input.getBytes();            
