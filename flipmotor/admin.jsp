@@ -174,7 +174,8 @@
                         <div id="leftPanel" style="float: left; width: 50%; padding: 0px;">
                             <label for="id">ID</label>
                             <input id="id" name="id" class="required" minlength="4" maxlength="10" type="text"><br>
-                            <label for="password">Password</label>
+                            <label for="email">Email</label>
+                            <input id="email" name="email" class="required" minlength="4" maxlength="50" type="email"> <br> <label for="password">Password</label>
                             <input name="password" id="password" type="password" class="required" minlength="4" maxlength="50"><br>
                             <label for="confirmpassword">Confirm Password</label>
                             <input name="confirmpassword" type="password" class="required" equalTo="#password" id="confirmpassword">

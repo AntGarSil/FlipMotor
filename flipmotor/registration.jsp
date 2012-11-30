@@ -37,8 +37,8 @@
                                     <input id="email" name="email" class="required email" type="text" />
                             </p>
                             <p>
-                                    <label for="card">Credit card</label>
-                                    <input id="card" name="card" class="required" minlength="16" maxlength="16" type="number" />
+                                    <label for="nationality">Nationality</label>
+                                    <input id="nationality" name="nationality" class="required" minlength="3" maxlength="12" type="text" />
                             </p>
                             <p>
 
