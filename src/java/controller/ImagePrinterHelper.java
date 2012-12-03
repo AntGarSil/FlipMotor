@@ -4,7 +4,7 @@
  */
 package controller;
 
-import Datastore.Entities.Vehicleadvert;
+import Flipmotor.Entities.Vehicleadvert;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

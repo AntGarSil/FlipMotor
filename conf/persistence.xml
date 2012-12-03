@@ -3,12 +3,12 @@
   <persistence-unit name="ProjectPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>mysql</jta-data-source>
-    <class>Datastore.Entities.Administrato</class>
-    <class>Datastore.Entities.Businessadvert</class>
-    <class>Datastore.Entities.Fav</class>
-    <class>Datastore.Entities.Offer</class>
-    <class>Datastore.Entities.Registeredclient</class>
-    <class>Datastore.Entities.Vehicleadvert</class>
+    <class>Flipmotor.Entities.Vehicleadvert</class>
+    <class>Flipmotor.Entities.Offer</class>
+    <class>Flipmotor.Entities.Administrato</class>
+    <class>Flipmotor.Entities.Fav</class>
+    <class>Flipmotor.Entities.Businessadvert</class>
+    <class>Flipmotor.Entities.Registeredclient</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.ddl-generation" value="create-tables"/>

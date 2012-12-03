@@ -4,8 +4,8 @@
  */
 package controller;
 
-import Datastore.Entities.Fav;
-import Datastore.Entities.Vehicleadvert;
+import Flipmotor.Entities.Fav;
+import Flipmotor.Entities.Vehicleadvert;
 import controller.Utils.Common;
 import java.io.IOException;
 import java.io.PrintWriter;

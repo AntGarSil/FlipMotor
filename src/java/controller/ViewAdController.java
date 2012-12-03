@@ -4,9 +4,9 @@
  */
 package controller;
 
-import Datastore.Entities.Fav;
-import Datastore.Entities.Registeredclient;
-import Datastore.Entities.Vehicleadvert;
+import Flipmotor.Entities.Fav;
+import Flipmotor.Entities.Registeredclient;
+import Flipmotor.Entities.Vehicleadvert;
 import controller.Utils.Common;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,9 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import model.FavJpaController;
-import model.RegisteredclientJpaController;
-import model.VehicleadvertJpaController;
+import Flipmotor.model.FavJpaController;
+import Flipmotor.model.RegisteredclientJpaController;
+import Flipmotor.model.VehicleadvertJpaController;
 
 /**
  *

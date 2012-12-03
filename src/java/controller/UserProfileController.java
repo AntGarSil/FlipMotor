@@ -6,8 +6,8 @@ package controller;
  */
 
 
-import Datastore.Entities.Registeredclient;
-import Datastore.Entities.Vehicleadvert;
+import Flipmotor.Entities.Registeredclient;
+import Flipmotor.Entities.Vehicleadvert;
 import controller.Utils.Common;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.RegisteredclientJpaController;
+import Flipmotor.model.RegisteredclientJpaController;
 
 
 

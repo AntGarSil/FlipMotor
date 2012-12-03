@@ -4,9 +4,9 @@
  */
 package controller.Utils;
 
-import Datastore.Entities.Fav;
-import Datastore.Entities.Registeredclient;
-import Datastore.Entities.Vehicleadvert;
+import Flipmotor.Entities.Fav;
+import Flipmotor.Entities.Registeredclient;
+import Flipmotor.Entities.Vehicleadvert;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -14,8 +14,8 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.FavJpaController;
-import model.VehicleadvertJpaController;
+import Flipmotor.model.FavJpaController;
+import Flipmotor.model.VehicleadvertJpaController;
 
 /**
  *
