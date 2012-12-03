@@ -4,9 +4,7 @@
  */
 package model;
 
-import model.exceptions.NonexistentEntityException;
-import model.exceptions.PreexistingEntityException;
-import model.exceptions.RollbackFailureException;
+import Datastore.Entities.Fav;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,15 +13,12 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.transaction.UserTransaction;
-import Datastore.Entities.Fav;
 import Datastore.Entities.Vehicleadvert;
 import Datastore.Entities.Registeredclient;
-import javax.annotation.Resource;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceUnit;
+import javax.transaction.UserTransaction;
+import model.exceptions.NonexistentEntityException;
+import model.exceptions.PreexistingEntityException;
+import model.exceptions.RollbackFailureException;
 
 /**
  *
@@ -31,12 +26,12 @@ import javax.persistence.PersistenceUnit;
  */
 public class FavJpaController implements Serializable {
 
-    public FavJpaController() {
-
+    public FavJpaController(UserTransaction utx, EntityManagerFactory emf) {
+        this.utx = utx;
+        this.emf = emf;
     }
-    
-    @Resource private UserTransaction utx;
-    @PersistenceUnit private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectPU");
+    private UserTransaction utx = null;
+    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -44,9 +39,6 @@ public class FavJpaController implements Serializable {
 
     public void create(Fav fav) throws PreexistingEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
-        Context ctx = new InitialContext();
-        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
-        
         try {
             utx.begin();
             em = getEntityManager();
@@ -89,9 +81,6 @@ public class FavJpaController implements Serializable {
 
     public void edit(Fav fav) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
-        Context ctx = new InitialContext();
-        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
-        
         try {
             utx.begin();
             em = getEntityManager();
@@ -149,9 +138,6 @@ public class FavJpaController implements Serializable {
 
     public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
-        Context ctx = new InitialContext();
-        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
-        
         try {
             utx.begin();
             em = getEntityManager();

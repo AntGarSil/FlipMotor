@@ -4,7 +4,7 @@
  */
 package model;
 
-import Datastore.Entities.Administrato;
+import Datastore.Entities.Statistics;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -22,9 +22,9 @@ import model.exceptions.RollbackFailureException;
  *
  * @author root
  */
-public class AdministratoJpaController implements Serializable {
+public class StatisticsJpaController implements Serializable {
 
-    public AdministratoJpaController(UserTransaction utx, EntityManagerFactory emf) {
+    public StatisticsJpaController(UserTransaction utx, EntityManagerFactory emf) {
         this.utx = utx;
         this.emf = emf;
     }
@@ -35,12 +35,12 @@ public class AdministratoJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Administrato administrato) throws PreexistingEntityException, RollbackFailureException, Exception {
+    public void create(Statistics statistics) throws PreexistingEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            em.persist(administrato);
+            em.persist(statistics);
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -48,8 +48,8 @@ public class AdministratoJpaController implements Serializable {
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
-            if (findAdministrato(administrato.getAdminID()) != null) {
-                throw new PreexistingEntityException("Administrato " + administrato + " already exists.", ex);
+            if (findStatistics(statistics.getAdvertID()) != null) {
+                throw new PreexistingEntityException("Statistics " + statistics + " already exists.", ex);
             }
             throw ex;
         } finally {
@@ -59,12 +59,12 @@ public class AdministratoJpaController implements Serializable {
         }
     }
 
-    public void edit(Administrato administrato) throws NonexistentEntityException, RollbackFailureException, Exception {
+    public void edit(Statistics statistics) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            administrato = em.merge(administrato);
+            statistics = em.merge(statistics);
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -74,9 +74,9 @@ public class AdministratoJpaController implements Serializable {
             }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = administrato.getAdminID();
-                if (findAdministrato(id) == null) {
-                    throw new NonexistentEntityException("The administrato with id " + id + " no longer exists.");
+                Integer id = statistics.getAdvertID();
+                if (findStatistics(id) == null) {
+                    throw new NonexistentEntityException("The statistics with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -92,14 +92,14 @@ public class AdministratoJpaController implements Serializable {
         try {
             utx.begin();
             em = getEntityManager();
-            Administrato administrato;
+            Statistics statistics;
             try {
-                administrato = em.getReference(Administrato.class, id);
-                administrato.getAdminID();
+                statistics = em.getReference(Statistics.class, id);
+                statistics.getAdvertID();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The administrato with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The statistics with id " + id + " no longer exists.", enfe);
             }
-            em.remove(administrato);
+            em.remove(statistics);
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -115,19 +115,19 @@ public class AdministratoJpaController implements Serializable {
         }
     }
 
-    public List<Administrato> findAdministratoEntities() {
-        return findAdministratoEntities(true, -1, -1);
+    public List<Statistics> findStatisticsEntities() {
+        return findStatisticsEntities(true, -1, -1);
     }
 
-    public List<Administrato> findAdministratoEntities(int maxResults, int firstResult) {
-        return findAdministratoEntities(false, maxResults, firstResult);
+    public List<Statistics> findStatisticsEntities(int maxResults, int firstResult) {
+        return findStatisticsEntities(false, maxResults, firstResult);
     }
 
-    private List<Administrato> findAdministratoEntities(boolean all, int maxResults, int firstResult) {
+    private List<Statistics> findStatisticsEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Administrato.class));
+            cq.select(cq.from(Statistics.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -139,20 +139,20 @@ public class AdministratoJpaController implements Serializable {
         }
     }
 
-    public Administrato findAdministrato(Integer id) {
+    public Statistics findStatistics(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Administrato.class, id);
+            return em.find(Statistics.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getAdministratoCount() {
+    public int getStatisticsCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Administrato> rt = cq.from(Administrato.class);
+            Root<Statistics> rt = cq.from(Statistics.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

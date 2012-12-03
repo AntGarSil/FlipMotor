@@ -5,28 +5,30 @@
 package Datastore.Entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author root
  */
 @Entity
-@Table(name = "OFFER")
+@Table(name = "OFFER", catalog = "flipmotor", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Offer.findAll", query = "SELECT o FROM Offer o"),
@@ -35,44 +37,47 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Offer.findByFee", query = "SELECT o FROM Offer o WHERE o.fee = :fee"),
     @NamedQuery(name = "Offer.findByPublicationDate", query = "SELECT o FROM Offer o WHERE o.publicationDate = :publicationDate"),
     @NamedQuery(name = "Offer.findByMonths", query = "SELECT o FROM Offer o WHERE o.months = :months"),
-    @NamedQuery(name = "Offer.findByNumAds", query = "SELECT o FROM Offer o WHERE o.numAds = :numAds"),
-    @NamedQuery(name = "Offer.findByEndDate", query = "SELECT o FROM Offer o WHERE o.endDate = :endDate")})
+    @NamedQuery(name = "Offer.findByEndDate", query = "SELECT o FROM Offer o WHERE o.endDate = :endDate"),
+    @NamedQuery(name = "Offer.findByActive", query = "SELECT o FROM Offer o WHERE o.active = :active")})
 public class Offer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
-    @Column(name = "Nam")
+    @Column(name = "Nam", nullable = false, length = 15)
     private String nam;
-    @Size(max = 10)
-    @Column(name = "Typ")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "Typ", nullable = false, length = 10)
     private String typ;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Fee")
+    @Column(name = "Fee", nullable = false)
     private int fee;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "PublicationDate")
+    @Column(name = "PublicationDate", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date publicationDate;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Months")
+    @Column(name = "Months", nullable = false)
     private int months;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "NumAds")
-    private int numAds;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "EndDate")
+    @Column(name = "EndDate", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date endDate;
-    @JoinColumn(name = "AdminID", referencedColumnName = "AdminID")
-    @ManyToOne(optional = false)
-    private Administrato adminID;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "Active", nullable = false)
+    private int active;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "offer")
+    private Collection<Vehicleadvert> vehicleadvertCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "offer")
+    private Collection<Businessadvert> businessadvertCollection;
 
     public Offer() {
     }
@@ -81,13 +86,14 @@ public class Offer implements Serializable {
         this.nam = nam;
     }
 
-    public Offer(String nam, int fee, Date publicationDate, int months, int numAds, Date endDate) {
+    public Offer(String nam, String typ, int fee, Date publicationDate, int months, Date endDate, int active) {
         this.nam = nam;
+        this.typ = typ;
         this.fee = fee;
         this.publicationDate = publicationDate;
         this.months = months;
-        this.numAds = numAds;
         this.endDate = endDate;
+        this.active = active;
     }
 
     public String getNam() {
@@ -130,14 +136,6 @@ public class Offer implements Serializable {
         this.months = months;
     }
 
-    public int getNumAds() {
-        return numAds;
-    }
-
-    public void setNumAds(int numAds) {
-        this.numAds = numAds;
-    }
-
     public Date getEndDate() {
         return endDate;
     }
@@ -146,12 +144,30 @@ public class Offer implements Serializable {
         this.endDate = endDate;
     }
 
-    public Administrato getAdminID() {
-        return adminID;
+    public int getActive() {
+        return active;
     }
 
-    public void setAdminID(Administrato adminID) {
-        this.adminID = adminID;
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    @XmlTransient
+    public Collection<Vehicleadvert> getVehicleadvertCollection() {
+        return vehicleadvertCollection;
+    }
+
+    public void setVehicleadvertCollection(Collection<Vehicleadvert> vehicleadvertCollection) {
+        this.vehicleadvertCollection = vehicleadvertCollection;
+    }
+
+    @XmlTransient
+    public Collection<Businessadvert> getBusinessadvertCollection() {
+        return businessadvertCollection;
+    }
+
+    public void setBusinessadvertCollection(Collection<Businessadvert> businessadvertCollection) {
+        this.businessadvertCollection = businessadvertCollection;
     }
 
     @Override
@@ -176,7 +192,7 @@ public class Offer implements Serializable {
 
     @Override
     public String toString() {
-        return "Datastore.Offer[ nam=" + nam + " ]";
+        return "Datastore.Entities.Offer[ nam=" + nam + " ]";
     }
     
 }

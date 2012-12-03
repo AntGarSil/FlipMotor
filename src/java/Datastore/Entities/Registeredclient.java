@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author root
  */
 @Entity
-@Table(name = "REGISTEREDCLIENT")
+@Table(name = "REGISTEREDCLIENT", catalog = "flipmotor", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Registeredclient.findAll", query = "SELECT r FROM Registeredclient r"),
@@ -36,7 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Registeredclient.findByNam", query = "SELECT r FROM Registeredclient r WHERE r.nam = :nam"),
     @NamedQuery(name = "Registeredclient.findBySurname", query = "SELECT r FROM Registeredclient r WHERE r.surname = :surname"),
     @NamedQuery(name = "Registeredclient.findByPasswor", query = "SELECT r FROM Registeredclient r WHERE r.passwor = :passwor"),
-    @NamedQuery(name = "Registeredclient.findByCreditCard", query = "SELECT r FROM Registeredclient r WHERE r.creditCard = :creditCard"),
     @NamedQuery(name = "Registeredclient.findByNationality", query = "SELECT r FROM Registeredclient r WHERE r.nationality = :nationality"),
     @NamedQuery(name = "Registeredclient.findByPc", query = "SELECT r FROM Registeredclient r WHERE r.pc = :pc"),
     @NamedQuery(name = "Registeredclient.findByCity", query = "SELECT r FROM Registeredclient r WHERE r.city = :city"),
@@ -45,96 +44,91 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Registeredclient.findByNumbe", query = "SELECT r FROM Registeredclient r WHERE r.numbe = :numbe"),
     @NamedQuery(name = "Registeredclient.findByFlat", query = "SELECT r FROM Registeredclient r WHERE r.flat = :flat"),
     @NamedQuery(name = "Registeredclient.findByLeter", query = "SELECT r FROM Registeredclient r WHERE r.leter = :leter"),
-    @NamedQuery(name = "Registeredclient.findByFav", query = "SELECT r FROM Registeredclient r WHERE r.fav = :fav"),
-    @NamedQuery(name = "Registeredclient.findByAnuncio", query = "SELECT r FROM Registeredclient r WHERE r.anuncio = :anuncio")})
+    @NamedQuery(name = "Registeredclient.findByConfirmed", query = "SELECT r FROM Registeredclient r WHERE r.confirmed = :confirmed")})
 public class Registeredclient implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ClientID")
+    @Column(name = "ClientID", nullable = false)
     private Integer clientID;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 9)
-    @Column(name = "NIF")
+    @Column(name = "NIF", nullable = false, length = 9)
     private String nif;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Phone")
+    @Column(name = "Phone", nullable = false)
     private int phone;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "Email")
+    @Column(name = "Email", nullable = false, length = 50)
     private String email;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "Nam")
+    @Column(name = "Nam", nullable = false, length = 20)
     private String nam;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "Surname")
+    @Column(name = "Surname", nullable = false, length = 20)
     private String surname;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 8)
-    @Column(name = "Passwor")
+    @Column(name = "Passwor", nullable = false, length = 8)
     private String passwor;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "CreditCard")
-    private long creditCard;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 12)
-    @Column(name = "Nationality")
+    @Column(name = "Nationality", nullable = false, length = 12)
     private String nationality;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "PC")
+    @Column(name = "PC", nullable = false)
     private int pc;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "City")
+    @Size(min = 1, max = 25)
+    @Column(name = "City", nullable = false, length = 25)
     private String city;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "Province")
+    @Column(name = "Province", nullable = false, length = 20)
     private String province;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "Street")
+    @Column(name = "Street", nullable = false, length = 20)
     private String street;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Numbe")
+    @Column(name = "Numbe", nullable = false)
     private int numbe;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Flat")
+    @Column(name = "Flat", nullable = false)
     private int flat;
     @Column(name = "Leter")
     private Character leter;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Fav")
-    private int fav;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Anuncio")
-    private int anuncio;
+    @Column(name = "Confirmed", nullable = false)
+    private int confirmed;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sellerID")
+    private Collection<Conciliation> conciliationCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyerID")
+    private Collection<Conciliation> conciliationCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientID")
     private Collection<Fav> favCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientID")
     private Collection<Vehicleadvert> vehicleadvertCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "registeredclient")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientID")
     private Collection<Businessadvert> businessadvertCollection;
 
     public Registeredclient() {
@@ -144,7 +138,7 @@ public class Registeredclient implements Serializable {
         this.clientID = clientID;
     }
 
-    public Registeredclient(Integer clientID, String nif, int phone, String email, String nam, String surname, String passwor, long creditCard, String nationality, int pc, String city, String province, String street, int numbe, int flat, int fav, int anuncio) {
+    public Registeredclient(Integer clientID, String nif, int phone, String email, String nam, String surname, String passwor, String nationality, int pc, String city, String province, String street, int numbe, int flat, int confirmed) {
         this.clientID = clientID;
         this.nif = nif;
         this.phone = phone;
@@ -152,7 +146,6 @@ public class Registeredclient implements Serializable {
         this.nam = nam;
         this.surname = surname;
         this.passwor = passwor;
-        this.creditCard = creditCard;
         this.nationality = nationality;
         this.pc = pc;
         this.city = city;
@@ -160,8 +153,7 @@ public class Registeredclient implements Serializable {
         this.street = street;
         this.numbe = numbe;
         this.flat = flat;
-        this.fav = fav;
-        this.anuncio = anuncio;
+        this.confirmed = confirmed;
     }
 
     public Integer getClientID() {
@@ -218,14 +210,6 @@ public class Registeredclient implements Serializable {
 
     public void setPasswor(String passwor) {
         this.passwor = passwor;
-    }
-
-    public long getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(long creditCard) {
-        this.creditCard = creditCard;
     }
 
     public String getNationality() {
@@ -292,20 +276,30 @@ public class Registeredclient implements Serializable {
         this.leter = leter;
     }
 
-    public int getFav() {
-        return fav;
+    public int getConfirmed() {
+        return confirmed;
     }
 
-    public void setFav(int fav) {
-        this.fav = fav;
+    public void setConfirmed(int confirmed) {
+        this.confirmed = confirmed;
     }
 
-    public int getAnuncio() {
-        return anuncio;
+    @XmlTransient
+    public Collection<Conciliation> getConciliationCollection() {
+        return conciliationCollection;
     }
 
-    public void setAnuncio(int anuncio) {
-        this.anuncio = anuncio;
+    public void setConciliationCollection(Collection<Conciliation> conciliationCollection) {
+        this.conciliationCollection = conciliationCollection;
+    }
+
+    @XmlTransient
+    public Collection<Conciliation> getConciliationCollection1() {
+        return conciliationCollection1;
+    }
+
+    public void setConciliationCollection1(Collection<Conciliation> conciliationCollection1) {
+        this.conciliationCollection1 = conciliationCollection1;
     }
 
     @XmlTransient
@@ -357,7 +351,7 @@ public class Registeredclient implements Serializable {
 
     @Override
     public String toString() {
-        return "Datastore.Registeredclient[ clientID=" + clientID + " ]";
+        return "Datastore.Entities.Registeredclient[ clientID=" + clientID + " ]";
     }
     
 }

@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author root
  */
 @Entity
-@Table(name = "FAV")
+@Table(name = "FAV", catalog = "flipmotor", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Fav.findAll", query = "SELECT f FROM Fav f"),
@@ -32,12 +32,12 @@ public class Fav implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     private Integer id;
-    @JoinColumn(name = "Code", referencedColumnName = "Code")
+    @JoinColumn(name = "Code", referencedColumnName = "Code", nullable = false)
     @ManyToOne(optional = false)
     private Vehicleadvert code;
-    @JoinColumn(name = "ClientID", referencedColumnName = "ClientID")
+    @JoinColumn(name = "ClientID", referencedColumnName = "ClientID", nullable = false)
     @ManyToOne(optional = false)
     private Registeredclient clientID;
 
@@ -94,7 +94,7 @@ public class Fav implements Serializable {
 
     @Override
     public String toString() {
-        return "Datastore.Fav[ id=" + id + " ]";
+        return "Datastore.Entities.Fav[ id=" + id + " ]";
     }
     
 }

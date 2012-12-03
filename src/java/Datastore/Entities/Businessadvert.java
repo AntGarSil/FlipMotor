@@ -5,104 +5,117 @@
 package Datastore.Entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author root
  */
 @Entity
-@Table(name = "BUSINESSADVERT")
+@Table(name = "BUSINESSADVERT", catalog = "flipmotor", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Businessadvert.findAll", query = "SELECT b FROM Businessadvert b"),
-    @NamedQuery(name = "Businessadvert.findByClientID", query = "SELECT b FROM Businessadvert b WHERE b.businessadvertPK.clientID = :clientID"),
-    @NamedQuery(name = "Businessadvert.findByCode", query = "SELECT b FROM Businessadvert b WHERE b.businessadvertPK.code = :code"),
+    @NamedQuery(name = "Businessadvert.findByCode", query = "SELECT b FROM Businessadvert b WHERE b.code = :code"),
     @NamedQuery(name = "Businessadvert.findByState", query = "SELECT b FROM Businessadvert b WHERE b.state = :state"),
     @NamedQuery(name = "Businessadvert.findByDat", query = "SELECT b FROM Businessadvert b WHERE b.dat = :dat"),
     @NamedQuery(name = "Businessadvert.findByText", query = "SELECT b FROM Businessadvert b WHERE b.text = :text"),
     @NamedQuery(name = "Businessadvert.findByBusiness", query = "SELECT b FROM Businessadvert b WHERE b.business = :business"),
-    @NamedQuery(name = "Businessadvert.findBySector", query = "SELECT b FROM Businessadvert b WHERE b.sector = :sector")})
+    @NamedQuery(name = "Businessadvert.findBySector", query = "SELECT b FROM Businessadvert b WHERE b.sector = :sector"),
+    @NamedQuery(name = "Businessadvert.findByEndDate", query = "SELECT b FROM Businessadvert b WHERE b.endDate = :endDate")})
 public class Businessadvert implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected BusinessadvertPK businessadvertPK;
-    @Size(max = 10)
-    @Column(name = "State")
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "Code", nullable = false)
+    private Integer code;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "State", nullable = false, length = 10)
     private String state;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Dat")
+    @Column(name = "Dat", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dat;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
-    @Column(name = "Text")
+    @Column(name = "Text", nullable = false, length = 250)
     private String text;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "Business")
+    @Column(name = "Business", nullable = false, length = 20)
     private String business;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "Sector")
+    @Column(name = "Sector", nullable = false, length = 20)
     private String sector;
     @Basic(optional = false)
     @NotNull
     @Lob
-    @Column(name = "Imag")
+    @Column(name = "Imag", nullable = false)
     private byte[] imag;
-    @JoinColumn(name = "AdminID", referencedColumnName = "AdminID")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "EndDate", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
+    @OneToMany(mappedBy = "businessID")
+    private Collection<Conciliation> conciliationCollection;
+    @JoinColumn(name = "Offer", referencedColumnName = "Nam", nullable = false)
     @ManyToOne(optional = false)
-    private Administrato adminID;
-    @JoinColumn(name = "ClientID", referencedColumnName = "ClientID", insertable = false, updatable = false)
+    private Offer offer;
+    @JoinColumn(name = "ClientID", referencedColumnName = "ClientID", nullable = false)
     @ManyToOne(optional = false)
-    private Registeredclient registeredclient;
+    private Registeredclient clientID;
 
     public Businessadvert() {
     }
 
-    public Businessadvert(BusinessadvertPK businessadvertPK) {
-        this.businessadvertPK = businessadvertPK;
+    public Businessadvert(Integer code) {
+        this.code = code;
     }
 
-    public Businessadvert(BusinessadvertPK businessadvertPK, Date dat, String text, String business, String sector, byte[] imag) {
-        this.businessadvertPK = businessadvertPK;
+    public Businessadvert(Integer code, String state, Date dat, String text, String business, String sector, byte[] imag, Date endDate) {
+        this.code = code;
+        this.state = state;
         this.dat = dat;
         this.text = text;
         this.business = business;
         this.sector = sector;
         this.imag = imag;
+        this.endDate = endDate;
     }
 
-    public Businessadvert(int clientID, int code) {
-        this.businessadvertPK = new BusinessadvertPK(clientID, code);
+    public Integer getCode() {
+        return code;
     }
 
-    public BusinessadvertPK getBusinessadvertPK() {
-        return businessadvertPK;
-    }
-
-    public void setBusinessadvertPK(BusinessadvertPK businessadvertPK) {
-        this.businessadvertPK = businessadvertPK;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
     public String getState() {
@@ -153,26 +166,43 @@ public class Businessadvert implements Serializable {
         this.imag = imag;
     }
 
-    public Administrato getAdminID() {
-        return adminID;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setAdminID(Administrato adminID) {
-        this.adminID = adminID;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
-    public Registeredclient getRegisteredclient() {
-        return registeredclient;
+    @XmlTransient
+    public Collection<Conciliation> getConciliationCollection() {
+        return conciliationCollection;
     }
 
-    public void setRegisteredclient(Registeredclient registeredclient) {
-        this.registeredclient = registeredclient;
+    public void setConciliationCollection(Collection<Conciliation> conciliationCollection) {
+        this.conciliationCollection = conciliationCollection;
+    }
+
+    public Offer getOffer() {
+        return offer;
+    }
+
+    public void setOffer(Offer offer) {
+        this.offer = offer;
+    }
+
+    public Registeredclient getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(Registeredclient clientID) {
+        this.clientID = clientID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (businessadvertPK != null ? businessadvertPK.hashCode() : 0);
+        hash += (code != null ? code.hashCode() : 0);
         return hash;
     }
 
@@ -183,7 +213,7 @@ public class Businessadvert implements Serializable {
             return false;
         }
         Businessadvert other = (Businessadvert) object;
-        if ((this.businessadvertPK == null && other.businessadvertPK != null) || (this.businessadvertPK != null && !this.businessadvertPK.equals(other.businessadvertPK))) {
+        if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code))) {
             return false;
         }
         return true;
@@ -191,7 +221,7 @@ public class Businessadvert implements Serializable {
 
     @Override
     public String toString() {
-        return "Datastore.Businessadvert[ businessadvertPK=" + businessadvertPK + " ]";
+        return "Datastore.Entities.Businessadvert[ code=" + code + " ]";
     }
     
 }

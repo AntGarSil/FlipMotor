@@ -4,10 +4,7 @@
  */
 package model;
 
-import model.exceptions.IllegalOrphanException;
-import model.exceptions.NonexistentEntityException;
-import model.exceptions.PreexistingEntityException;
-import model.exceptions.RollbackFailureException;
+import Datastore.Entities.Vehicleadvert;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -16,18 +13,17 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.transaction.UserTransaction;
-import Datastore.Entities.Administrato;
+import Datastore.Entities.Offer;
 import Datastore.Entities.Registeredclient;
-import Datastore.Entities.Fav;
+import Datastore.Entities.Conciliation;
 import java.util.ArrayList;
 import java.util.Collection;
-import Datastore.Entities.Vehicleadvert;
-import javax.annotation.Resource;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceUnit;
+import Datastore.Entities.Fav;
+import javax.transaction.UserTransaction;
+import model.exceptions.IllegalOrphanException;
+import model.exceptions.NonexistentEntityException;
+import model.exceptions.PreexistingEntityException;
+import model.exceptions.RollbackFailureException;
 
 /**
  *
@@ -35,37 +31,44 @@ import javax.persistence.PersistenceUnit;
  */
 public class VehicleadvertJpaController implements Serializable {
 
-    public VehicleadvertJpaController() {
+    public VehicleadvertJpaController(UserTransaction utx, EntityManagerFactory emf) {
+        this.utx = utx;
+        this.emf = emf;
     }
-
-    @Resource private UserTransaction utx;
-    @PersistenceUnit private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectPU");    
+    private UserTransaction utx = null;
+    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
     public void create(Vehicleadvert vehicleadvert) throws PreexistingEntityException, RollbackFailureException, Exception {
+        if (vehicleadvert.getConciliationCollection() == null) {
+            vehicleadvert.setConciliationCollection(new ArrayList<Conciliation>());
+        }
         if (vehicleadvert.getFavCollection() == null) {
             vehicleadvert.setFavCollection(new ArrayList<Fav>());
         }
         EntityManager em = null;
-        Context ctx = new InitialContext();
-        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
-        
         try {
             utx.begin();
             em = getEntityManager();
-            Administrato adminID = vehicleadvert.getAdminID();
-            if (adminID != null) {
-                adminID = em.getReference(adminID.getClass(), adminID.getAdminID());
-                vehicleadvert.setAdminID(adminID);
+            Offer offer = vehicleadvert.getOffer();
+            if (offer != null) {
+                offer = em.getReference(offer.getClass(), offer.getNam());
+                vehicleadvert.setOffer(offer);
             }
             Registeredclient clientID = vehicleadvert.getClientID();
             if (clientID != null) {
                 clientID = em.getReference(clientID.getClass(), clientID.getClientID());
                 vehicleadvert.setClientID(clientID);
             }
+            Collection<Conciliation> attachedConciliationCollection = new ArrayList<Conciliation>();
+            for (Conciliation conciliationCollectionConciliationToAttach : vehicleadvert.getConciliationCollection()) {
+                conciliationCollectionConciliationToAttach = em.getReference(conciliationCollectionConciliationToAttach.getClass(), conciliationCollectionConciliationToAttach.getCode());
+                attachedConciliationCollection.add(conciliationCollectionConciliationToAttach);
+            }
+            vehicleadvert.setConciliationCollection(attachedConciliationCollection);
             Collection<Fav> attachedFavCollection = new ArrayList<Fav>();
             for (Fav favCollectionFavToAttach : vehicleadvert.getFavCollection()) {
                 favCollectionFavToAttach = em.getReference(favCollectionFavToAttach.getClass(), favCollectionFavToAttach.getId());
@@ -73,13 +76,22 @@ public class VehicleadvertJpaController implements Serializable {
             }
             vehicleadvert.setFavCollection(attachedFavCollection);
             em.persist(vehicleadvert);
-            if (adminID != null) {
-                adminID.getVehicleadvertCollection().add(vehicleadvert);
-                adminID = em.merge(adminID);
+            if (offer != null) {
+                offer.getVehicleadvertCollection().add(vehicleadvert);
+                offer = em.merge(offer);
             }
             if (clientID != null) {
                 clientID.getVehicleadvertCollection().add(vehicleadvert);
                 clientID = em.merge(clientID);
+            }
+            for (Conciliation conciliationCollectionConciliation : vehicleadvert.getConciliationCollection()) {
+                Vehicleadvert oldVehicleIDOfConciliationCollectionConciliation = conciliationCollectionConciliation.getVehicleID();
+                conciliationCollectionConciliation.setVehicleID(vehicleadvert);
+                conciliationCollectionConciliation = em.merge(conciliationCollectionConciliation);
+                if (oldVehicleIDOfConciliationCollectionConciliation != null) {
+                    oldVehicleIDOfConciliationCollectionConciliation.getConciliationCollection().remove(conciliationCollectionConciliation);
+                    oldVehicleIDOfConciliationCollectionConciliation = em.merge(oldVehicleIDOfConciliationCollectionConciliation);
+                }
             }
             for (Fav favCollectionFav : vehicleadvert.getFavCollection()) {
                 Vehicleadvert oldCodeOfFavCollectionFav = favCollectionFav.getCode();
@@ -110,17 +122,16 @@ public class VehicleadvertJpaController implements Serializable {
 
     public void edit(Vehicleadvert vehicleadvert) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
-        Context ctx = new InitialContext();
-        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
-        
         try {
             utx.begin();
             em = getEntityManager();
             Vehicleadvert persistentVehicleadvert = em.find(Vehicleadvert.class, vehicleadvert.getCode());
-            Administrato adminIDOld = persistentVehicleadvert.getAdminID();
-            Administrato adminIDNew = vehicleadvert.getAdminID();
+            Offer offerOld = persistentVehicleadvert.getOffer();
+            Offer offerNew = vehicleadvert.getOffer();
             Registeredclient clientIDOld = persistentVehicleadvert.getClientID();
             Registeredclient clientIDNew = vehicleadvert.getClientID();
+            Collection<Conciliation> conciliationCollectionOld = persistentVehicleadvert.getConciliationCollection();
+            Collection<Conciliation> conciliationCollectionNew = vehicleadvert.getConciliationCollection();
             Collection<Fav> favCollectionOld = persistentVehicleadvert.getFavCollection();
             Collection<Fav> favCollectionNew = vehicleadvert.getFavCollection();
             List<String> illegalOrphanMessages = null;
@@ -135,14 +146,21 @@ public class VehicleadvertJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            if (adminIDNew != null) {
-                adminIDNew = em.getReference(adminIDNew.getClass(), adminIDNew.getAdminID());
-                vehicleadvert.setAdminID(adminIDNew);
+            if (offerNew != null) {
+                offerNew = em.getReference(offerNew.getClass(), offerNew.getNam());
+                vehicleadvert.setOffer(offerNew);
             }
             if (clientIDNew != null) {
                 clientIDNew = em.getReference(clientIDNew.getClass(), clientIDNew.getClientID());
                 vehicleadvert.setClientID(clientIDNew);
             }
+            Collection<Conciliation> attachedConciliationCollectionNew = new ArrayList<Conciliation>();
+            for (Conciliation conciliationCollectionNewConciliationToAttach : conciliationCollectionNew) {
+                conciliationCollectionNewConciliationToAttach = em.getReference(conciliationCollectionNewConciliationToAttach.getClass(), conciliationCollectionNewConciliationToAttach.getCode());
+                attachedConciliationCollectionNew.add(conciliationCollectionNewConciliationToAttach);
+            }
+            conciliationCollectionNew = attachedConciliationCollectionNew;
+            vehicleadvert.setConciliationCollection(conciliationCollectionNew);
             Collection<Fav> attachedFavCollectionNew = new ArrayList<Fav>();
             for (Fav favCollectionNewFavToAttach : favCollectionNew) {
                 favCollectionNewFavToAttach = em.getReference(favCollectionNewFavToAttach.getClass(), favCollectionNewFavToAttach.getId());
@@ -151,13 +169,13 @@ public class VehicleadvertJpaController implements Serializable {
             favCollectionNew = attachedFavCollectionNew;
             vehicleadvert.setFavCollection(favCollectionNew);
             vehicleadvert = em.merge(vehicleadvert);
-            if (adminIDOld != null && !adminIDOld.equals(adminIDNew)) {
-                adminIDOld.getVehicleadvertCollection().remove(vehicleadvert);
-                adminIDOld = em.merge(adminIDOld);
+            if (offerOld != null && !offerOld.equals(offerNew)) {
+                offerOld.getVehicleadvertCollection().remove(vehicleadvert);
+                offerOld = em.merge(offerOld);
             }
-            if (adminIDNew != null && !adminIDNew.equals(adminIDOld)) {
-                adminIDNew.getVehicleadvertCollection().add(vehicleadvert);
-                adminIDNew = em.merge(adminIDNew);
+            if (offerNew != null && !offerNew.equals(offerOld)) {
+                offerNew.getVehicleadvertCollection().add(vehicleadvert);
+                offerNew = em.merge(offerNew);
             }
             if (clientIDOld != null && !clientIDOld.equals(clientIDNew)) {
                 clientIDOld.getVehicleadvertCollection().remove(vehicleadvert);
@@ -166,6 +184,23 @@ public class VehicleadvertJpaController implements Serializable {
             if (clientIDNew != null && !clientIDNew.equals(clientIDOld)) {
                 clientIDNew.getVehicleadvertCollection().add(vehicleadvert);
                 clientIDNew = em.merge(clientIDNew);
+            }
+            for (Conciliation conciliationCollectionOldConciliation : conciliationCollectionOld) {
+                if (!conciliationCollectionNew.contains(conciliationCollectionOldConciliation)) {
+                    conciliationCollectionOldConciliation.setVehicleID(null);
+                    conciliationCollectionOldConciliation = em.merge(conciliationCollectionOldConciliation);
+                }
+            }
+            for (Conciliation conciliationCollectionNewConciliation : conciliationCollectionNew) {
+                if (!conciliationCollectionOld.contains(conciliationCollectionNewConciliation)) {
+                    Vehicleadvert oldVehicleIDOfConciliationCollectionNewConciliation = conciliationCollectionNewConciliation.getVehicleID();
+                    conciliationCollectionNewConciliation.setVehicleID(vehicleadvert);
+                    conciliationCollectionNewConciliation = em.merge(conciliationCollectionNewConciliation);
+                    if (oldVehicleIDOfConciliationCollectionNewConciliation != null && !oldVehicleIDOfConciliationCollectionNewConciliation.equals(vehicleadvert)) {
+                        oldVehicleIDOfConciliationCollectionNewConciliation.getConciliationCollection().remove(conciliationCollectionNewConciliation);
+                        oldVehicleIDOfConciliationCollectionNewConciliation = em.merge(oldVehicleIDOfConciliationCollectionNewConciliation);
+                    }
+                }
             }
             for (Fav favCollectionNewFav : favCollectionNew) {
                 if (!favCollectionOld.contains(favCollectionNewFav)) {
@@ -202,9 +237,6 @@ public class VehicleadvertJpaController implements Serializable {
 
     public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
-        Context ctx = new InitialContext();
-        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
-        
         try {
             utx.begin();
             em = getEntityManager();
@@ -226,15 +258,20 @@ public class VehicleadvertJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            Administrato adminID = vehicleadvert.getAdminID();
-            if (adminID != null) {
-                adminID.getVehicleadvertCollection().remove(vehicleadvert);
-                adminID = em.merge(adminID);
+            Offer offer = vehicleadvert.getOffer();
+            if (offer != null) {
+                offer.getVehicleadvertCollection().remove(vehicleadvert);
+                offer = em.merge(offer);
             }
             Registeredclient clientID = vehicleadvert.getClientID();
             if (clientID != null) {
                 clientID.getVehicleadvertCollection().remove(vehicleadvert);
                 clientID = em.merge(clientID);
+            }
+            Collection<Conciliation> conciliationCollection = vehicleadvert.getConciliationCollection();
+            for (Conciliation conciliationCollectionConciliation : conciliationCollection) {
+                conciliationCollectionConciliation.setVehicleID(null);
+                conciliationCollectionConciliation = em.merge(conciliationCollectionConciliation);
             }
             em.remove(vehicleadvert);
             utx.commit();
