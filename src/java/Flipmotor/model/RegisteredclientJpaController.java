@@ -38,7 +38,7 @@ public class RegisteredclientJpaController implements Serializable {
     private EntityManagerFactory emf = null;
 
     public RegisteredclientJpaController() {
-        //this.create(this);
+        
     }
 
     public EntityManager getEntityManager() {
@@ -48,9 +48,6 @@ public class RegisteredclientJpaController implements Serializable {
     public void create(Registeredclient registeredclient) throws RollbackFailureException, Exception {
         if (registeredclient.getConciliationCollection() == null) {
             registeredclient.setConciliationCollection(new ArrayList<Conciliation>());
-        }
-        if (registeredclient.getConciliationCollection1() == null) {
-            registeredclient.setConciliationCollection1(new ArrayList<Conciliation>());
         }
         if (registeredclient.getFavCollection() == null) {
             registeredclient.setFavCollection(new ArrayList<Fav>());
@@ -71,12 +68,6 @@ public class RegisteredclientJpaController implements Serializable {
                 attachedConciliationCollection.add(conciliationCollectionConciliationToAttach);
             }
             registeredclient.setConciliationCollection(attachedConciliationCollection);
-            Collection<Conciliation> attachedConciliationCollection1 = new ArrayList<Conciliation>();
-            for (Conciliation conciliationCollection1ConciliationToAttach : registeredclient.getConciliationCollection1()) {
-                conciliationCollection1ConciliationToAttach = em.getReference(conciliationCollection1ConciliationToAttach.getClass(), conciliationCollection1ConciliationToAttach.getCode());
-                attachedConciliationCollection1.add(conciliationCollection1ConciliationToAttach);
-            }
-            registeredclient.setConciliationCollection1(attachedConciliationCollection1);
             Collection<Fav> attachedFavCollection = new ArrayList<Fav>();
             for (Fav favCollectionFavToAttach : registeredclient.getFavCollection()) {
                 favCollectionFavToAttach = em.getReference(favCollectionFavToAttach.getClass(), favCollectionFavToAttach.getId());
@@ -97,21 +88,12 @@ public class RegisteredclientJpaController implements Serializable {
             registeredclient.setBusinessadvertCollection(attachedBusinessadvertCollection);
             em.persist(registeredclient);
             for (Conciliation conciliationCollectionConciliation : registeredclient.getConciliationCollection()) {
-                Registeredclient oldSellerIDOfConciliationCollectionConciliation = conciliationCollectionConciliation.getSellerID();
-                conciliationCollectionConciliation.setSellerID(registeredclient);
+                Registeredclient oldUserIDOfConciliationCollectionConciliation = conciliationCollectionConciliation.getUserID();
+                conciliationCollectionConciliation.setUserID(registeredclient);
                 conciliationCollectionConciliation = em.merge(conciliationCollectionConciliation);
-                if (oldSellerIDOfConciliationCollectionConciliation != null) {
-                    oldSellerIDOfConciliationCollectionConciliation.getConciliationCollection().remove(conciliationCollectionConciliation);
-                    oldSellerIDOfConciliationCollectionConciliation = em.merge(oldSellerIDOfConciliationCollectionConciliation);
-                }
-            }
-            for (Conciliation conciliationCollection1Conciliation : registeredclient.getConciliationCollection1()) {
-                Registeredclient oldBuyerIDOfConciliationCollection1Conciliation = conciliationCollection1Conciliation.getBuyerID();
-                conciliationCollection1Conciliation.setBuyerID(registeredclient);
-                conciliationCollection1Conciliation = em.merge(conciliationCollection1Conciliation);
-                if (oldBuyerIDOfConciliationCollection1Conciliation != null) {
-                    oldBuyerIDOfConciliationCollection1Conciliation.getConciliationCollection1().remove(conciliationCollection1Conciliation);
-                    oldBuyerIDOfConciliationCollection1Conciliation = em.merge(oldBuyerIDOfConciliationCollection1Conciliation);
+                if (oldUserIDOfConciliationCollectionConciliation != null) {
+                    oldUserIDOfConciliationCollectionConciliation.getConciliationCollection().remove(conciliationCollectionConciliation);
+                    oldUserIDOfConciliationCollectionConciliation = em.merge(oldUserIDOfConciliationCollectionConciliation);
                 }
             }
             for (Fav favCollectionFav : registeredclient.getFavCollection()) {
@@ -164,8 +146,6 @@ public class RegisteredclientJpaController implements Serializable {
             Registeredclient persistentRegisteredclient = em.find(Registeredclient.class, registeredclient.getClientID());
             Collection<Conciliation> conciliationCollectionOld = persistentRegisteredclient.getConciliationCollection();
             Collection<Conciliation> conciliationCollectionNew = registeredclient.getConciliationCollection();
-            Collection<Conciliation> conciliationCollection1Old = persistentRegisteredclient.getConciliationCollection1();
-            Collection<Conciliation> conciliationCollection1New = registeredclient.getConciliationCollection1();
             Collection<Fav> favCollectionOld = persistentRegisteredclient.getFavCollection();
             Collection<Fav> favCollectionNew = registeredclient.getFavCollection();
             Collection<Vehicleadvert> vehicleadvertCollectionOld = persistentRegisteredclient.getVehicleadvertCollection();
@@ -178,15 +158,7 @@ public class RegisteredclientJpaController implements Serializable {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Conciliation " + conciliationCollectionOldConciliation + " since its sellerID field is not nullable.");
-                }
-            }
-            for (Conciliation conciliationCollection1OldConciliation : conciliationCollection1Old) {
-                if (!conciliationCollection1New.contains(conciliationCollection1OldConciliation)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Conciliation " + conciliationCollection1OldConciliation + " since its buyerID field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Conciliation " + conciliationCollectionOldConciliation + " since its userID field is not nullable.");
                 }
             }
             for (Fav favCollectionOldFav : favCollectionOld) {
@@ -223,13 +195,6 @@ public class RegisteredclientJpaController implements Serializable {
             }
             conciliationCollectionNew = attachedConciliationCollectionNew;
             registeredclient.setConciliationCollection(conciliationCollectionNew);
-            Collection<Conciliation> attachedConciliationCollection1New = new ArrayList<Conciliation>();
-            for (Conciliation conciliationCollection1NewConciliationToAttach : conciliationCollection1New) {
-                conciliationCollection1NewConciliationToAttach = em.getReference(conciliationCollection1NewConciliationToAttach.getClass(), conciliationCollection1NewConciliationToAttach.getCode());
-                attachedConciliationCollection1New.add(conciliationCollection1NewConciliationToAttach);
-            }
-            conciliationCollection1New = attachedConciliationCollection1New;
-            registeredclient.setConciliationCollection1(conciliationCollection1New);
             Collection<Fav> attachedFavCollectionNew = new ArrayList<Fav>();
             for (Fav favCollectionNewFavToAttach : favCollectionNew) {
                 favCollectionNewFavToAttach = em.getReference(favCollectionNewFavToAttach.getClass(), favCollectionNewFavToAttach.getId());
@@ -254,23 +219,12 @@ public class RegisteredclientJpaController implements Serializable {
             registeredclient = em.merge(registeredclient);
             for (Conciliation conciliationCollectionNewConciliation : conciliationCollectionNew) {
                 if (!conciliationCollectionOld.contains(conciliationCollectionNewConciliation)) {
-                    Registeredclient oldSellerIDOfConciliationCollectionNewConciliation = conciliationCollectionNewConciliation.getSellerID();
-                    conciliationCollectionNewConciliation.setSellerID(registeredclient);
+                    Registeredclient oldUserIDOfConciliationCollectionNewConciliation = conciliationCollectionNewConciliation.getUserID();
+                    conciliationCollectionNewConciliation.setUserID(registeredclient);
                     conciliationCollectionNewConciliation = em.merge(conciliationCollectionNewConciliation);
-                    if (oldSellerIDOfConciliationCollectionNewConciliation != null && !oldSellerIDOfConciliationCollectionNewConciliation.equals(registeredclient)) {
-                        oldSellerIDOfConciliationCollectionNewConciliation.getConciliationCollection().remove(conciliationCollectionNewConciliation);
-                        oldSellerIDOfConciliationCollectionNewConciliation = em.merge(oldSellerIDOfConciliationCollectionNewConciliation);
-                    }
-                }
-            }
-            for (Conciliation conciliationCollection1NewConciliation : conciliationCollection1New) {
-                if (!conciliationCollection1Old.contains(conciliationCollection1NewConciliation)) {
-                    Registeredclient oldBuyerIDOfConciliationCollection1NewConciliation = conciliationCollection1NewConciliation.getBuyerID();
-                    conciliationCollection1NewConciliation.setBuyerID(registeredclient);
-                    conciliationCollection1NewConciliation = em.merge(conciliationCollection1NewConciliation);
-                    if (oldBuyerIDOfConciliationCollection1NewConciliation != null && !oldBuyerIDOfConciliationCollection1NewConciliation.equals(registeredclient)) {
-                        oldBuyerIDOfConciliationCollection1NewConciliation.getConciliationCollection1().remove(conciliationCollection1NewConciliation);
-                        oldBuyerIDOfConciliationCollection1NewConciliation = em.merge(oldBuyerIDOfConciliationCollection1NewConciliation);
+                    if (oldUserIDOfConciliationCollectionNewConciliation != null && !oldUserIDOfConciliationCollectionNewConciliation.equals(registeredclient)) {
+                        oldUserIDOfConciliationCollectionNewConciliation.getConciliationCollection().remove(conciliationCollectionNewConciliation);
+                        oldUserIDOfConciliationCollectionNewConciliation = em.merge(oldUserIDOfConciliationCollectionNewConciliation);
                     }
                 }
             }
@@ -347,14 +301,7 @@ public class RegisteredclientJpaController implements Serializable {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Registeredclient (" + registeredclient + ") cannot be destroyed since the Conciliation " + conciliationCollectionOrphanCheckConciliation + " in its conciliationCollection field has a non-nullable sellerID field.");
-            }
-            Collection<Conciliation> conciliationCollection1OrphanCheck = registeredclient.getConciliationCollection1();
-            for (Conciliation conciliationCollection1OrphanCheckConciliation : conciliationCollection1OrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Registeredclient (" + registeredclient + ") cannot be destroyed since the Conciliation " + conciliationCollection1OrphanCheckConciliation + " in its conciliationCollection1 field has a non-nullable buyerID field.");
+                illegalOrphanMessages.add("This Registeredclient (" + registeredclient + ") cannot be destroyed since the Conciliation " + conciliationCollectionOrphanCheckConciliation + " in its conciliationCollection field has a non-nullable userID field.");
             }
             Collection<Fav> favCollectionOrphanCheck = registeredclient.getFavCollection();
             for (Fav favCollectionOrphanCheckFav : favCollectionOrphanCheck) {

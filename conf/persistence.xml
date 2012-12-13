@@ -9,6 +9,9 @@
     <class>Flipmotor.Entities.Fav</class>
     <class>Flipmotor.Entities.Businessadvert</class>
     <class>Flipmotor.Entities.Registeredclient</class>
+    <class>Bank.Entities.Conciliate</class>
+    <class>Flipmotor.Entities.Conciliation</class>
+    <class>Flipmotor.Entities.Statistics</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.ddl-generation" value="create-tables"/>

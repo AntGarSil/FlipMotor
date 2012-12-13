@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
                            "/UserProfile",
                            "/RegisterError",
                            "/ViewAdController",
+                           "/PaymentAction",
                            "/MakeFavourite"
                            })
 public class ControllerServlet extends HttpServlet {
@@ -161,6 +162,9 @@ public class ControllerServlet extends HttpServlet {
 	}else if (userPath.equals("/Favorites")) {
             // TODO: Implement motorbike page request
             userPath = "/FavouriteViewController";
+	}else if (userPath.equals("/PaymentAction")) {
+            // TODO: Implement motorbike page request
+            userPath = "/PaymentController";
 	}
 
         // use RequestDispatcher to forward request internally

@@ -63,7 +63,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("userid", userid);
             }else{
                 // SHOW WRONG LOGIN INPUT MESSAGE
-
+                System.out.println("error");
             }
             request.getRequestDispatcher("/Home").forward(request, response);
         } finally {            

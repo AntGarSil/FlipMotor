@@ -52,15 +52,10 @@ public class ConciliationJpaController implements Serializable {
                 businessID = em.getReference(businessID.getClass(), businessID.getCode());
                 conciliation.setBusinessID(businessID);
             }
-            Registeredclient sellerID = conciliation.getSellerID();
-            if (sellerID != null) {
-                sellerID = em.getReference(sellerID.getClass(), sellerID.getClientID());
-                conciliation.setSellerID(sellerID);
-            }
-            Registeredclient buyerID = conciliation.getBuyerID();
-            if (buyerID != null) {
-                buyerID = em.getReference(buyerID.getClass(), buyerID.getClientID());
-                conciliation.setBuyerID(buyerID);
+            Registeredclient userID = conciliation.getUserID();
+            if (userID != null) {
+                userID = em.getReference(userID.getClass(), userID.getClientID());
+                conciliation.setUserID(userID);
             }
             em.persist(conciliation);
             if (vehicleID != null) {
@@ -71,13 +66,9 @@ public class ConciliationJpaController implements Serializable {
                 businessID.getConciliationCollection().add(conciliation);
                 businessID = em.merge(businessID);
             }
-            if (sellerID != null) {
-                sellerID.getConciliationCollection().add(conciliation);
-                sellerID = em.merge(sellerID);
-            }
-            if (buyerID != null) {
-                buyerID.getConciliationCollection().add(conciliation);
-                buyerID = em.merge(buyerID);
+            if (userID != null) {
+                userID.getConciliationCollection().add(conciliation);
+                userID = em.merge(userID);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -104,10 +95,8 @@ public class ConciliationJpaController implements Serializable {
             Vehicleadvert vehicleIDNew = conciliation.getVehicleID();
             Businessadvert businessIDOld = persistentConciliation.getBusinessID();
             Businessadvert businessIDNew = conciliation.getBusinessID();
-            Registeredclient sellerIDOld = persistentConciliation.getSellerID();
-            Registeredclient sellerIDNew = conciliation.getSellerID();
-            Registeredclient buyerIDOld = persistentConciliation.getBuyerID();
-            Registeredclient buyerIDNew = conciliation.getBuyerID();
+            Registeredclient userIDOld = persistentConciliation.getUserID();
+            Registeredclient userIDNew = conciliation.getUserID();
             if (vehicleIDNew != null) {
                 vehicleIDNew = em.getReference(vehicleIDNew.getClass(), vehicleIDNew.getCode());
                 conciliation.setVehicleID(vehicleIDNew);
@@ -116,13 +105,9 @@ public class ConciliationJpaController implements Serializable {
                 businessIDNew = em.getReference(businessIDNew.getClass(), businessIDNew.getCode());
                 conciliation.setBusinessID(businessIDNew);
             }
-            if (sellerIDNew != null) {
-                sellerIDNew = em.getReference(sellerIDNew.getClass(), sellerIDNew.getClientID());
-                conciliation.setSellerID(sellerIDNew);
-            }
-            if (buyerIDNew != null) {
-                buyerIDNew = em.getReference(buyerIDNew.getClass(), buyerIDNew.getClientID());
-                conciliation.setBuyerID(buyerIDNew);
+            if (userIDNew != null) {
+                userIDNew = em.getReference(userIDNew.getClass(), userIDNew.getClientID());
+                conciliation.setUserID(userIDNew);
             }
             conciliation = em.merge(conciliation);
             if (vehicleIDOld != null && !vehicleIDOld.equals(vehicleIDNew)) {
@@ -141,21 +126,13 @@ public class ConciliationJpaController implements Serializable {
                 businessIDNew.getConciliationCollection().add(conciliation);
                 businessIDNew = em.merge(businessIDNew);
             }
-            if (sellerIDOld != null && !sellerIDOld.equals(sellerIDNew)) {
-                sellerIDOld.getConciliationCollection().remove(conciliation);
-                sellerIDOld = em.merge(sellerIDOld);
+            if (userIDOld != null && !userIDOld.equals(userIDNew)) {
+                userIDOld.getConciliationCollection().remove(conciliation);
+                userIDOld = em.merge(userIDOld);
             }
-            if (sellerIDNew != null && !sellerIDNew.equals(sellerIDOld)) {
-                sellerIDNew.getConciliationCollection().add(conciliation);
-                sellerIDNew = em.merge(sellerIDNew);
-            }
-            if (buyerIDOld != null && !buyerIDOld.equals(buyerIDNew)) {
-                buyerIDOld.getConciliationCollection().remove(conciliation);
-                buyerIDOld = em.merge(buyerIDOld);
-            }
-            if (buyerIDNew != null && !buyerIDNew.equals(buyerIDOld)) {
-                buyerIDNew.getConciliationCollection().add(conciliation);
-                buyerIDNew = em.merge(buyerIDNew);
+            if (userIDNew != null && !userIDNew.equals(userIDOld)) {
+                userIDNew.getConciliationCollection().add(conciliation);
+                userIDNew = em.merge(userIDNew);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -201,15 +178,10 @@ public class ConciliationJpaController implements Serializable {
                 businessID.getConciliationCollection().remove(conciliation);
                 businessID = em.merge(businessID);
             }
-            Registeredclient sellerID = conciliation.getSellerID();
-            if (sellerID != null) {
-                sellerID.getConciliationCollection().remove(conciliation);
-                sellerID = em.merge(sellerID);
-            }
-            Registeredclient buyerID = conciliation.getBuyerID();
-            if (buyerID != null) {
-                buyerID.getConciliationCollection().remove(conciliation);
-                buyerID = em.merge(buyerID);
+            Registeredclient userID = conciliation.getUserID();
+            if (userID != null) {
+                userID.getConciliationCollection().remove(conciliation);
+                userID = em.merge(userID);
             }
             em.remove(conciliation);
             utx.commit();

@@ -123,10 +123,8 @@ public class Registeredclient implements Serializable {
     @NotNull
     @Column(name = "Confirmed", nullable = false)
     private int confirmed;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sellerID")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userID")
     private Collection<Conciliation> conciliationCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyerID")
-    private Collection<Conciliation> conciliationCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientID")
     private Collection<Fav> favCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientID")
@@ -142,7 +140,6 @@ public class Registeredclient implements Serializable {
     }
 
     public Registeredclient(Integer clientID, String nif, int phone, String email, String nam, String surname, String passwor, String nationality, int pc, String city, String province, String street, int numbe, int flat, int confirmed) {
-        
         this.clientID = clientID;
         this.nif = nif;
         this.phone = phone;
@@ -295,15 +292,6 @@ public class Registeredclient implements Serializable {
 
     public void setConciliationCollection(Collection<Conciliation> conciliationCollection) {
         this.conciliationCollection = conciliationCollection;
-    }
-
-    @XmlTransient
-    public Collection<Conciliation> getConciliationCollection1() {
-        return conciliationCollection1;
-    }
-
-    public void setConciliationCollection1(Collection<Conciliation> conciliationCollection1) {
-        this.conciliationCollection1 = conciliationCollection1;
     }
 
     @XmlTransient

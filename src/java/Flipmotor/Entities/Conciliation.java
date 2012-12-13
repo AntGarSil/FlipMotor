@@ -62,12 +62,9 @@ public class Conciliation implements Serializable {
     @JoinColumn(name = "BusinessID", referencedColumnName = "Code")
     @ManyToOne
     private Businessadvert businessID;
-    @JoinColumn(name = "SellerID", referencedColumnName = "ClientID", nullable = false)
+    @JoinColumn(name = "UserID", referencedColumnName = "ClientID", nullable = false)
     @ManyToOne(optional = false)
-    private Registeredclient sellerID;
-    @JoinColumn(name = "BuyerID", referencedColumnName = "ClientID", nullable = false)
-    @ManyToOne(optional = false)
-    private Registeredclient buyerID;
+    private Registeredclient userID;
 
     public Conciliation() {
     }
@@ -131,20 +128,12 @@ public class Conciliation implements Serializable {
         this.businessID = businessID;
     }
 
-    public Registeredclient getSellerID() {
-        return sellerID;
+    public Registeredclient getUserID() {
+        return userID;
     }
 
-    public void setSellerID(Registeredclient sellerID) {
-        this.sellerID = sellerID;
-    }
-
-    public Registeredclient getBuyerID() {
-        return buyerID;
-    }
-
-    public void setBuyerID(Registeredclient buyerID) {
-        this.buyerID = buyerID;
+    public void setUserID(Registeredclient userID) {
+        this.userID = userID;
     }
 
     @Override
