@@ -54,7 +54,6 @@ public class EditProfileController extends HttpServlet {
             String email = request.getParameter("email");
             String pc = "0" + request.getParameter("pc");
             String leter = request.getParameter("leter");
-            String card = "0" + request.getParameter("card");
             String province = request.getParameter("province");
             int PK = -1;
             
@@ -64,9 +63,9 @@ public class EditProfileController extends HttpServlet {
                                     String city, String province, String street, int numbe,
                                             int flat, int fav, int anuncio)*/
             Registeredclient newClient = new Registeredclient(PK,nif,Integer.valueOf(phone),
-                    email, name, surname, password, Long.valueOf(card), "NA", Integer.valueOf(pc),
+                    email, name, surname, password, "NA", Integer.valueOf(pc),
                     city, province, street, Integer.valueOf(number),Integer.valueOf(flat),
-                    -1, -1);
+                    -1);
             if(leter.length() != 0){
                 newClient.setLeter(leter.charAt(0));
             }else{
@@ -89,10 +88,10 @@ public class EditProfileController extends HttpServlet {
                 oldClient.setCity(newClient.getCity());
             }
             
-            if(newClient.getCreditCard() != 0)
-            {
-                oldClient.setCreditCard(newClient.getCreditCard());
-            }
+          //  if(newClient.getCreditCard() != 0)
+           // {
+            //    oldClient.setCreditCard(newClient.getCreditCard());
+            //}
             
             
             if(newClient.getFlat() != 0)

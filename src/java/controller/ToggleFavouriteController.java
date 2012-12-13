@@ -20,8 +20,8 @@ import javax.servlet.http.HttpSession;
 import Flipmotor.model.FavJpaController;
 import Flipmotor.model.RegisteredclientJpaController;
 import Flipmotor.model.VehicleadvertJpaController;
-import model.exceptions.PreexistingEntityException;
-import model.exceptions.RollbackFailureException;
+import Flipmotor.model.exceptions.PreexistingEntityException;
+import Flipmotor.model.exceptions.RollbackFailureException;
 
 /**
  *

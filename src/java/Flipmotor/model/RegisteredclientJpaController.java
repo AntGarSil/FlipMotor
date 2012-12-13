@@ -37,6 +37,10 @@ public class RegisteredclientJpaController implements Serializable {
     private UserTransaction utx = null;
     private EntityManagerFactory emf = null;
 
+    public RegisteredclientJpaController() {
+        //this.create(this);
+    }
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }

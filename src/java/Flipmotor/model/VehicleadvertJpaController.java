@@ -37,6 +37,10 @@ public class VehicleadvertJpaController implements Serializable {
     private UserTransaction utx = null;
     private EntityManagerFactory emf = null;
 
+    public VehicleadvertJpaController() {
+        
+    }
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }

@@ -142,6 +142,7 @@ public class Registeredclient implements Serializable {
     }
 
     public Registeredclient(Integer clientID, String nif, int phone, String email, String nam, String surname, String passwor, String nationality, int pc, String city, String province, String street, int numbe, int flat, int confirmed) {
+        
         this.clientID = clientID;
         this.nif = nif;
         this.phone = phone;

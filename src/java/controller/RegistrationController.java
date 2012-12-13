@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import Flipmotor.model.RegisteredclientJpaController;
-import model.exceptions.PreexistingEntityException;
-import model.exceptions.RollbackFailureException;
+import Flipmotor.model.exceptions.PreexistingEntityException;
+import Flipmotor.model.exceptions.RollbackFailureException;
 
 /**
  *
@@ -57,7 +57,6 @@ public class RegistrationController extends HttpServlet {
             String email = request.getParameter("email");
             String pc = request.getParameter("pc");
             String leter = request.getParameter("leter");
-            String card = request.getParameter("card");
             String province = request.getParameter("province");
             
             int PK = Common.generateUserID(email);
@@ -74,9 +73,9 @@ public class RegistrationController extends HttpServlet {
                                     String city, String province, String street, int numbe,
                                             int flat, int fav, int anuncio)*/
             Registeredclient newClient = new Registeredclient(PK,nif,Integer.valueOf(phone),
-                    email, name, surname, password, Long.valueOf(card), "NA", Integer.valueOf(pc),
+                    email, name, surname, password, "NA", Integer.valueOf(pc),
                     city, province, street, Integer.valueOf(number),Integer.valueOf(flat),
-                    -1, -1);
+                    -1);
             newClient.setLeter(leter.charAt(0));
             
             

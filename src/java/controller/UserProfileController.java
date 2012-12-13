@@ -119,10 +119,7 @@ public class UserProfileController extends HttpServlet {
             out.println("                                <div><label for='email'>Email address: " + user.getEmail() + "</label> </div>");
 
 
-            //////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////                      ADD CREDITCARD HERE                               //////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////
-            out.println("                                <div><label for='card'>Credit card: " + user.getCreditCard() + "</label></div>");
+
 
 
             out.println("                                <div><h4>Address</h4> ");

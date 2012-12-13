@@ -32,6 +32,10 @@ public class FavJpaController implements Serializable {
     private UserTransaction utx = null;
     private EntityManagerFactory emf = null;
 
+    public FavJpaController() {
+        
+    }
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
