@@ -66,7 +66,10 @@ public class LoginController extends HttpServlet {
                 System.out.println("error");
             }
             request.getRequestDispatcher("/Home").forward(request, response);
-        } finally {            
+        }catch(Exception ex)
+        {
+            System.out.println(ex.toString());
+        }finally {            
             out.close();
         }
     }
