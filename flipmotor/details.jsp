@@ -36,8 +36,8 @@ function register_Validator(theForm)
                             <p>
 				<label for="card">Credit Card</label>
 				<input id="card" name="card" class="required" minlength="16" maxlength="16" type="number" />
-                            </p><p>Expiry Date<br />
-                                 Month:<SELECT NAME="cboExpMonth" SIZE	="1">
+                            </p><p><b>Expiry Date</b></br>
+                                   Month:<SELECT NAME="cboExpMonth" SIZE="1">
 
                                         <option VALUE="00" selected></option>
                                                 <OPTION VALUE="01">01</OPTION>
@@ -57,15 +57,12 @@ function register_Validator(theForm)
                                 Year:    <SELECT NAME="cboExpYear" SIZE="1">		
 
                                                 <option VALUE="00" selected></option>
-                                                        <OPTION VALUE="2004">04</OPTION>
-                                                        <OPTION VALUE="2005">05</OPTION>
-                                                <OPTION VALUE="2006">06</OPTION>
-                                                <OPTION VALUE="2007">07</OPTION>
-                                                <OPTION VALUE="2008">06</OPTION>
-                                                <OPTION VALUE="2009">09</OPTION>
-                                                <OPTION VALUE="2010">10</OPTION>
-                                                <OPTION VALUE="2011">11</OPTION>
-                                                <OPTION VALUE="2012">12</OPTION>
+                                                        <OPTION VALUE="2012">12</OPTION>
+                                                        <OPTION VALUE="2013">13</OPTION>
+                                                <OPTION VALUE="2014">14</OPTION>
+                                                <OPTION VALUE="2015">15</OPTION>
+                                                <OPTION VALUE="2016">16</OPTION>
+                                                <OPTION VALUE="2017">17</OPTION>
                                          </SELECT>
                         </div>
                         

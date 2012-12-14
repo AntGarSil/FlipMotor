@@ -147,6 +147,8 @@ public class RegisteredclientJpaController implements Serializable {
 
     public void edit(Registeredclient registeredclient) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
+        Context ctx = new InitialContext();
+        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
         try {
             utx.begin();
             em = getEntityManager();

@@ -22,6 +22,11 @@ import Flipmotor.Entities.Conciliation;
 import java.util.ArrayList;
 import java.util.Collection;
 import Flipmotor.Entities.Fav;
+import javax.annotation.Resource;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceUnit;
 import javax.transaction.UserTransaction;
 
 /**
@@ -34,8 +39,8 @@ public class VehicleadvertJpaController implements Serializable {
         this.utx = utx;
         this.emf = emf;
     }
-    private UserTransaction utx = null;
-    private EntityManagerFactory emf = null;
+    @Resource private UserTransaction utx;
+    @PersistenceUnit private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectPU"); 
 
     public VehicleadvertJpaController() {
         
@@ -53,6 +58,8 @@ public class VehicleadvertJpaController implements Serializable {
             vehicleadvert.setFavCollection(new ArrayList<Fav>());
         }
         EntityManager em = null;
+        Context ctx = new InitialContext();
+        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
         try {
             utx.begin();
             em = getEntityManager();
@@ -122,6 +129,8 @@ public class VehicleadvertJpaController implements Serializable {
 
     public void edit(Vehicleadvert vehicleadvert) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
+        Context ctx = new InitialContext();
+        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
         try {
             utx.begin();
             em = getEntityManager();
@@ -237,6 +246,8 @@ public class VehicleadvertJpaController implements Serializable {
 
     public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
+        Context ctx = new InitialContext();
+        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
         try {
             utx.begin();
             em = getEntityManager();
