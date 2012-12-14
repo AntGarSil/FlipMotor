@@ -18,6 +18,11 @@ import javax.persistence.criteria.Root;
 import Flipmotor.Entities.Vehicleadvert;
 import Flipmotor.Entities.Businessadvert;
 import Flipmotor.Entities.Registeredclient;
+import javax.annotation.Resource;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceUnit;
 import javax.transaction.UserTransaction;
 
 /**
@@ -30,8 +35,8 @@ public class ConciliationJpaController implements Serializable {
         this.utx = utx;
         this.emf = emf;
     }
-    private UserTransaction utx = null;
-    private EntityManagerFactory emf = null;
+    @Resource private UserTransaction utx;
+    @PersistenceUnit private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectPU"); 
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -39,6 +44,8 @@ public class ConciliationJpaController implements Serializable {
 
     public void create(Conciliation conciliation) throws RollbackFailureException, Exception {
         EntityManager em = null;
+        Context ctx = new InitialContext();
+        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
         try {
             utx.begin();
             em = getEntityManager();
@@ -87,6 +94,8 @@ public class ConciliationJpaController implements Serializable {
 
     public void edit(Conciliation conciliation) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
+        Context ctx = new InitialContext();
+        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
         try {
             utx.begin();
             em = getEntityManager();
@@ -158,6 +167,8 @@ public class ConciliationJpaController implements Serializable {
 
     public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
+        Context ctx = new InitialContext();
+        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
         try {
             utx.begin();
             em = getEntityManager();

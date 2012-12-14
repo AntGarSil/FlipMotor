@@ -22,6 +22,8 @@ import java.util.Collection;
 import Flipmotor.Entities.Fav;
 import Flipmotor.Entities.Vehicleadvert;
 import Flipmotor.Entities.Businessadvert;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.transaction.UserTransaction;
 
 /**
@@ -36,6 +38,10 @@ public class RegisteredclientJpaController implements Serializable {
     }
     private UserTransaction utx = null;
     private EntityManagerFactory emf = null;
+
+    public RegisteredclientJpaController() {
+        
+    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -136,6 +142,8 @@ public class RegisteredclientJpaController implements Serializable {
 
     public void edit(Registeredclient registeredclient) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
+        Context ctx = new InitialContext();
+        this.utx = (UserTransaction) ctx.lookup("java:comp/UserTransaction");
         try {
             utx.begin();
             em = getEntityManager();

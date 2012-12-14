@@ -4,12 +4,21 @@
  */
 package controller;
 
+import Flipmotor.Entities.Registeredclient;
+import controller.Utils.Common;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import Flipmotor.model.RegisteredclientJpaController;
+import Flipmotor.model.exceptions.PreexistingEntityException;
+import Flipmotor.model.exceptions.RollbackFailureException;
 
 /**
  *
@@ -29,16 +38,68 @@ public class PaymentController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PaymentController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet PaymentController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-             */
+
+            RegisteredclientJpaController userJPA = new RegisteredclientJpaController();
+            
+            
+            //phone, nif, street, flat, surname, number, password, city
+            //email, name, pc, province, letter, card
+            
+            String name = request.getParameter("name");
+            String surname = request.getParameter("surname");
+            String phone = request.getParameter("phone");
+            String nif = request.getParameter("nif");
+            String street = request.getParameter("street");
+            String flat = request.getParameter("flat");
+            String number = request.getParameter("number");
+            String password = request.getParameter("password");
+            String city = request.getParameter("city");
+            String email = request.getParameter("email");
+            String pc = request.getParameter("pc");
+            String leter = request.getParameter("leter");
+            String province = request.getParameter("province");
+            
+            int PK = Common.generateUserID(email);
+            
+            Registeredclient existClient = userJPA.findRegisteredclient(PK);
+            if(null != existClient)
+            {
+                request.getRequestDispatcher("/RegisterError").forward(request, response);
+                return;
+            }
+            /*Registeredclient(Integer clientID, String nif, int phone,
+                    String email, String nam, String surname, String passwor,
+                            long creditCard, String nationality, int pc,
+                                    String city, String province, String street, int numbe,
+                                            int flat, int fav, int anuncio)*/
+            Registeredclient newClient = new Registeredclient(PK,nif,Integer.valueOf(phone),
+                    email, name, surname, password, "NA", Integer.valueOf(pc),
+                    city, province, street, Integer.valueOf(number),Integer.valueOf(flat),
+                    -1);
+            newClient.setLeter(leter.charAt(0));
+            
+            
+            try {
+                int count = userJPA.getRegisteredclientCount();
+                userJPA.create(newClient);
+                count = userJPA.getRegisteredclientCount();
+                
+                
+                HttpSession session = request.getSession(true);
+                //Log in will expire every 20 minutes
+                session.setMaxInactiveInterval(20 * 60);
+                //Store user credential
+                session.setAttribute("userid", PK);
+                request.getRequestDispatcher("/UserProfile").forward(request, response);
+                
+            } catch (PreexistingEntityException ex) {
+                Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (RollbackFailureException ex) {
+                Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+            
         } finally {            
             out.close();
         }
