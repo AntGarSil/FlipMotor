@@ -9,7 +9,7 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.2.0.v20110202-r8913", date="2012-12-13T13:19:47")
+@Generated(value="EclipseLink-2.2.0.v20110202-r8913", date="2012-12-14T00:44:29")
 @StaticMetamodel(Registeredclient.class)
 public class Registeredclient_ { 
 
@@ -31,7 +31,6 @@ public class Registeredclient_ {
     public static volatile CollectionAttribute<Registeredclient, Conciliation> conciliationCollection;
     public static volatile SingularAttribute<Registeredclient, String> province;
     public static volatile SingularAttribute<Registeredclient, Character> leter;
-    public static volatile CollectionAttribute<Registeredclient, Conciliation> conciliationCollection1;
     public static volatile SingularAttribute<Registeredclient, String> passwor;
     public static volatile CollectionAttribute<Registeredclient, Businessadvert> businessadvertCollection;
 

@@ -25,14 +25,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author root
  */
 @Entity
-@Table(name = "CONCILIATE", catalog = "bankDB", schema = "")
+@Table(name = "CONCILIATE", catalog = "bank", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Conciliate.findAll", query = "SELECT c FROM Conciliate c"),
     @NamedQuery(name = "Conciliate.findByCode", query = "SELECT c FROM Conciliate c WHERE c.code = :code"),
     @NamedQuery(name = "Conciliate.findByTdate", query = "SELECT c FROM Conciliate c WHERE c.tdate = :tdate"),
-    @NamedQuery(name = "Conciliate.findByBuyerID", query = "SELECT c FROM Conciliate c WHERE c.buyerID = :buyerID"),
-    @NamedQuery(name = "Conciliate.findBySellerID", query = "SELECT c FROM Conciliate c WHERE c.sellerID = :sellerID"),
+    @NamedQuery(name = "Conciliate.findByClientID", query = "SELECT c FROM Conciliate c WHERE c.clientID = :clientID"),
     @NamedQuery(name = "Conciliate.findByPrice", query = "SELECT c FROM Conciliate c WHERE c.price = :price"),
     @NamedQuery(name = "Conciliate.findByAdvertID", query = "SELECT c FROM Conciliate c WHERE c.advertID = :advertID"),
     @NamedQuery(name = "Conciliate.findByType", query = "SELECT c FROM Conciliate c WHERE c.type = :type"),
@@ -52,12 +51,8 @@ public class Conciliate implements Serializable {
     private Date tdate;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "BuyerID", nullable = false)
-    private int buyerID;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "SellerID", nullable = false)
-    private int sellerID;
+    @Column(name = "ClientID", nullable = false)
+    private int clientID;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Price", nullable = false)
@@ -82,11 +77,10 @@ public class Conciliate implements Serializable {
         this.code = code;
     }
 
-    public Conciliate(Integer code, Date tdate, int buyerID, int sellerID, int price, int advertID, int type, long creditcard) {
+    public Conciliate(Integer code, Date tdate, int clientID, int price, int advertID, int type, long creditcard) {
         this.code = code;
         this.tdate = tdate;
-        this.buyerID = buyerID;
-        this.sellerID = sellerID;
+        this.clientID = clientID;
         this.price = price;
         this.advertID = advertID;
         this.type = type;
@@ -109,20 +103,12 @@ public class Conciliate implements Serializable {
         this.tdate = tdate;
     }
 
-    public int getBuyerID() {
-        return buyerID;
+    public int getClientID() {
+        return clientID;
     }
 
-    public void setBuyerID(int buyerID) {
-        this.buyerID = buyerID;
-    }
-
-    public int getSellerID() {
-        return sellerID;
-    }
-
-    public void setSellerID(int sellerID) {
-        this.sellerID = sellerID;
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
     }
 
     public int getPrice() {

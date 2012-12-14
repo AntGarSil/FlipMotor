@@ -123,7 +123,7 @@ public class Registeredclient implements Serializable {
     @NotNull
     @Column(name = "Confirmed", nullable = false)
     private int confirmed;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userID")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientID")
     private Collection<Conciliation> conciliationCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientID")
     private Collection<Fav> favCollection;

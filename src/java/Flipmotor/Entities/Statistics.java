@@ -28,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Statistics.findAll", query = "SELECT s FROM Statistics s"),
     @NamedQuery(name = "Statistics.findByStatID", query = "SELECT s FROM Statistics s WHERE s.statID = :statID"),
     @NamedQuery(name = "Statistics.findByAdvertID", query = "SELECT s FROM Statistics s WHERE s.advertID = :advertID"),
-    @NamedQuery(name = "Statistics.findByIncome", query = "SELECT s FROM Statistics s WHERE s.income = :income")})
+    @NamedQuery(name = "Statistics.findByIncome", query = "SELECT s FROM Statistics s WHERE s.income = :income"),
+    @NamedQuery(name = "Statistics.findByTyp", query = "SELECT s FROM Statistics s WHERE s.typ = :typ")})
 public class Statistics implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,6 +46,10 @@ public class Statistics implements Serializable {
     @NotNull
     @Column(name = "Income", nullable = false)
     private int income;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "Typ", nullable = false)
+    private int typ;
 
     public Statistics() {
     }
@@ -53,10 +58,11 @@ public class Statistics implements Serializable {
         this.statID = statID;
     }
 
-    public Statistics(Integer statID, int advertID, int income) {
+    public Statistics(Integer statID, int advertID, int income, int typ) {
         this.statID = statID;
         this.advertID = advertID;
         this.income = income;
+        this.typ = typ;
     }
 
     public Integer getStatID() {
@@ -81,6 +87,14 @@ public class Statistics implements Serializable {
 
     public void setIncome(int income) {
         this.income = income;
+    }
+
+    public int getTyp() {
+        return typ;
+    }
+
+    public void setTyp(int typ) {
+        this.typ = typ;
     }
 
     @Override
