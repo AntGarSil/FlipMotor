@@ -7,7 +7,6 @@ package controller;
 import Flipmotor.Entities.Fav;
 import Flipmotor.Entities.Registeredclient;
 import Flipmotor.Entities.Vehicleadvert;
-import controller.Utils.Common;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -22,6 +21,7 @@ import Flipmotor.model.RegisteredclientJpaController;
 import Flipmotor.model.VehicleadvertJpaController;
 import Flipmotor.model.exceptions.PreexistingEntityException;
 import Flipmotor.model.exceptions.RollbackFailureException;
+import java.util.List;
 
 /**
  *
@@ -58,15 +58,30 @@ public class ToggleFavouriteController extends HttpServlet {
             }
 
             Registeredclient client = clientJPA.findRegisteredclient(uid);
+            List<Fav> favlist = favJPA.getFavouritesByClient(client);
+            
             Vehicleadvert vehicle = vehicleJPA.findVehicleadvert(code);
-            int favID = Common.generateFavID(vehicle, client);
+            
+            //int favID = Common.generateFavID(vehicle, client);
             
             Fav newFavRelationship = new Fav();
             newFavRelationship.setClientID(client);
             newFavRelationship.setCode(vehicle);
-            newFavRelationship.setId(favID);
+            newFavRelationship.setId(1);
             
-            Fav relationship = favJPA.findFav(favID);
+            Fav relationship = null;
+            if(!favlist.isEmpty())
+                {
+                for(Fav fav : favlist){
+
+                    if(fav.getCode().equals(vehicle))
+                    {
+                        relationship = fav;
+                    }
+                }
+            }
+            
+            //Fav relationship = favJPA.findFav(favID);
             
             try{
                 

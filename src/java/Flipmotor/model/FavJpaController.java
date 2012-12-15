@@ -17,10 +17,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import Flipmotor.Entities.Vehicleadvert;
 import Flipmotor.Entities.Registeredclient;
+import java.util.ArrayList;
 import javax.annotation.Resource;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.transaction.UserTransaction;
 
@@ -230,5 +232,55 @@ public class FavJpaController implements Serializable {
             em.close();
         }
     }
+    
+    @PersistenceContext
+    public List<Fav> getFavouritesByClient(Registeredclient client)
+    {
+        EntityManager em = getEntityManager();
+        
+        try{        
+        String jpql = "SELECT f FROM Fav f WHERE f.clientID = :uid";
+
+        Query consulta = em.createQuery(jpql);
+        consulta.setParameter("uid", client);
+        //List list = consulta.getSingleResult();
+        List<Fav> resultset = new ArrayList<Fav>();
+        
+        resultset = (List<Fav>) consulta.getResultList();
+        
+        return resultset;
+        }catch(Exception e){
+            return null;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @PersistenceContext
+    public Fav FindFavourite(Registeredclient client, Vehicleadvert vehicle)
+    {
+        EntityManager em = getEntityManager();
+        
+        try{        
+        String jpql = "SELECT f FROM Fav f WHERE f.clientID = :uid AND f.code = :vid";
+
+        Query consulta = em.createQuery(jpql);
+        consulta.setParameter("uid", client);
+        consulta.setParameter("vid", vehicle);
+        
+        //List list = consulta.getSingleResult();
+        Fav resultset = null;
+        
+        resultset = (Fav) consulta.getSingleResult();
+        
+        return resultset;
+        }catch(Exception e){
+            return null;
+        }finally{
+            em.close();
+        }
+    }
+    
+
     
 }

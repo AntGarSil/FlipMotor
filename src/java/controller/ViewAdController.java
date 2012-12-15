@@ -87,8 +87,8 @@ public class ViewAdController extends HttpServlet {
                 FavJpaController favJPA = new FavJpaController();
                 RegisteredclientJpaController clieJPA = new RegisteredclientJpaController();
                 Registeredclient clie = clieJPA.findRegisteredclient(uid);
-                int favID = Common.generateFavID(showVehicle, clie);
-                Fav favourite = favJPA.findFav(favID); 
+                
+                Fav favourite = favJPA.FindFavourite(clie, showVehicle); 
                 
                 if(null != favourite)
                 {
@@ -135,11 +135,11 @@ public class ViewAdController extends HttpServlet {
             out.println("             </div> ");
             out.println("             <div id='contactBox' style='float:left; width: 275px; height:100%; margin-left: 20px; border-left: 2px solid gray;'>");
             out.println("                 <div id='contactInfo' style='width: 100%; height: auto; margin-top: 10px;'>");
-            out.println("                     <form action='JMSSend' method='POST'>");
+            out.println("                     <form action='SendMessage' method='POST'>");
             out.println("                         <div style='margin-left: 10px; margin-top: 20px;'>");
             out.println("                             <h2>Contact the Advertiser</h2>");
             out.println("                             Name: <br>");
-            out.println("                             <input id='contactName' type='text'>");
+            out.println("                             <input id='contactName' name='contactName' type='text'>");
             out.println("                         </div>");
             out.println("                         <div style='margin-left: 10px; margin-top: 20px;'>");
             out.println("                             Message:<br>");
@@ -147,7 +147,7 @@ public class ViewAdController extends HttpServlet {
             out.println("                         </div>");
             out.println("                         <div style='margin-left: 10px; margin-top: 20px;'>");
             out.println("                             E-mail:<br>");
-            out.println("                             <input id='contactEmail' type='text'>");
+            out.println("                             <input id='contactEmail' name='contactEmail' type='text'>");
             out.println("                         </div>");
             out.println("                         <div id='submitMessage' style='width: 100%; margin-top: 25px;'>");
             out.println("                             <input id='submitMessageButton' type='Submit' value='Send Message' style='margin-left: auto; margin-right: auto; display:block;'>");
