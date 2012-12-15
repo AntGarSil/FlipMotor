@@ -20,6 +20,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import Flipmotor.model.RegisteredclientJpaController;
+import java.util.ArrayList;
+import javax.jms.Message;
+import javax.jms.TextMessage;
+import jms.MessageReceiver;
+import jms.MessageSender;
 
 
 
@@ -83,6 +88,7 @@ public class UserProfileController extends HttpServlet {
             out.println("                      <ul> ");
             out.println("                          <li><a href='#tabs-1'>Profile</a></li> ");
             out.println("                          <li><a href='#tabs-2'>Advertisements</a></li> ");
+            out.println("                          <li><a href='#tabs-3'>Messages</a></li> ");
             out.println("                      </ul> ");
             out.println("            <div id='tabs-1' class='tabs-1'> ");
             out.println("                    <div id='leftProfilePanel' style='float:left; width: 50%;'> ");
@@ -282,9 +288,57 @@ public class UserProfileController extends HttpServlet {
             out.println("                </table> ");
             out.println("                </div> ");
             out.println("             </div> ");
-            out.println("         </div> ");
+            //out.println("         </div> ");
+            //out.println("     </div> ");
+            
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            //MESSAGES
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            out.println("            <div id='tabs-3' class='tabs-1'> ");
+            
+            //msg.setIntProperty("SenderId", 0);
+            //msg.setIntProperty("ReceiverId", 0);
+            //msg.setIntProperty("VehicleAd", 0);  
+            
+            String selector = "ReceiverId = " + uid +" OR SenderId = " + uid + "";
+            MessageReceiver receiver = new MessageReceiver();
+            receiver.connect(selector);
+            List<Message> msglist = new ArrayList<Message>();
+            
+            
+            TextMessage msg = (TextMessage) receiver.receive();
+            
+            while (msg != null)
+            {
+                msglist.add(msg);
+                out.println("<form action='DeleteMessage' method='POST'>");
+                out.println("<div style='border: 5px groove #98bf21; padding:3px; margin-top:10px'>");
+                out.println("<div> <b>From: </b>" + msg.getStringProperty("SenderName") +"     </div> ");
+                out.println("<div>" + msg.getStringProperty("SenderEmail") +"     </div> ");
+                out.println("<div>" + msg.getText() +"     </div> ");
+                out.println("<div><a href='Advert?code=" + msg.getIntProperty("VehicleAd") +"&num=" + msg.getIntProperty("num") +"'> Advertisement </a></div>");
+                out.println("<div> Delete: <input type='checkbox' onclick='this.form.submit();' />    </div> ");
+                out.println("<input type='hidden' name='JMSMessageID' value='" + msg.getJMSMessageID() +"'> ");
+                out.println("</div>");
+                out.println("</form>");
+                
+                msg = (TextMessage) receiver.receive();                
+            }
+            
+            
+            receiver.disconnect();
+            
+            MessageSender sender = new MessageSender();
+            sender.connect();
+            for(int i = 0; i < msglist.size(); i++)
+            {
+                sender.send(msglist.get(i));
+            }
+            sender.disconnect();
+
             out.println("     </div> ");
 
+            out.println("</div> ");
             out.println("</div> ");
             
             

@@ -149,6 +149,9 @@ public class ViewAdController extends HttpServlet {
             out.println("                             E-mail:<br>");
             out.println("                             <input id='contactEmail' name='contactEmail' type='text'>");
             out.println("                         </div>");
+            out.println("                     <input type='hidden' name='senderID' value='" + uid + "'/> ");
+            out.println("                     <input type='hidden' name='vehicleID' value='" + adcode + "'/> ");
+            out.println("                     <input type='hidden' name='num' value='" + imagenum + "'/> ");
             out.println("                         <div id='submitMessage' style='width: 100%; margin-top: 25px;'>");
             out.println("                             <input id='submitMessageButton' type='Submit' value='Send Message' style='margin-left: auto; margin-right: auto; display:block;'>");
             out.println("                         </div>");
