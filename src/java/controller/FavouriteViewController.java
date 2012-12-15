@@ -5,7 +5,10 @@
 package controller;
 
 import Flipmotor.Entities.Fav;
+import Flipmotor.Entities.Registeredclient;
 import Flipmotor.Entities.Vehicleadvert;
+import Flipmotor.model.FavJpaController;
+import Flipmotor.model.RegisteredclientJpaController;
 import controller.Utils.Common;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -75,8 +78,10 @@ public class FavouriteViewController extends HttpServlet {
     out.println("                    </thead> ");
     out.println("                    <tbody style='overflow: auto; display: block; height: 390px;'> ");
     
-
-    List<Fav> res = Common.getAFavouritesByClient(uid);
+    FavJpaController favjpa = new FavJpaController();
+    RegisteredclientJpaController clieJPA = new RegisteredclientJpaController();
+    Registeredclient clie = clieJPA.findRegisteredclient(uid);
+    List<Fav> res = favjpa.getFavouritesByClient(clie);
     
     List<Vehicleadvert> listforimag = new ArrayList<Vehicleadvert>();
     int imagno = 0;
