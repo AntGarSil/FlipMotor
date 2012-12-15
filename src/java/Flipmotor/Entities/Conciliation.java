@@ -160,5 +160,9 @@ public class Conciliation implements Serializable {
     public String toString() {
         return "Flipmotor.Entities.Conciliation[ code=" + code + " ]";
     }
+
+    public void setClientID(int i) {
+        
+    }
     
 }

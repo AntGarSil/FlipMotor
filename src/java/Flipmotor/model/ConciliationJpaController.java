@@ -36,7 +36,11 @@ public class ConciliationJpaController implements Serializable {
         this.emf = emf;
     }
     @Resource private UserTransaction utx;
-    @PersistenceUnit private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectPU"); 
+    @PersistenceUnit private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectPU");
+
+    public ConciliationJpaController() {
+        
+    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();

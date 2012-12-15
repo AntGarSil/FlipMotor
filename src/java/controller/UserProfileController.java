@@ -49,7 +49,7 @@ public class UserProfileController extends HttpServlet {
              * Output user profile for logged in user
              */
             
-            
+           
                         
             HttpSession session = request.getSession(true);
             Integer uid = -1;

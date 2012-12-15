@@ -22,7 +22,7 @@
 
 		<div id="vehicles" style="-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 20px; height:420px; margin-bottom: 20px;">
                     <div id="vehicleContainer" style="overflow: auto; height: 100%;" class="tableWrapper">
-                    <form id="postVehicle" method="post" action="Controller">
+                    <form id="postVehicle" method="POST" action="ReceiptAction">
 			<p>
 				<label for="phone">Phone</label>
 				<input id="phone" name="phone" class="required" minlength="9" maxlength="13" type="number" />
@@ -41,9 +41,9 @@
 			<p id="fee">
 				<label for="fee">Ad fee</label>
 				<select id="fee" name="fee" class="required">
-					<option value="">Normal</option>
-					<option>Medium</option>
-					<option>Extra</option>
+					<option value="">1month-15&euro;</option>
+					<option>2month-20&euro;</option>
+					<option>3month-25&euro;</option>
 				</select>
 				<a class="Ntooltip">
 					<image src="images/interrogacion.jpeg" width="15" height="15"/>
@@ -91,14 +91,14 @@
 				<input id="terms" name="terms" class="required" type="checkbox" />
 			</p>
 			<div id="submitPanel" style="float: left; width: 100%; margin-top: 5px;">
-                            <input type="submit" value="Post Vehicle" onclick="window.location='/src/java/controller/UserProfileController.java';" style="margin-left: auto; margin-right: auto; display:block;">
+                            <input type="submit" value="Post Vehicle" style="margin-left: auto; margin-right: auto; display:block;">
             </div>
 			</form>
                     </div>
 		</div>
 		<div id="general" style="-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 20px; height:480px; margin-bottom: 20px;">
                     <div id="generalContainer" style="overflow: auto; height: 100%;" class="tableWrapper">
-                        <form id="postGeneral" method="post" action="Controller">
+                        <form id="postGeneral" method="POST" action="ReceiptAction">
 			<p>
 				<label for="sector">Sector</label>
 				<input id="sector" name="sector" class="required" type="text" />
@@ -110,6 +110,20 @@
 			<p>
 				<label for="text">Text</label>
 				<input name="text" class="required" type="text"  />
+			</p><p id="fee">
+				<label for="fee">Ad fee</label>
+				<select id="fee" name="fee" class="required">
+					<option value="15">1month-15&euro;</option>
+					<option value="20">2month-20&euro;</option>
+					<option value="25">3month-25&euro;</option>
+				</select>
+				<a class="Ntooltip">
+					<image src="images/interrogacion.jpeg" width="15" height="15"/>
+						<span>
+							Current fees <br/><br/>	Normal: 20&euro; for at least 1month<br /> Medium: 16&euro;/month for at least 2months <br /> Extra: 8&euro;/month for at least 3months
+						</span>
+					</image>
+				</a>
 			</p>
 			<p>
 				<label for="image">Image</label>
@@ -120,8 +134,8 @@
 				<input id="terms" name="terms" class="required" type="checkbox" />
 			</p>
 			<div id="submitPanel" style="float: left; width: 100%; margin-top: 5px;">
-                            <input type="submit" value="Post General" onclick="window.location='/src/java/controller/UserProfileController.java';" style="margin-left: auto; margin-right: auto; display:block;">
-            </div>
+                            <input type="submit" value="Post General" style="margin-left: auto; margin-right: auto; display:block;">
+            </div><!--onclick="window.location='/src/java/controller/UserProfileController.java';"-->
 			</form>
                     </div>
 		</div>

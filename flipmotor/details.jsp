@@ -13,7 +13,7 @@ function register_Validator(theForm)
    		var expYear = theForm.cboExpYear.options[theForm.cboExpYear.selectedIndex].value;
   		var expMonth = theForm.cboExpMonth.options[theForm.cboExpMonth.selectedIndex].value;
 		
-		if ((nowYear >= expYear)&&(nowMonth > expMonth))
+		if ((12 == expYear)&&(12 > expMonth))
 		{
   		 alert("expire date can't be in the past!");
    		return false;
@@ -25,7 +25,7 @@ function register_Validator(theForm)
 
 
 
-	<div id="tabs" style="width: 90%; height: 500px; margin: auto; font-size: 12px; border: 2px solid grey; padding: 3px;
+	<div id="tabs" style="width: 90%; height: 400px; margin: auto; font-size: 12px; border: 2px solid grey; padding: 3px;
     -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px;" >
 		<ul>
 			<li><a href="#payment">Payment</a></li>
@@ -57,12 +57,12 @@ function register_Validator(theForm)
                                 Year:    <SELECT NAME="cboExpYear" SIZE="1">		
 
                                                 <option VALUE="00" selected></option>
-                                                        <OPTION VALUE="2012">12</OPTION>
-                                                        <OPTION VALUE="2013">13</OPTION>
-                                                <OPTION VALUE="2014">14</OPTION>
-                                                <OPTION VALUE="2015">15</OPTION>
-                                                <OPTION VALUE="2016">16</OPTION>
-                                                <OPTION VALUE="2017">17</OPTION>
+                                                        <OPTION VALUE="12">12</OPTION>
+                                                        <OPTION VALUE="13">13</OPTION>
+                                                <OPTION VALUE="14">14</OPTION>
+                                                <OPTION VALUE="15">15</OPTION>
+                                                <OPTION VALUE="16">16</OPTION>
+                                                <OPTION VALUE="17">17</OPTION>
                                          </SELECT>
                         </div>
                         

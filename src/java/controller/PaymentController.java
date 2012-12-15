@@ -4,11 +4,16 @@
  */
 package controller;
 
+import Flipmotor.Entities.Conciliation;
 import Flipmotor.Entities.Registeredclient;
+import Flipmotor.model.ConciliationJpaController;
+import Flipmotor.model.RegisteredclientJpaController;
+import Flipmotor.model.exceptions.PreexistingEntityException;
+import Flipmotor.model.exceptions.RollbackFailureException;
 import controller.Utils.Common;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -16,9 +21,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import Flipmotor.model.RegisteredclientJpaController;
-import Flipmotor.model.exceptions.PreexistingEntityException;
-import Flipmotor.model.exceptions.RollbackFailureException;
 
 /**
  *
@@ -34,71 +36,102 @@ public class PaymentController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+            throws ServletException, IOException, Exception {
+     response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
 
-            RegisteredclientJpaController userJPA = new RegisteredclientJpaController();
-            
-            
-            //phone, nif, street, flat, surname, number, password, city
-            //email, name, pc, province, letter, card
-            
-            String name = request.getParameter("name");
-            String surname = request.getParameter("surname");
-            String phone = request.getParameter("phone");
-            String nif = request.getParameter("nif");
-            String street = request.getParameter("street");
-            String flat = request.getParameter("flat");
-            String number = request.getParameter("number");
-            String password = request.getParameter("password");
-            String city = request.getParameter("city");
-            String email = request.getParameter("email");
-            String pc = request.getParameter("pc");
-            String leter = request.getParameter("leter");
-            String province = request.getParameter("province");
-            
-            int PK = Common.generateUserID(email);
-            
-            Registeredclient existClient = userJPA.findRegisteredclient(PK);
-            if(null != existClient)
-            {
-                request.getRequestDispatcher("/RegisterError").forward(request, response);
-                return;
+            ConciliationJpaController conciJPA = new ConciliationJpaController();
+            HttpSession session = request.getSession(true);
+           int price=0;
+            if(null != session.getAttribute("fee")){
+                price = (Integer) session.getAttribute("fee"); 
+                //out.println("Price fee"+price);
+            } else{
+                out.println("Session Expired");
+                throw new Exception ("Something funky going on with your session");
             }
-            /*Registeredclient(Integer clientID, String nif, int phone,
-                    String email, String nam, String surname, String passwor,
-                            long creditCard, String nationality, int pc,
-                                    String city, String province, String street, int numbe,
-                                            int flat, int fav, int anuncio)*/
-            Registeredclient newClient = new Registeredclient(PK,nif,Integer.valueOf(phone),
-                    email, name, surname, password, "NA", Integer.valueOf(pc),
-                    city, province, street, Integer.valueOf(number),Integer.valueOf(flat),
-                    -1);
-            newClient.setLeter(leter.charAt(0));
+            /*int uid=0;
+            if(null != session.getAttribute("userid")){
+                uid = (Integer) session.getAttribute("userid"); 
+                out.println("User ID"+uid);
+            } else{
+                out.println("Session Expired");
+                throw new Exception ("Something funky going on with your session");
+            }*/
+                        int uid=1;//cambiar por el de la sesion
+            RegisteredclientJpaController userJPA = new RegisteredclientJpaController();
+            Registeredclient user = userJPA.findRegisteredclient(Integer.valueOf(uid));
             
             
-            try {
-                int count = userJPA.getRegisteredclientCount();
-                userJPA.create(newClient);
-                count = userJPA.getRegisteredclientCount();
+           String card = request.getParameter("card");
+            String month= request.getParameter("cboExpMonth");
+            String year=request.getParameter("cboExpYear");
+            
+            //int PK = Common.generateUserID(email);
+            int code=1;//value we should get frmo the web service
+            Date date=new Date();
+            //int price=10;
+            //(Integer code, Date tdate, int price, long creditcard)
+            Conciliation newConci = new Conciliation(code,date,price,Long.valueOf(card));
+            newConci.setClientID(user);
+            response.setContentType("text/html");
+            request.getRequestDispatcher("/header.jsp").include(request, response); 
+            
+            out.println("<div id='bodyContent'> ");
+            out.println("<script> ");
+            out.println("    $('#tabs').ready(function(){ ");
+            out.println("        $('#tabs').tabs(); ");
+            out.println("        $('#posted').tablesorter(); ");
+            out.println("        $('#editProfileButton').click(function() { ");
+            out.println("            $('#rightProfilePanel').toggle(); ");
+            out.println("        }); ");
+            out.println("    }); ");
+            out.println("</script> ");  
+            out.println("            <div id='bodycontent' style='margin-top: 10px;'> ");
+            out.println("                 <div id='tabs' class='tabs'  style='width: 90%; height: 400px; margin: auto; font-size: 12px; border: 2px solid grey; padding: 3px; ");
+            out.println("                     -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px;' > ");
+            out.println("                      <ul> ");
+            
+            out.println("                          <li><a href='#feedback'>Feedback</a></li> ");
+            out.println("                      </ul> ");
+            out.println("            <div id='feedback'style='-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 20px; height:420px; margin-bottom: 20px;'>");
+            out.println("                <div id='vehicleContainer' style='overflow: auto; height: 100%;' class='tableWrapper'>");
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////                      CONFIRMATION HERE                              //////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+           // int code=-1;
+                //out.println("                               <div>Fee: "+price+" </div> ");
+                if(code>0)
+                {
+                    out.println("                               <div>SUCCESSFUL TRANSACTION!! Code "+code+" </div> ");
+                    out.println("                               <div>"+price+"€ were charged in your account</div> ");
+                }
+                else{
+                    out.println("                               <div>THERE WAS AN ERROR IN THE TRANSACTION, TRY AGAIN LATER </div> ");
+                }
+            out.println("             </div> ");
+            out.println("         </div> ");
+            out.println("     </div> ");
+            out.println("   </div> ");
+            out.println("</div> ");	
+            
                 
+    request.getRequestDispatcher("/footer.jsp").include(request, response); 
+            
+           try {
+                int count = conciJPA.getConciliationCount();
+                conciJPA.create(newConci);
+                count = conciJPA.getConciliationCount();
                 
-                HttpSession session = request.getSession(true);
-                //Log in will expire every 20 minutes
-                session.setMaxInactiveInterval(20 * 60);
-                //Store user credential
-                session.setAttribute("userid", PK);
-                request.getRequestDispatcher("/UserProfile").forward(request, response);
                 
             } catch (PreexistingEntityException ex) {
-                Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (RollbackFailureException ex) {
-                Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-                Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
-            }            
+                Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
+            }       
             
         } finally {            
             out.close();
@@ -116,7 +149,11 @@ public class PaymentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /** 
@@ -129,7 +166,11 @@ public class PaymentController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /** 

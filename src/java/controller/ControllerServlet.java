@@ -34,6 +34,8 @@ import javax.servlet.http.HttpServletResponse;
                            "/UserProfile",
                            "/RegisterError",
                            "/ViewAdController",
+                           "/ReceiptAction",
+                           "/DetailsAction",
                            "/PaymentAction",
                            "/MakeFavourite"
                            })
@@ -114,13 +116,20 @@ public class ControllerServlet extends HttpServlet {
 
              //userPath = "/query";
         // if checkout page is requested
+        } else if (userPath.equals("/DetailsAction")) {
+            // TODO: Implement motorbike page request
+            userPath = "/details.jsp";
+
+             //userPath = "/query";
+        // if checkout page is requested
         } else if (userPath.equals("/Register")) {
             // TODO: Implement motorbike page request
             userPath = "/registration.jsp";
 
              //userPath = "/query";
         // if checkout page is requested
-        } else if (userPath.equals("/About")) {
+        }
+        else if (userPath.equals("/About")) {
             // TODO: Implement motorbike page request
             userPath = "/aboutus.jsp";
 
@@ -149,6 +158,10 @@ public class ControllerServlet extends HttpServlet {
 	}else if (userPath.equals("/RegisterAction")) {
             // TODO: Implement motorbike page request
             userPath = "/RegistrationController";
+            
+	}else if (userPath.equals("/ReceiptAction")) {
+            // TODO: Implement motorbike page request
+            userPath = "/ReceiptHelper";
             
 	}else if (userPath.equals("/RegisterError")) {
             // TODO: Implement motorbike page request
