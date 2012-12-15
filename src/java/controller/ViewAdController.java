@@ -128,14 +128,14 @@ public class ViewAdController extends HttpServlet {
 
             out.println("                 <div style='width:100%; height: 150px; margin-top:25px;'>");
             out.println("                     <h4>Description</h4>");
-            out.println("                     For next sprint please add description column to table");
+            out.println("                     " + showVehicle.getText() + "");
             out.println("                 </div>");
             out.println("                 <div id='footBar' style='width:100%; height:auto;'>");
             out.println("                 </div>");
             out.println("             </div> ");
             out.println("             <div id='contactBox' style='float:left; width: 275px; height:100%; margin-left: 20px; border-left: 2px solid gray;'>");
             out.println("                 <div id='contactInfo' style='width: 100%; height: auto; margin-top: 10px;'>");
-            out.println("                     <form action='ControllerServlet' method='POST'>");
+            out.println("                     <form action='JMSSend' method='POST'>");
             out.println("                         <div style='margin-left: 10px; margin-top: 20px;'>");
             out.println("                             <h2>Contact the Advertiser</h2>");
             out.println("                             Name: <br>");
@@ -143,7 +143,7 @@ public class ViewAdController extends HttpServlet {
             out.println("                         </div>");
             out.println("                         <div style='margin-left: 10px; margin-top: 20px;'>");
             out.println("                             Message:<br>");
-            out.println("                             <input id='message' type='textarea' maxlength='250' style='height: 100px; width: 240px;'>");
+            out.println("                             <textarea rows='6' cols='30' maxlength='250' name='message' style='height=100px; width=240px'></textarea>"); // <input id='message' type='text' maxlength='250' style='height: 100px; width: 240px;'>");
             out.println("                         </div>");
             out.println("                         <div style='margin-left: 10px; margin-top: 20px;'>");
             out.println("                             E-mail:<br>");
