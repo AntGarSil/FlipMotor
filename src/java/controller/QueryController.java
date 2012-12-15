@@ -80,16 +80,17 @@ public class QueryController extends HttpServlet {
     
     String opt = request.getParameter("opt");
     List<Vehicleadvert> res = new ArrayList<Vehicleadvert>();
+    VehicleadvertJpaController vehiclejpa = new VehicleadvertJpaController();    
     
     if(opt.equals("General"))
     {
-        res = Common.getAllAdverts();
+        res = vehiclejpa.findVehicleadvertEntities();
     }
     if(opt.equals("Cars")){
-        res = Common.getCars();
+        res = vehiclejpa.findByVehicle("Car");
     }
     if(opt.equals("Motorbikes")){
-        res = Common.getMotorbikes();
+        res = vehiclejpa.findByVehicle("Motorbike");
     }
     
 

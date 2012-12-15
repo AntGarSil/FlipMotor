@@ -26,6 +26,7 @@ import javax.annotation.Resource;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.transaction.UserTransaction;
 
@@ -342,6 +343,44 @@ public class VehicleadvertJpaController implements Serializable {
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
+            em.close();
+        }
+    }
+    
+    public List findWithBrand(String Brand)
+    {
+        EntityManager em = getEntityManager();
+        try{        
+        String jpql = "SELECT a FROM Vehicleadvert a WHERE a.brand LIKE :BrandName";
+
+        Query consulta = em.createQuery(jpql);
+        consulta.setParameter("BrandName", Brand);
+
+        return consulta.getResultList();
+        }finally{
+            em.close();
+        }
+    }
+    
+    @PersistenceContext
+    public List<Vehicleadvert> findByVehicle(String vehicle)
+    {
+        EntityManager em = getEntityManager();
+        
+        try{        
+        String jpql = "SELECT v FROM Vehicleadvert v WHERE v.vehicle = :vehicle";
+
+        Query consulta = em.createQuery(jpql);
+        consulta.setParameter("vehicle", vehicle);
+        //List list = consulta.getSingleResult();
+        List<Vehicleadvert> resultset = new ArrayList<Vehicleadvert>();
+        
+        resultset = (List<Vehicleadvert>) consulta.getResultList();
+        
+        return resultset;
+        }catch(Exception e){
+            return null;
+        }finally{
             em.close();
         }
     }
