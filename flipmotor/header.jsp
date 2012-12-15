@@ -160,7 +160,7 @@
                         <img alt="Close" id="closeLoginPopup" src="images/gtk-close.png" class="closeButton"/>
                         <div class="loginHeaderText">Log In </div>
 
-                        <form action="LoginController" method="POST">
+                        <form action="Login" method="POST">
                             <span class="loginBodyText"><b>User: </b></span>
                             <input class="roundBox" type="text" name="username"/>
 
