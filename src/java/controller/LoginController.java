@@ -5,7 +5,6 @@
 package controller;
 
 import Flipmotor.Entities.Registeredclient;
-import controller.Utils.Common;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -48,7 +47,7 @@ public class LoginController extends HttpServlet {
             RegisteredclientJpaController userJPA = new RegisteredclientJpaController();
             
             //Generate ID for the given name-password pair
-            int userid = Common.generateUserID(req_name);
+            //int userid = Common.generateUserID(req_name);
                         
             //Check if the ID is in the database
             Registeredclient user = new Registeredclient();            

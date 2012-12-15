@@ -178,7 +178,17 @@ public class ControllerServlet extends HttpServlet {
 	}else if (userPath.equals("/PaymentAction")) {
             // TODO: Implement motorbike page request
             userPath = "/PaymentController";
+	}else if (userPath.equals("/SendMessage")) {
+            // TODO: Implement motorbike page request
+            userPath = "/MessageSenderController";
+	}else if (userPath.equals("/DeleteMessage")) {
+            // TODO: Implement motorbike page request
+            userPath = "/MessageDeleteController";
+	}else if (userPath.equals("/Login")) {
+            // TODO: Implement motorbike page request
+            userPath = "/LoginController";
 	}
+        
 
         // use RequestDispatcher to forward request internally
         String url = userPath;

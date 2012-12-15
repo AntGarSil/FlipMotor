@@ -413,7 +413,7 @@ public class RegisteredclientJpaController implements Serializable {
         Query consulta = em.createQuery(jpql);
         consulta.setParameter("email", email);
         //List list = consulta.getSingleResult();
-        Registeredclient entity = (Registeredclient) consulta.getSingleResult();
+        Registeredclient entity =  (Registeredclient) consulta.getSingleResult();
         
         return entity;
         }catch(Exception e){
