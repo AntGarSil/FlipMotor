@@ -26,6 +26,7 @@ import javax.annotation.Resource;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.transaction.UserTransaction;
 
@@ -397,6 +398,27 @@ public class RegisteredclientJpaController implements Serializable {
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
+            em.close();
+        }
+    }
+    
+    @PersistenceContext
+    public Registeredclient getRegisteredclientByEmail(String email)
+    {
+        EntityManager em = getEntityManager();
+        
+        try{        
+        String jpql = "SELECT r FROM Registeredclient r WHERE r.email = :email";
+
+        Query consulta = em.createQuery(jpql);
+        consulta.setParameter("email", email);
+        //List list = consulta.getSingleResult();
+        Registeredclient entity = (Registeredclient) consulta.getSingleResult();
+        
+        return entity;
+        }catch(Exception e){
+            return null;
+        }finally{
             em.close();
         }
     }

@@ -52,7 +52,10 @@ public class LoginController extends HttpServlet {
                         
             //Check if the ID is in the database
             Registeredclient user = new Registeredclient();            
-            user = userJPA.findRegisteredclient(userid);
+            //user = userJPA.findRegisteredclient(userid);
+            
+            //Hardcoded user due to unexistance of queries
+            user = userJPA.getRegisteredclientByEmail(req_name);
             
                        
             if(null != user && user.getPasswor().equals(req_pass)){
@@ -60,7 +63,7 @@ public class LoginController extends HttpServlet {
                 //Log in will expire every 20 minutes
                 session.setMaxInactiveInterval(20 * 60);
                 //Store user credential
-                session.setAttribute("userid", userid);
+                session.setAttribute("userid", user.getClientID());
             }else{
                 // SHOW WRONG LOGIN INPUT MESSAGE
                 System.out.println("error");
