@@ -123,7 +123,7 @@
                         
                         
                         
-        <div id="advSearchBox" style="width:750px; height: 270px; border: 2px solid grey; padding: 10px; margin-top: 10px; background-image: url('images/seamlesstexture1_1200.jpg');
+        <div id="advSearchBox" style="width:750px; height: 265px; border: 2px solid grey; padding: 10px; margin-top: 10px; background-image: url('images/seamlesstexture1_1200.jpg');
          -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; margin:auto; display: none; z-index: 100; position: relative; left: -280px; top: 30px;">
             <form id="advSearch" method="get" action="AdvancedSearch">
             <div id="leftAdv" style="float:left; width: 40%;">
