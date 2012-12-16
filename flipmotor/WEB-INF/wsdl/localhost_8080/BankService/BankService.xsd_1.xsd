@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.2.0-1 (tags/2.2.0u1-7139; 2012-06-02T10:55:19+0000) JAXWS-RI/2.2.6-2 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://FlipServiceImplementation/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://FlipServiceImplementation/">
+
+<xs:element name="sendTransactionalInformation" type="tns:sendTransactionalInformation"/>
+
+<xs:element name="sendTransactionalInformationResponse" type="tns:sendTransactionalInformationResponse"/>
+
+<xs:element name="validateCreditCard" type="tns:validateCreditCard"/>
+
+<xs:element name="validateCreditCardResponse" type="tns:validateCreditCardResponse"/>
+
+<xs:complexType name="validateCreditCard">
+<xs:sequence>
+<xs:element name="creditCard" type="xs:string" minOccurs="0"/>
+<xs:element name="expireMonth" type="xs:int"/>
+<xs:element name="expireYear" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="validateCreditCardResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendTransactionalInformation">
+<xs:sequence>
+<xs:element name="code" type="xs:int"/>
+<xs:element name="clientID" type="xs:int"/>
+<xs:element name="price" type="xs:int"/>
+<xs:element name="advertID" type="xs:int"/>
+<xs:element name="type" type="xs:int"/>
+<xs:element name="creditcard" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendTransactionalInformationResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

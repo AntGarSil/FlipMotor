@@ -1,0 +1,35 @@
+table.exterior {
+  background-color:aliceblue;
+  vertical-align: middle;
+  text-align:center;
+  width:100%;
+  height:100%;
+ }
+
+table.interior {
+  background-color:aliceblue;
+  border-spacing:10px;
+  vertical-align: center;
+  margin-right: auto; 
+  margin-left:auto;
+ }
+ 
+th {
+  border-style:solid;
+  border-width:1px;
+  background-color:aquamarine;
+  text-align:center;
+  font-size:25px;
+  padding:10px;
+ }
+ 
+td.tittle {
+  padding:4px;
+  text-align:right;
+  color:blue;
+ }
+ 
+td.content {
+  padding:4px;
+  text-align:left;
+ }
