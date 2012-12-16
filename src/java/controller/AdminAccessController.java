@@ -5,20 +5,14 @@
 package controller;
 
 import model.Entities.Administrato;
-import model.Entities.Registeredclient;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.model.AdministratoJpaController;
-import model.model.RegisteredclientJpaController;
-import model.model.exceptions.PreexistingEntityException;
-import model.model.exceptions.RollbackFailureException;
 import java.util.List;
 
 /**
@@ -56,9 +50,9 @@ public class AdminAccessController extends HttpServlet {
                 AdministratoJpaController adminJPA = new AdministratoJpaController();
                 
                 //Check if the ID is in the database
-                List<Administrato> adminList = adminJPA.findAdministratoByName(req_name);
+                Administrato admin = adminJPA.findAdministratoByName(req_name);
                 
-                Administrato admin = (Administrato) adminList.get(0);
+                //Administrato admin = adminList.get(0);
 
                 if(null != admin && admin.getPasswor().equals(req_pass)){
                     //Log in will expire every 20 minutes
@@ -75,6 +69,8 @@ public class AdminAccessController extends HttpServlet {
                 session.invalidate();
                 request.getRequestDispatcher("/Home").forward(request, response);
             }  
+        }catch(Exception e){
+            e.printStackTrace();
         } finally {            
             out.close();
         }

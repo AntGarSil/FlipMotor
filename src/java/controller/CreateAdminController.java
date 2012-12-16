@@ -45,9 +45,9 @@ public class CreateAdminController extends HttpServlet {
             String admin_email = request.getParameter("email");
             
             AdministratoJpaController adminJPA = new AdministratoJpaController();
-            List<Administrato> existAdmin = adminJPA.findAdministratoByName(admin_user);
+            Administrato existAdmin = adminJPA.findAdministratoByName(admin_user);
 
-            if(!existAdmin.isEmpty())
+            if(null != existAdmin)
             {
                 System.out.println("CREATING ADMIN");
                 request.getRequestDispatcher("/adminRegistrationError.jsp").forward(request, response);
