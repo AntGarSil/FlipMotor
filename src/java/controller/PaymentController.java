@@ -10,6 +10,10 @@ import model.model.ConciliationJpaController;
 import model.model.RegisteredclientJpaController;
 import model.model.exceptions.PreexistingEntityException;
 import model.model.exceptions.RollbackFailureException;
+import WebServiceClient.BankService_Service;
+import WebServiceClient.ObjectFactory;
+import WebServiceClient.ValidateCreditCard;
+import WebServiceClient.ValidateCreditCardResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -20,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.WebServiceClient;
 
 /**
  *
@@ -64,16 +69,32 @@ public class PaymentController extends HttpServlet {
             
             
            String card = request.getParameter("card");
-            String month= request.getParameter("cboExpMonth");
-            String year=request.getParameter("cboExpYear");
+            String m= request.getParameter("cboExpMonth");
+            int month=Integer.valueOf(m);
+            String y=request.getParameter("cboExpYear");
+            int year=Integer.valueOf(y);
+            
             
             //int PK = Common.generateUserID(email);
-            int code=1;//value we should get frmo the web service
+            BankService_Service bs= new BankService_Service();
+            ObjectFactory of=new ObjectFactory();
+            ValidateCreditCard vc=of.createValidateCreditCard();
+            vc.setCreditCard(card);
+            vc.setExpireMonth(month);
+            vc.setExpireYear(year);
+            ValidateCreditCardResponse vcr=of.createValidateCreditCardResponse();
+            //int code=vcr.getReturn();
+            int code=1;
+            out.println("code: "+code);
             Date date=new Date();
             //int price=10;
             //(Integer code, Date tdate, int price, long creditcard)
-            Conciliation newConci = new Conciliation(code,date,price,Long.valueOf(card));
-            newConci.setClientID(user);
+            Conciliation newConci=null;
+            if(code>0)
+            {
+                newConci = new Conciliation(code,date,price,Long.valueOf(card));
+                newConci.setClientID(user);
+            }
             response.setContentType("text/html");
             request.getRequestDispatcher("/header.jsp").include(request, response); 
             
@@ -117,7 +138,8 @@ public class PaymentController extends HttpServlet {
             
                 
     request.getRequestDispatcher("/footer.jsp").include(request, response); 
-            
+     if(code>0) 
+     {
            try {
                 int count = conciJPA.getConciliationCount();
                 conciJPA.create(newConci);
@@ -131,7 +153,7 @@ public class PaymentController extends HttpServlet {
             } catch (Exception ex) {
                 Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
             }       
-            
+     }  
         } finally {            
             out.close();
         }
