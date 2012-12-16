@@ -2,4 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="file:/home/tiw/Escritorio/Project/build/generated-sources/jax-ws/resources/BankService.wsdl" uri="conf/xml-resources/web-service-references/BankService/wsdl/BankService.wsdl"/>
     <system systemId="file:/home/tiw/Escritorio/Project/build/generated-sources/jax-ws/resources/BankService_schema1.xsd" uri="conf/xml-resources/web-service-references/BankService/wsdl/BankService_schema1.xsd"/>
+    <system systemId="http://localhost:8080/BankService/BankService?wsdl" uri="src/conf/xml-resources/web-service-references/BankService/wsdl/localhost_8080/BankService/BankService.wsdl"/>
+    <system systemId="http://localhost:8080/BankService/BankService?xsd=1" uri="src/conf/xml-resources/web-service-references/BankService/wsdl/localhost_8080/BankService/BankService.xsd_1.xsd"/>
 </catalog>
