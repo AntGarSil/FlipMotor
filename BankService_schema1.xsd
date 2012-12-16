@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://BankService/" xmlns:tns="http://BankService/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="validateCreditCard" type="tns:validateCreditCard"/>
+
+  <xs:element name="validateCreditCardResponse" type="tns:validateCreditCardResponse"/>
+
+  <xs:complexType name="validateCreditCard">
+    <xs:sequence>
+      <xs:element name="creditCard" type="xs:string" minOccurs="0"/>
+      <xs:element name="expireMonth" type="xs:int"/>
+      <xs:element name="expireYear" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="validateCreditCardResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

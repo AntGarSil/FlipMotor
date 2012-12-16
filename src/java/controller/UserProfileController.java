@@ -295,7 +295,9 @@ public class UserProfileController extends HttpServlet {
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             //MESSAGES
             ////////////////////////////////////////////////////////////////////////////////////////////////////
+
             out.println("            <div id='tabs-3' class='tabs-1' style='overflow:auto; height:400px'> ");
+
             
             //msg.setIntProperty("SenderId", 0);
             //msg.setIntProperty("ReceiverId", 0);
@@ -311,6 +313,7 @@ public class UserProfileController extends HttpServlet {
             
             while (msg != null)
             {
+
                 
                 msglist.add(msg);                                
                 
@@ -337,6 +340,7 @@ public class UserProfileController extends HttpServlet {
                 
                 out.println("<form action='DeleteMessage' method='POST'>");
                 out.println("<div> Delete: <input type='checkbox' onclick='this.form.submit();' />    </div> ");
+
                 out.println("<input type='hidden' name='JMSMessageID' value='" + msg.getJMSTimestamp() +"'> ");
                 out.println("</form>");
                 if(isInbox)
@@ -346,6 +350,7 @@ public class UserProfileController extends HttpServlet {
                 out.println("</div>");
                 
                 out.println("<div id='modalReply" + msg.getJMSTimestamp() +"popup' class='modalReply'>");
+
                 out.println("<form action='SendMessage' method='POST'> ");
                 out.println("        <div style='margin-left: 10px; margin-top: 20px;'>");
                 out.println("                             <h2>Reply</h2>");
@@ -371,12 +376,14 @@ public class UserProfileController extends HttpServlet {
                 out.println("</div>");       
                 
                 out.println("<script type='text/javascript'> $(document).ready(function() { ");
+
                 out.println("     $('#modalReply" + msg.getJMSTimestamp() + "').click(function(e) {");
                 out.println("          $('#modalReply" + msg.getJMSTimestamp() + "popup').lightbox_me({");
                 out.println("         centered: true, ");
                 out.println("         //showOverlay: false,");
                 out.println("         onLoad: function() { ");
                 out.println("             $('#modalReply" + msg.getJMSTimestamp() + "popup').find('input:first').focus();");
+
                 out.println("             }");
                 out.println("         });");
                 out.println("     });");

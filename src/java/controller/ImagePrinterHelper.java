@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.model.VehicleadvertJpaController;
 
+
 /**
  *
  * @author root
@@ -61,12 +62,14 @@ public class ImagePrinterHelper extends HttpServlet {
                 } else{                    
                     throw new Exception ("Something funky going on with your session");
                 }
+
                 
                 VehicleadvertJpaController vehicleJPA = new VehicleadvertJpaController();
                 if(vehicles.isEmpty())
                 {
                     vehicles.add(vehicleJPA.findVehicleadvert(num));
                 }
+
             
                 BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(vehicles.get(num).getImag()));
                 

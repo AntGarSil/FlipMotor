@@ -58,8 +58,8 @@ public class RegistrationController extends HttpServlet {
             String province = request.getParameter("province");
             
 
-            
             Registeredclient existClient = userJPA.getRegisteredclientByEmail(email);
+
             if(null != existClient)
             {
                 request.getRequestDispatcher("/RegisterError").forward(request, response);
@@ -70,6 +70,7 @@ public class RegistrationController extends HttpServlet {
                             long creditCard, String nationality, int pc,
                                     String city, String province, String street, int numbe,
                                             int flat, int fav, int anuncio)*/
+
             Registeredclient newClient = new Registeredclient(123,nif,Integer.valueOf(phone),
                     email, name, surname, password, "NA", Integer.valueOf(pc),
                     city, province, street, Integer.valueOf(number),Integer.valueOf(flat),
@@ -87,7 +88,9 @@ public class RegistrationController extends HttpServlet {
                 //Log in will expire every 20 minutes
                 session.setMaxInactiveInterval(20 * 60);
                 //Store user credential
+
                 session.setAttribute("userid", count);
+
                 request.getRequestDispatcher("/UserProfile").forward(request, response);
                 
             } catch (PreexistingEntityException ex) {

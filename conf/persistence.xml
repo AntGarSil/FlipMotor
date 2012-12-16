@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="ProjectPU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>flipmotor2</jta-data-source>
+    <class>model.Entities.Administrato</class>
+    <class>model.Entities.Businessadvert</class>
+    <class>model.Entities.Conciliation</class>
+    <class>model.Entities.Fav</class>
+    <class>model.Entities.Offer</class>
+    <class>model.Entities.Registeredclient</class>
+    <class>model.Entities.Statistics</class>
+    <class>model.Entities.Vehicleadvert</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+      <property name="eclipselink.ddl-generation" value="create-tables"/>
+    </properties>
+  </persistence-unit>
+</persistence>

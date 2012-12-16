@@ -6,8 +6,7 @@
 package controller;
 
 
-//import controller.ServiceImplementation.BankService;
-//import controller.ServiceImplementation.BankService_Service;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,7 +58,7 @@ public class ControllerServlet extends HttpServlet {
     throws ServletException, IOException {
 
         String userPath = request.getServletPath();
-        
+
         /**
          * SAMPLE CODE
          */

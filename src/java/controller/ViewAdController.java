@@ -130,6 +130,7 @@ public class ViewAdController extends HttpServlet {
             out.println("                 <div id='footBar' style='width:100%; height:auto;'>");
             out.println("                 </div>");
             out.println("             </div> ");
+
             
             if(hasSession)
             {
@@ -163,6 +164,7 @@ public class ViewAdController extends HttpServlet {
             }
             out.println(" </div>");
             
+
            request.getRequestDispatcher("/footer.jsp").include(request, response); 
              
         } finally {            

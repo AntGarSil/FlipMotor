@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/home/tiw/Escritorio/Project/build/generated-sources/jax-ws/resources/BankService.wsdl" uri="conf/xml-resources/web-service-references/BankService/wsdl/BankService.wsdl"/>
+    <system systemId="file:/home/tiw/Escritorio/Project/build/generated-sources/jax-ws/resources/BankService_schema1.xsd" uri="conf/xml-resources/web-service-references/BankService/wsdl/BankService_schema1.xsd"/>
+</catalog>

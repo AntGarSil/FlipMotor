@@ -66,6 +66,7 @@ public class MessageSenderController extends HttpServlet {
             sender.send(msg);
             sender.disconnect();
             request.getRequestDispatcher("/UserProfile").forward(request, response);
+
             
         } catch (JMSException ex) {
             Logger.getLogger(MessageSenderController.class.getName()).log(Level.SEVERE, null, ex);
