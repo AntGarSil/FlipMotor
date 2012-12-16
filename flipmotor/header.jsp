@@ -123,50 +123,56 @@
                         
                         
                         
-        <div id="advSearchBox" style="width:750px; height: 120px; border: 2px solid grey; padding: 10px; margin-top: 10px; background-image: url('images/seamlesstexture1_1200.jpg');
+        <div id="advSearchBox" style="width:750px; height: 270px; border: 2px solid grey; padding: 10px; margin-top: 10px; background-image: url('images/seamlesstexture1_1200.jpg');
          -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; margin:auto; display: none; z-index: 100; position: relative; left: -280px; top: 30px;">
             <form id="advSearch" method="get" action="AdvancedSearch">
             <div id="leftAdv" style="float:left; width: 40%;">
                 <input type="hidden" id="opt" name="opt" value="Advanced">
                 <label for="brand">Brand: </label><input name="brand" type="text"><br>
                 <label for="model">Model: </label><input name="model" type="text"><br>
-                <label for="vehicle">Type: </label>
+                <label for="region">Region: </label><input name="region" type="text"><br>
+                Type:
                 <select id="vehicle" name="vehicle">
                         <option value="car">Car</option>
                         <option value="motorbike">Motorbike</option>
                 </select>
-                <br>
-                <label for="color">Color: </label>
+                Color:
                 <select id="color" name="color">
                         <option value="red">Red</option>
-                        <option value="red">Blue</option>
-                        <option value="red">Green</option>
-                        <option value="red">Black</option>
-                        <option value="red">White</option>
-                        <option value="red">Yellow</option>
-                        <option value="red">Orange</option>
-                        <option value="red">Purple</option>
+                        <option value="blue">Blue</option>
+                        <option value="green">Green</option>
+                        <option value="black">Black</option>
+                        <option value="white">White</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="orange">Orange</option>
+                        <option value="purple">Purple</option>
                 </select>
+                
+                
             </div>
             <div id="leftAdv" style="float:left; width: 50%; margin-left: 10px;">
-                <label for="price">Price: </label><input type="text" id="price">
-                        <div id="price-range" style="width:100px; display: inline-block; margin-left: 10px; vertical-align: bottom;"></div>
-                        <br>
-                        <label for="year">Year: </label><input type="text" id="year">
-                        <div id="year-range" style="width:100px; display: inline-block; margin-left: 10px; vertical-align: bottom;"></div><br>
-                        <label for="km">Km </label><input type="text" id="km">
-                        <div id="km-range" style="width:100px; display: inline-block; margin-left: 10px; vertical-align: bottom;"></div><br>
-                        <label for="postDate">Post Date: </label>
-                        <select id="beforeAfter" name="beforeAfter">
-                                <option value="after">After</option>
-                                <option value="before">Before</option>
-                        </select>
-                        <input id="postDate" name="postDate">
+                Min Price: <input type="text" name="minprice" style="width: 70px;">
+                Max Price: <input type="text" name="maxprice" style="width: 70px;">
+                <br>
+
+                Min Year: <input type="text" name="minyear" style="width: 70px;">
+                Max Year: <input type="text" name="maxyear" style="width: 70px;">
+
+                <br>
+                Min km: <input type="text" name="minkm" style="width: 70px;">
+                Max km: <input type="text" name="maxkm" style="width: 70px;">
+                <br>
+                Post Date: 
+                <select id="beforeAfter" name="beforeAfter">
+                        <option value="after">After</option>
+                        <option value="before">Before</option>
+                </select>
+                <input id="postDate" name="postDate">
             </div>
             <div id="advSearchSubmit" style="float:left; width: 100%; margin-top: 10px;">
                 <input type="submit" value="Search" style="margin-left: auto; margin-right: auto; display:inline-block;">
                 <input type="button" id="closeSearchButton" value="Close Box" style="margin-right: 20px;">
-            </div>1
+            </div>
             </form>
         </div>
                         

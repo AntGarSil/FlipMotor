@@ -246,6 +246,7 @@
         <url-pattern>/SendMessage</url-pattern>
         <url-pattern>/DeleteMessage</url-pattern>
         <url-pattern>/Login</url-pattern>   
+        <url-pattern>/AdvancedSearch</url-pattern>   
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PaymentController</servlet-name>

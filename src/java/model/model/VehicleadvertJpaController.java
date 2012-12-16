@@ -354,6 +354,128 @@ public class VehicleadvertJpaController implements Serializable {
         Query q = em.createQuery(jpql);
         return q.getResultList();
     }
+    
+    @PersistenceContext
+    public List findAll(String brand, String model, String color, String vehicle, String region, String minprice, String maxprice,String maxkm, String minkm, String maxyear, String minyear, String postDate, String beforeAfter){	
+	EntityManager em = getEntityManager();
+         boolean other = false;
+        
+        String jpql = "SELECT a FROM Vehicleadvert a WHERE a.state LIKE 'Validated' AND ";
+        if(!brand.trim().equalsIgnoreCase("")){
+            jpql+=" a.brand LIKE '"+brand+"'";
+            other = true;
+        }
+        if(!model.trim().equalsIgnoreCase("")){
+            if(other){
+                jpql+=" AND ";
+            }
+            jpql+=" a.modelV LIKE '"+model+"' ";
+            other = true;
+        }
+        if(vehicle!=null){
+            if(other){
+                jpql+=" AND ";
+            }
+            jpql+=" a.vehicle LIKE '"+vehicle+"' ";
+            other = true;
+        }
+        if(!region.trim().equalsIgnoreCase("")){
+            if(other){
+                jpql+=" AND ";
+            }
+            jpql+=" a.region LIKE '"+region+"' ";
+            other = true;
+        }
+        if(!color.trim().equalsIgnoreCase("")){
+            if(other){
+                jpql+=" AND ";
+            }
+            jpql+=" a.color LIKE '"+color+"' ";
+            other = true;
+        }
+       
+        if(!minprice.trim().equalsIgnoreCase("")){
+           if(other){
+                jpql+=" AND ";
+            } 
+           jpql+=" a.price >= "+minprice;
+           other = true;
+        }
+        if(!maxprice.trim().equalsIgnoreCase("")){
+            if(other){
+                jpql+=" AND ";
+            } 
+           jpql+=" a.price <= "+maxprice;
+           other = true;
+        }
+        
+        if(!minyear.trim().equalsIgnoreCase("")){
+            if(other){
+                jpql+=" AND ";
+            } 
+           jpql+=" a.yearV >= "+minyear;
+           other = true;
+        }
+        if(!maxyear.trim().equalsIgnoreCase("")){
+            if(other){
+                jpql+=" AND ";
+            } 
+           jpql+=" a.yearV <= "+maxyear;
+           other = true;
+        }
+       
+        if(!minkm.trim().equalsIgnoreCase("")){
+            if(other){
+                jpql+=" AND ";
+            } 
+           jpql+=" a.km >= "+minkm;
+           other = true;
+        }
+        if(!maxkm.trim().equalsIgnoreCase("")){
+            if(other){
+                jpql+=" AND ";
+            } 
+           jpql+=" a.km <= "+maxkm;
+           other = true;
+        }
+        
+        if(!postDate.trim().equalsIgnoreCase("")){
+            String aux = postDate.substring(6) +"-"+ postDate.substring(0,2) +"-"+postDate.substring(3,5);
+            postDate = aux;
+            if(other){
+                jpql+=" AND ";
+            }       
+
+           jpql+=postDate+"'";
+           other = true;
+        } 
+        System.out.println(jpql);
+	Query consultaV = em.createQuery(jpql);
+	return consultaV.getResultList();
+}
+    
+        public List<Vehicleadvert> findByClient(Registeredclient client)
+    {
+        EntityManager em = getEntityManager();
+        
+        try{        
+        String jpql = "SELECT v FROM Vehicleadvert v WHERE v.clientID = :client";
+
+        Query consulta = em.createQuery(jpql);
+        consulta.setParameter("client", client);
+        //List list = consulta.getSingleResult();
+        List<Vehicleadvert> resultset = new ArrayList<Vehicleadvert>();
+        
+        resultset = (List<Vehicleadvert>) consulta.getResultList();
+        
+        return resultset;
+        }catch(Exception e){
+            return null;
+        }finally{
+            em.close();
+           }
+    }
+        
     public List<Vehicleadvert> findByVehicle(String vehicle)
     {
         EntityManager em = getEntityManager();
@@ -375,28 +497,4 @@ public class VehicleadvertJpaController implements Serializable {
             em.close();
         }
     }
-    
-
-    public List<Vehicleadvert> findByClient(Registeredclient client)
-    {
-        EntityManager em = getEntityManager();
-        
-        try{        
-        String jpql = "SELECT v FROM Vehicleadvert v WHERE v.clientID = :client";
-
-        Query consulta = em.createQuery(jpql);
-        consulta.setParameter("client", client);
-        //List list = consulta.getSingleResult();
-        List<Vehicleadvert> resultset = new ArrayList<Vehicleadvert>();
-        
-        resultset = (List<Vehicleadvert>) consulta.getResultList();
-        
-        return resultset;
-        }catch(Exception e){
-            return null;
-        }finally{
-            em.close();
-        }
-    }
-    
 }

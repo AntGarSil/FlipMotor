@@ -7,8 +7,10 @@ package controller;
 import model.Entities.Vehicleadvert;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -87,6 +89,35 @@ public class QueryController extends HttpServlet {
     if(opt.equals("Motorbikes")){
         res = vehiclejpa.findByVehicle("Motorbike");
     }
+    if(opt.equals("Advanced")){
+        String brand = request.getParameter("brand");
+        String model = request.getParameter("model");
+        String vehicle = request.getParameter("vehicle");
+        String region = request.getParameter("region");
+        String color = request.getParameter("color");
+        String minprice = request.getParameter("minprice");
+        String maxprice = request.getParameter("maxprice");
+        String minyear = request.getParameter("minyear");
+        String maxyear = request.getParameter("maxyear");
+        String minkm = request.getParameter("minkm");
+        String maxkm = request.getParameter("maxkm");
+        String postDate = request.getParameter("postDate");
+        String beforeAfter = request.getParameter("beforeAfter");
+        
+        System.out.println("Brand: "+brand);
+        System.out.println("Model: "+model);
+        System.out.println("Vehicle: "+vehicle);
+        System.out.println("Color: "+color);
+        System.out.println("Minprice: "+minprice);
+        System.out.println("Maxp: "+maxprice);
+        System.out.println("MinY: "+minyear);
+        System.out.println("MaxY: "+maxyear);
+        System.out.println("Minkm: "+minkm);
+        System.out.println("Maxkm: "+maxkm);
+        System.out.println("Post: "+postDate);
+        System.out.println("When: "+beforeAfter);
+        res = vehiclejpa.findAll(brand, model, color, vehicle,region, minprice, maxprice, maxkm, minkm, maxyear, minyear, postDate, beforeAfter);
+    }
     
 
     HttpSession session = request.getSession(true);
@@ -100,7 +131,7 @@ public class QueryController extends HttpServlet {
     for(int i = 0; i < res.size(); i++)
     {
         
-        Vehicleadvert entity = res.get(i);
+        Vehicleadvert entity = (Vehicleadvert) res.get(i);
 
         out.println("                        <tr><td style='width:199px;'>" + entity.getPublicationDate() + "</td><td style='width:62px;'><iframe width='100' height='100' frameBorder='0' src='ImagePrinterHelper?height=80&width=80&num=" + i +"'></iframe></td><td style='width:200px;'>" + entity.getBrand() +"</td><td style='width:201px;'>" + entity.getState() +"</td><td style='width:52px;'>" + entity.getYearV() +"</td><td style='width:102px;'>" + entity.getPrice() +" $</td><td style='width:66px;'><form id='ad_id' action='Advert' method='GET' ><input type='hidden' name='code' value='" + entity.getCode() + "'/><input type='hidden' name='num' value='" + i + "'/><input type='submit' id='visitAd1' value='Visit AD'></form></td></tr> ");    
     }
