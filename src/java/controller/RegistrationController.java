@@ -56,6 +56,8 @@ public class RegistrationController extends HttpServlet {
             String pc = request.getParameter("pc");
             String leter = request.getParameter("leter");
             String province = request.getParameter("province");
+            String nationality = request.getParameter("nationality");
+            
             
 
             Registeredclient existClient = userJPA.getRegisteredclientByEmail(email);
@@ -72,7 +74,7 @@ public class RegistrationController extends HttpServlet {
                                             int flat, int fav, int anuncio)*/
 
             Registeredclient newClient = new Registeredclient(123,nif,Integer.valueOf(phone),
-                    email, name, surname, password, "NA", Integer.valueOf(pc),
+                    email, name, surname, password, nationality , Integer.valueOf(pc),
                     city, province, street, Integer.valueOf(number),Integer.valueOf(flat),
                     -1);
             newClient.setLeter(leter.charAt(0));
