@@ -4,9 +4,9 @@
  */
 package controller;
 
-import Flipmotor.Entities.Fav;
-import Flipmotor.Entities.Registeredclient;
-import Flipmotor.Entities.Vehicleadvert;
+import model.Entities.Fav;
+import model.Entities.Registeredclient;
+import model.Entities.Vehicleadvert;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import Flipmotor.model.FavJpaController;
-import Flipmotor.model.RegisteredclientJpaController;
-import Flipmotor.model.VehicleadvertJpaController;
-import Flipmotor.model.exceptions.PreexistingEntityException;
-import Flipmotor.model.exceptions.RollbackFailureException;
+import model.model.FavJpaController;
+import model.model.RegisteredclientJpaController;
+import model.model.VehicleadvertJpaController;
+import model.model.exceptions.PreexistingEntityException;
+import model.model.exceptions.RollbackFailureException;
 import java.util.List;
 
 /**

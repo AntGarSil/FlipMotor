@@ -4,13 +4,12 @@
  */
 package controller;
 
-import Flipmotor.model.VehicleadvertJpaController;
+import model.model.VehicleadvertJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.JMSException;
-import javax.jms.MapMessage;
 import javax.jms.TextMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

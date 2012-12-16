@@ -33,11 +33,15 @@ import javax.servlet.http.HttpServletResponse;
                            "/EditProfile",
                            "/UserProfile",
                            "/RegisterError",
-                           "/ViewAdController",
+                           //"/ViewAdController",
                            "/ReceiptAction",
                            "/DetailsAction",
                            "/PaymentAction",
-                           "/MakeFavourite"
+                           "/MakeFavourite",
+                           "/Login",
+                           "/DeleteMessage",
+                           "/SendMessage",
+                           "/LoginController"
                            })
 public class ControllerServlet extends HttpServlet {
 

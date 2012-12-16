@@ -9,6 +9,7 @@ package jms;
  * @author root
  */
 
+import java.util.Enumeration;
 import javax.jms.*;
 
 public class MessageReceiver {
@@ -30,8 +31,20 @@ public Message receive(){
   return getMessageConnection().receive(1);
 }
 
+public Message browseMessagesById(int id){    
+  return getMessageConnection().findByIntProperty("SenderId", id);
+}
+
+public Enumeration<Message> getBrowseMessages(){    
+  return getMessageConnection().getMessageEnumeration();
+}
+
 public void connect() {
-  getMessageConnection().getConsumer();
+  getMessageConnection().getConsumerSync();
+}
+
+public void connect(String selector) {
+  getMessageConnection().getConsumerSync(selector);
 }
 
 public void disconnect()  {

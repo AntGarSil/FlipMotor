@@ -41,7 +41,7 @@ public void send(Message message){
 
 
 public void connect(){
-  getJMSConnectionFactory().getProducer();
+  getJMSConnectionFactory().getProducerSync();
 }
 
 

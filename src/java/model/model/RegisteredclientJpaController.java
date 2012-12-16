@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Flipmotor.model;
+package model.model;
 
-import Flipmotor.Entities.Registeredclient;
-import Flipmotor.model.exceptions.IllegalOrphanException;
-import Flipmotor.model.exceptions.NonexistentEntityException;
-import Flipmotor.model.exceptions.RollbackFailureException;
+import model.Entities.Registeredclient;
+import model.model.exceptions.IllegalOrphanException;
+import model.model.exceptions.NonexistentEntityException;
+import model.model.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -16,12 +16,12 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Flipmotor.Entities.Conciliation;
+import model.Entities.Conciliation;
 import java.util.ArrayList;
 import java.util.Collection;
-import Flipmotor.Entities.Fav;
-import Flipmotor.Entities.Vehicleadvert;
-import Flipmotor.Entities.Businessadvert;
+import model.Entities.Fav;
+import model.Entities.Vehicleadvert;
+import model.Entities.Businessadvert;
 import javax.annotation.Resource;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -402,7 +402,7 @@ public class RegisteredclientJpaController implements Serializable {
         }
     }
     
-    @PersistenceContext
+
     public Registeredclient getRegisteredclientByEmail(String email)
     {
         EntityManager em = getEntityManager();

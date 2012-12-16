@@ -1,4 +1,4 @@
-package Flipmotor.model.exceptions;
+package model.model.exceptions;
 
 public class PreexistingEntityException extends Exception {
     public PreexistingEntityException(String message, Throwable cause) {

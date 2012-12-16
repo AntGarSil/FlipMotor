@@ -1,4 +1,4 @@
-package Flipmotor.model.exceptions;
+package model.model.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

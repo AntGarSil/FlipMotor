@@ -4,12 +4,11 @@
  */
 package controller;
 
-import Flipmotor.Entities.Fav;
-import Flipmotor.Entities.Registeredclient;
-import Flipmotor.Entities.Vehicleadvert;
-import Flipmotor.model.FavJpaController;
-import Flipmotor.model.RegisteredclientJpaController;
-import controller.Utils.Common;
+import model.Entities.Fav;
+import model.Entities.Registeredclient;
+import model.Entities.Vehicleadvert;
+import model.model.FavJpaController;
+import model.model.RegisteredclientJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;

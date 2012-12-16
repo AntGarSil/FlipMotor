@@ -1,4 +1,4 @@
-package Flipmotor.model.exceptions;
+package model.model.exceptions;
 
 public class NonexistentEntityException extends Exception {
     public NonexistentEntityException(String message, Throwable cause) {

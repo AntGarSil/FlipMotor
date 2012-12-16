@@ -4,22 +4,17 @@
  */
 package controller;
 
-import Flipmotor.Entities.Vehicleadvert;
-import controller.Utils.Common;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import model.Entities.Vehicleadvert;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import Flipmotor.model.VehicleadvertJpaController;
+import model.model.VehicleadvertJpaController;
 
 /**
  *

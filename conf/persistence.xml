@@ -3,15 +3,15 @@
   <persistence-unit name="ProjectPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>flipmotor</jta-data-source>
-    <class>Flipmotor.Entities.Vehicleadvert</class>
-    <class>Flipmotor.Entities.Offer</class>
-    <class>Flipmotor.Entities.Administrato</class>
-    <class>Flipmotor.Entities.Fav</class>
-    <class>Flipmotor.Entities.Businessadvert</class>
-    <class>Flipmotor.Entities.Registeredclient</class>
-    <class>Flipmotor.Entities.Conciliation</class>
-    <class>Flipmotor.Entities.Statistics</class>
-    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <class>model.Entities.Administrato</class>
+    <class>model.Entities.Businessadvert</class>
+    <class>model.Entities.Conciliation</class>
+    <class>model.Entities.Fav</class>
+    <class>model.Entities.Offer</class>
+    <class>model.Entities.Registeredclient</class>
+    <class>model.Entities.Statistics</class>
+    <class>model.Entities.Vehicleadvert</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.ddl-generation" value="create-tables"/>
     </properties>

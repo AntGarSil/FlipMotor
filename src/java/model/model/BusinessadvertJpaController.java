@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Flipmotor.model;
+package model.model;
 
-import Flipmotor.Entities.Businessadvert;
-import Flipmotor.model.exceptions.NonexistentEntityException;
-import Flipmotor.model.exceptions.RollbackFailureException;
+import model.Entities.Businessadvert;
+import model.model.exceptions.NonexistentEntityException;
+import model.model.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,9 +15,9 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Flipmotor.Entities.Offer;
-import Flipmotor.Entities.Registeredclient;
-import Flipmotor.Entities.Conciliation;
+import model.Entities.Offer;
+import model.Entities.Registeredclient;
+import model.Entities.Conciliation;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.annotation.Resource;

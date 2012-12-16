@@ -6,9 +6,8 @@ package controller;
  */
 
 
-import Flipmotor.Entities.Registeredclient;
-import Flipmotor.Entities.Vehicleadvert;
-import controller.Utils.Common;
+import model.Entities.Registeredclient;
+import model.Entities.Vehicleadvert;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -19,7 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import Flipmotor.model.RegisteredclientJpaController;
+import model.model.RegisteredclientJpaController;
+import model.model.VehicleadvertJpaController;
 import java.util.ArrayList;
 import javax.jms.Message;
 import javax.jms.TextMessage;
@@ -272,8 +272,9 @@ public class UserProfileController extends HttpServlet {
             //////////////////                      ADD ADVERTISEMENTS                          //////////////
             //////////  LOOP FILLING IN SAMPLE <TR> BELOW
             //////////////////////////////////////////////////////////////////////////////////////////////////
-            List<Vehicleadvert> userads = Common.getAdvertsByClient(user.getClientID());
-            
+            //List<Vehicleadvert> userads = Common.getAdvertsByClient(user.getClientID());
+            VehicleadvertJpaController vehicleJPA = new VehicleadvertJpaController();
+            List<Vehicleadvert> userads = vehicleJPA.findByClient(user);
             
             //Store user credential
             session.setAttribute("vehicles", userads);
@@ -294,7 +295,7 @@ public class UserProfileController extends HttpServlet {
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             //MESSAGES
             ////////////////////////////////////////////////////////////////////////////////////////////////////
-            out.println("            <div id='tabs-3' class='tabs-1'> ");
+            out.println("            <div id='tabs-3' class='tabs-1' style='overflow:auto; height:500px'> ");
             
             //msg.setIntProperty("SenderId", 0);
             //msg.setIntProperty("ReceiverId", 0);
@@ -310,18 +311,61 @@ public class UserProfileController extends HttpServlet {
             
             while (msg != null)
             {
-                msglist.add(msg);
-                out.println("<form action='DeleteMessage' method='POST'>");
+                msglist.add(msg);                                
+                
                 out.println("<div style='border: 5px groove #98bf21; padding:3px; margin-top:10px'>");
                 out.println("<div> <b>From: </b>" + msg.getStringProperty("SenderName") +"     </div> ");
                 out.println("<div>" + msg.getStringProperty("SenderEmail") +"     </div> ");
                 out.println("<div>" + msg.getText() +"     </div> ");
                 out.println("<div><a href='Advert?code=" + msg.getIntProperty("VehicleAd") +"&num=" + msg.getIntProperty("num") +"'> Advertisement </a></div>");
+                
+                
+                
+                out.println("<form action='DeleteMessage' method='POST'>");
                 out.println("<div> Delete: <input type='checkbox' onclick='this.form.submit();' />    </div> ");
                 out.println("<input type='hidden' name='JMSMessageID' value='" + msg.getJMSMessageID() +"'> ");
-                out.println("</div>");
                 out.println("</form>");
+                out.println("<div style='margin-left:40%;'> <input type='button'id='modalReply" + msg.getJMSMessageID().substring(msg.getJMSMessageID().length() - 12, msg.getJMSMessageID().length()) +"' value='Reply'/></div>");
+                out.println("</div>");
                 
+                out.println("<div id='modalReply" + msg.getJMSMessageID().substring(msg.getJMSMessageID().length() - 12, msg.getJMSMessageID().length()) +"popup' class='modalReply'>");
+                out.println("<form action='SendMessage' method='POST'> ");
+                out.println("        <div style='margin-left: 10px; margin-top: 20px;'>");
+                out.println("                             <h2>Reply</h2>");
+                out.println("                             Name: <br>");
+                out.println("                             <input id='contactName' name='contactName' type='text'>");
+                out.println("                         </div>");
+                out.println("                         <div style='margin-left: 10px; margin-top: 20px;'>");
+                out.println("                             Message:<br>");
+                out.println("                             <textarea rows='6' cols='30' maxlength='250' name='message' style='height=100px; width=240px'></textarea>"); // <input id='message' type='text' maxlength='250' style='height: 100px; width: 240px;'>");
+                out.println("                         </div>");
+                out.println("                         <div style='margin-left: 10px; margin-top: 20px;'>");
+                out.println("                             E-mail:<br>");
+                out.println("                             <input id='contactEmail' name='contactEmail' type='text'>");
+                out.println("                         </div>");
+                out.println("                     <input type='hidden' name='senderID' value='" + uid + "'/> ");
+                out.println("                     <input type='hidden' name='vehicleID' value='" + msg.getIntProperty("VehicleAd") + "'/> ");
+                out.println("                     <input type='hidden' name='num' value='" + msg.getIntProperty("num") + "'/> ");
+                out.println("                     <input type='hidden' name='ReceiverID' value='" + msg.getIntProperty("SenderId") + "'/> ");
+                out.println("                         <div id='submitMessage' style='width: 100%; margin-top: 25px;'>");
+                out.println("                             <input id='submitMessageButton' type='Submit' value='Send Message' style='margin-left: auto; margin-right: auto; display:block;'>");
+                out.println("                         </div>");
+                out.println("</form>");
+                out.println("</div>");       
+                
+                out.println("<script type='text/javascript'> $(document).ready(function() { ");
+                out.println("     $('#modalReply" + msg.getJMSMessageID().substring(msg.getJMSMessageID().length() - 12, msg.getJMSMessageID().length()) + "').click(function(e) {");
+                out.println("          $('#modalReply" + msg.getJMSMessageID().substring(msg.getJMSMessageID().length() - 12, msg.getJMSMessageID().length()) +"popup').lightbox_me({");
+                out.println("         centered: true, ");
+                out.println("         //showOverlay: false,");
+                out.println("         onLoad: function() { ");
+                out.println("             $('#modalReply" + msg.getJMSMessageID().substring(msg.getJMSMessageID().length() - 12, msg.getJMSMessageID().length()) + "popup').find('input:first').focus();");
+                out.println("             }");
+                out.println("         });");
+                out.println("     });");
+                out.println("});</script>");
+                
+                                
                 msg = (TextMessage) receiver.receive();                
             }
             

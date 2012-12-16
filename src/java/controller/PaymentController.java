@@ -4,13 +4,12 @@
  */
 package controller;
 
-import Flipmotor.Entities.Conciliation;
-import Flipmotor.Entities.Registeredclient;
-import Flipmotor.model.ConciliationJpaController;
-import Flipmotor.model.RegisteredclientJpaController;
-import Flipmotor.model.exceptions.PreexistingEntityException;
-import Flipmotor.model.exceptions.RollbackFailureException;
-import controller.Utils.Common;
+import model.Entities.Conciliation;
+import model.Entities.Registeredclient;
+import model.model.ConciliationJpaController;
+import model.model.RegisteredclientJpaController;
+import model.model.exceptions.PreexistingEntityException;
+import model.model.exceptions.RollbackFailureException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;

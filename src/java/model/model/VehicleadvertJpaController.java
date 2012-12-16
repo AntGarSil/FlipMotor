@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Flipmotor.model;
+package model.model;
 
-import Flipmotor.Entities.Vehicleadvert;
-import Flipmotor.model.exceptions.IllegalOrphanException;
-import Flipmotor.model.exceptions.NonexistentEntityException;
-import Flipmotor.model.exceptions.RollbackFailureException;
+import model.Entities.Vehicleadvert;
+import model.model.exceptions.IllegalOrphanException;
+import model.model.exceptions.NonexistentEntityException;
+import model.model.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -16,12 +16,12 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Flipmotor.Entities.Offer;
-import Flipmotor.Entities.Registeredclient;
-import Flipmotor.Entities.Conciliation;
+import model.Entities.Offer;
+import model.Entities.Registeredclient;
+import model.Entities.Conciliation;
 import java.util.ArrayList;
 import java.util.Collection;
-import Flipmotor.Entities.Fav;
+import model.Entities.Fav;
 import javax.annotation.Resource;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -362,7 +362,7 @@ public class VehicleadvertJpaController implements Serializable {
         }
     }
     
-    @PersistenceContext
+
     public List<Vehicleadvert> findByVehicle(String vehicle)
     {
         EntityManager em = getEntityManager();
@@ -372,6 +372,29 @@ public class VehicleadvertJpaController implements Serializable {
 
         Query consulta = em.createQuery(jpql);
         consulta.setParameter("vehicle", vehicle);
+        //List list = consulta.getSingleResult();
+        List<Vehicleadvert> resultset = new ArrayList<Vehicleadvert>();
+        
+        resultset = (List<Vehicleadvert>) consulta.getResultList();
+        
+        return resultset;
+        }catch(Exception e){
+            return null;
+        }finally{
+            em.close();
+        }
+    }
+    
+
+    public List<Vehicleadvert> findByClient(Registeredclient client)
+    {
+        EntityManager em = getEntityManager();
+        
+        try{        
+        String jpql = "SELECT v FROM Vehicleadvert v WHERE v.clientID = :client";
+
+        Query consulta = em.createQuery(jpql);
+        consulta.setParameter("client", client);
         //List list = consulta.getSingleResult();
         List<Vehicleadvert> resultset = new ArrayList<Vehicleadvert>();
         

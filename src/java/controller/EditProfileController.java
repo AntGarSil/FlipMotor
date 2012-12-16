@@ -4,8 +4,7 @@
  */
 package controller;
 
-import Flipmotor.Entities.Registeredclient;
-import controller.Utils.Common;
+import model.Entities.Registeredclient;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import Flipmotor.model.RegisteredclientJpaController;
+import model.model.RegisteredclientJpaController;
 
 /**
  *

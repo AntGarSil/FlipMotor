@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Flipmotor.model;
+package model.model;
 
-import Flipmotor.Entities.Statistics;
-import Flipmotor.model.exceptions.NonexistentEntityException;
-import Flipmotor.model.exceptions.RollbackFailureException;
+import model.Entities.Statistics;
+import model.model.exceptions.NonexistentEntityException;
+import model.model.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Resource;

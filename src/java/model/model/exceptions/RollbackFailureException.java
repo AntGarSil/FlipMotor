@@ -1,4 +1,4 @@
-package Flipmotor.model.exceptions;
+package model.model.exceptions;
 
 public class RollbackFailureException extends Exception {
     public RollbackFailureException(String message, Throwable cause) {
