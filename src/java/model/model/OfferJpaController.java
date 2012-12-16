@@ -39,7 +39,10 @@ public class OfferJpaController implements Serializable {
         this.emf = emf;
     }
    @Resource private UserTransaction utx;
-    @PersistenceUnit private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectPU"); 
+    @PersistenceUnit private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectPU");
+
+    public OfferJpaController() {
+    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();

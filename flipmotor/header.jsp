@@ -45,9 +45,21 @@
 
                 <div id="headerContent" style="width: 100%; height:110px; ">
                     <div id="logo" style="float:left;width: 40%; height: 100%;">
-                        <form action="Home" method="POST">
-                            <input type="submit" class="headerText" id="headerText" value="FlipMotor">
-                        </form>
+                        <%
+                            if(session.getAttribute("adminid")!= null){
+                        %>
+                                <form action="AdminPage" method="POST">
+                                    <input type="submit" class="headerText" id="headerText" value="FlipMotor">
+                                </form>
+                        <%
+                            }else{
+                        %>
+                                <form action="Home" method="POST">
+                                    <input type="submit" class="headerText" id="headerText" value="FlipMotor">
+                                </form>
+                        <%
+                            }
+                        %>
                     </div>
                     
                     <div id="navigationBar" style="width: 60%; height: 100%; float:left;">
@@ -75,10 +87,14 @@
                         <%
                              } else if(null!= session.getAttribute("adminid")){
                         %>
-                            
                             <div id="postBox" style="float: right; margin-top: 40px; margin-right: 50px;">
                                 <form action="AdminLogOut" method="POST">
                                     <input type="submit" class="loginbutton" value="Log Out">
+                                </form>
+                            </div>
+                            <div id="adminBox" style="float: right; margin-top: 40px; margin-right: 50px;">
+                                <form action="AdminPage" method="POST">
+                                    <input type="submit" class="loginbutton" value="Admin Page">
                                 </form>
                             </div>
                         <%
@@ -109,8 +125,9 @@
                         
         <div id="advSearchBox" style="width:750px; height: 120px; border: 2px solid grey; padding: 10px; margin-top: 10px; background-image: url('images/seamlesstexture1_1200.jpg');
          -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; margin:auto; display: none; z-index: 100; position: relative; left: -280px; top: 30px;">
-            <form id="advSearch" method="get" action="Controller">
+            <form id="advSearch" method="get" action="AdvancedSearch">
             <div id="leftAdv" style="float:left; width: 40%;">
+                <input type="hidden" id="opt" name="opt" value="Advanced">
                 <label for="brand">Brand: </label><input name="brand" type="text"><br>
                 <label for="model">Model: </label><input name="model" type="text"><br>
                 <label for="vehicle">Type: </label>

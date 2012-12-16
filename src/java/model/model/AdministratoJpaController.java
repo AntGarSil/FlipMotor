@@ -17,6 +17,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -34,6 +35,8 @@ public class AdministratoJpaController implements Serializable {
     }
     @Resource private UserTransaction utx;
     @PersistenceUnit private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectPU"); 
+
+    public AdministratoJpaController() { }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -167,5 +170,13 @@ public class AdministratoJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    @PersistenceContext
+    public List<Administrato> findAdministratoByName(String req_name) {
+        String jpql = "SELECT a FROM Administrato a WHERE a.username LIKE :User";
+        EntityManager em = getEntityManager();
+        Query q = em.createQuery(jpql);
+        q.setParameter("User",req_name);
+        return q.getResultList();
+    }
 }

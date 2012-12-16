@@ -347,22 +347,13 @@ public class VehicleadvertJpaController implements Serializable {
         }
     }
     
-    public List findWithBrand(String Brand)
-    {
+    @PersistenceContext
+    public List<Vehicleadvert> findNotValidatedVehicles() {
         EntityManager em = getEntityManager();
-        try{        
-        String jpql = "SELECT a FROM Vehicleadvert a WHERE a.brand LIKE :BrandName";
-
-        Query consulta = em.createQuery(jpql);
-        consulta.setParameter("BrandName", Brand);
-
-        return consulta.getResultList();
-        }finally{
-            em.close();
-        }
+        String jpql = "SELECT a FROM Vehicleadvert a WHERE a.state LIKE 'Not Active' OR a.state LIKE 'Payed'";
+        Query q = em.createQuery(jpql);
+        return q.getResultList();
     }
-    
-
     public List<Vehicleadvert> findByVehicle(String vehicle)
     {
         EntityManager em = getEntityManager();

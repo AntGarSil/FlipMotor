@@ -6,7 +6,6 @@
 package controller;
 
 
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
                            "/EditProfile",
                            "/UserProfile",
                            "/RegisterError",
-                           //"/ViewAdController",
+                           "/ViewAdController",
                            "/ReceiptAction",
                            "/DetailsAction",
                            "/PaymentAction",
@@ -72,7 +71,12 @@ public class ControllerServlet extends HttpServlet {
             
 
         // if checkout page is requested
-        } 
+        }else if (userPath.equals("/AdvancedSearch")) {
+            // TODO: Implement motorbike page request
+            userPath = "/QueryController";
+	}else{
+            userPath = "/notFound.jsp";
+        }
 
         // use RequestDispatcher to forward request internally
         String url = userPath;
@@ -140,12 +144,6 @@ public class ControllerServlet extends HttpServlet {
 
              //userPath = "/query";
         // if checkout page is requested
-        }else if (userPath.equals("/AdminPage")) {
-            // TODO: Implement motorbike page request
-            userPath = "/admin.jsp";
-
-             //userPath = "/query";
-        // if checkout page is requested
         }else if (userPath.equals("/TermsAndConditions")) {
             // TODO: Implement motorbike page request
             userPath = "/termsandconditions.jsp";
@@ -192,8 +190,35 @@ public class ControllerServlet extends HttpServlet {
 	}else if (userPath.equals("/Login")) {
             // TODO: Implement motorbike page request
             userPath = "/LoginController";
+	}else if (userPath.equals("/CreateAdmin")) {
+            // TODO: Implement motorbike page request
+            userPath = "/CreateAdminController";
+	}else if (userPath.equals("/DeleteAdmin")) {
+            // TODO: Implement motorbike page request
+            userPath = "/DeleteAdminController";
+	}else if (userPath.equals("/CreateOffer")) {
+            // TODO: Implement motorbike page request
+            userPath = "/CreateOfferController";
+	}else if (userPath.equals("/DeleteOffer")) {
+            // TODO: Implement motorbike page request
+            userPath = "/DeleteOfferController";
+	}else if (userPath.equals("/AdminLogIn")) {
+            // TODO: Implement motorbike page request
+            userPath = "/AdminAccessController";
+	}else if (userPath.equals("/AdminPage")) {
+            // TODO: Implement motorbike page request
+            userPath = "/AdminController";
+	}else if (userPath.equals("/AdvancedSearch")) {
+            // TODO: Implement motorbike page request
+            userPath = "/QueryController";
+	}else if (userPath.equals("/ValidateVehicle")) {
+            // TODO: Implement motorbike page request
+            userPath = "/ValidateVehicleController";
+	}else if (userPath.equals("/ValidateBusiness")) {
+            // TODO: Implement motorbike page request
+            userPath = "/ValidateBusinessController";
 	}
-        
+
 
         // use RequestDispatcher to forward request internally
         String url = userPath;

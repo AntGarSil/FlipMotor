@@ -24,6 +24,7 @@ import javax.annotation.Resource;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.transaction.UserTransaction;
 
@@ -39,6 +40,8 @@ public class BusinessadvertJpaController implements Serializable {
     }
     @Resource private UserTransaction utx;
     @PersistenceUnit private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectPU"); 
+
+    public BusinessadvertJpaController() {}
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -277,6 +280,14 @@ public class BusinessadvertJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    @PersistenceContext
+    public List<Businessadvert> findNotValidatedBusiness() {
+        EntityManager em = getEntityManager();
+        String jpql = "SELECT a FROM Businessadvert a WHERE a.state LIKE 'Not Active' OR a.state LIKE 'Payed'";
+        Query q = em.createQuery(jpql);
+        return q.getResultList();
     }
     
 }

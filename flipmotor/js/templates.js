@@ -16,5 +16,14 @@ $(document).ready(function() {
     });
 });
 
-
-
+$(document).ready(function() {
+    $('#adminButtonId').click(function(e) {
+         $('#adminpopup').lightbox_me({
+        centered: true, 
+        //showOverlay: false,
+        onLoad: function() { 
+            $('#adminpopup').find('input:first').focus()
+            }
+        });
+    });
+});
