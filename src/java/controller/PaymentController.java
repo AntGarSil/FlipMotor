@@ -10,10 +10,6 @@ import model.model.ConciliationJpaController;
 import model.model.RegisteredclientJpaController;
 import model.model.exceptions.PreexistingEntityException;
 import model.model.exceptions.RollbackFailureException;
-import WebServiceClient.BankService_Service;
-import WebServiceClient.ObjectFactory;
-import WebServiceClient.ValidateCreditCard;
-import WebServiceClient.ValidateCreditCardResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -76,7 +72,7 @@ public class PaymentController extends HttpServlet {
             
             
             //int PK = Common.generateUserID(email);
-            BankService_Service bs= new BankService_Service();
+            /*BankService_Service bs= new BankService_Service();
             ObjectFactory of=new ObjectFactory();
             ValidateCreditCard vc=of.createValidateCreditCard();
             vc.setCreditCard(card);
@@ -94,7 +90,7 @@ public class PaymentController extends HttpServlet {
             {
                 newConci = new Conciliation(code,date,price,Long.valueOf(card));
                 newConci.setClientID(user);
-            }
+            }*/
             response.setContentType("text/html");
             request.getRequestDispatcher("/header.jsp").include(request, response); 
             
@@ -122,14 +118,14 @@ public class PaymentController extends HttpServlet {
             //////////////////////////////////////////////////////////////////////////////////////////////////
            // int code=-1;
                 //out.println("                               <div>Fee: "+price+" </div> ");
-                if(code>0)
+/*                if(code>0)
                 {
                     out.println("                               <div>SUCCESSFUL TRANSACTION!! Code "+code+" </div> ");
                     out.println("                               <div>"+price+"€ were charged in your account</div> ");
                 }
                 else{
                     out.println("                               <div>THERE WAS AN ERROR IN THE TRANSACTION, TRY AGAIN LATER </div> ");
-                }
+                }*/
             out.println("             </div> ");
             out.println("         </div> ");
             out.println("     </div> ");
@@ -138,7 +134,7 @@ public class PaymentController extends HttpServlet {
             
                 
     request.getRequestDispatcher("/footer.jsp").include(request, response); 
-     if(code>0) 
+   /*  if(code>0) 
      {
            try {
                 int count = conciJPA.getConciliationCount();
@@ -153,7 +149,7 @@ public class PaymentController extends HttpServlet {
             } catch (Exception ex) {
                 Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
             }       
-     }  
+     }  */
         } finally {            
             out.close();
         }

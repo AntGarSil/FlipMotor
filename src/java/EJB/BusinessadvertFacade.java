@@ -4,7 +4,7 @@
  */
 package EJB;
 
-import Flipmotor.Entities.Businessadvert;
+import model.Entities.Businessadvert;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

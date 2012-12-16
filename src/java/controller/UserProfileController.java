@@ -313,7 +313,7 @@ public class UserProfileController extends HttpServlet {
             {
                 msglist.add(msg);                                
                 
-                out.println("<div style='border: 5px groove #98bf21; padding:3px; margin-top:10px'>");
+                out.println("<div style='border: 5px groove #98bf21; padding:3px; margin-top:10px'> ");
                 out.println("<div> <b>From: </b>" + msg.getStringProperty("SenderName") +"     </div> ");
                 out.println("<div>" + msg.getStringProperty("SenderEmail") +"     </div> ");
                 out.println("<div>" + msg.getText() +"     </div> ");

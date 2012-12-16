@@ -33,4 +33,5 @@
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="bankDB" object-type="user" pool-name="mysql_bankDB_rootPool"/>
     <jdbc-resource enabled="true" jndi-name="flipmotor" object-type="user" pool-name="mysql_flipmotor_rootPool"/>
+    <jdbc-resource enabled="true" jndi-name="flipmotor2" object-type="user" pool-name="mysql_flipmotor_rootPool"/>
 </resources>
